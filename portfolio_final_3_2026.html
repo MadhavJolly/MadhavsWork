@@ -512,12 +512,38 @@ a.nav-link {
   transition: height var(--sidebar-duration) var(--sidebar-ease);
 }
 .p-thumb.has-img { padding: 0; }
-.p-thumb.has-img img {
+.p-thumb.has-img img,
+.p-thumb.has-img video {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
+.p-thumb.has-img video {
+  object-position: center 42%;
+  transform: scale(var(--media-zoom, 1));
+}
+.p-thumb.has-img.contain img,
+.p-thumb.has-img.contain video { object-fit: contain; }
+.p-thumb.has-img.contain video {
+  object-position: center;
+  transform: none;
+}
+.listing-carousel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.listing-carousel .listing-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.55s ease;
+}
+.listing-carousel .listing-slide.active { opacity: 1; }
 
 /* News section */
 .news-divider {
@@ -708,12 +734,126 @@ a.nav-link {
 .g-item.has-video.contain video {
   object-fit: contain;
 }
+.g-item.has-embed {
+  padding: 0;
+  color: transparent;
+  background: #0a0a0a;
+}
+.g-item.has-embed iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+.g-item.has-embed.compact {
+  grid-column: 1 / 2;
+  width: min(220px, 100%);
+  max-height: 390px;
+  aspect-ratio: 9 / 16;
+  justify-self: start;
+}
+.g-item.video-row {
+  grid-column: 1 / -1;
+  aspect-ratio: auto;
+  padding: 0;
+  background: none;
+  display: grid;
+  gap: var(--gap);
+  align-items: start;
+  color: transparent;
+}
+.g-item.video-row.cols-2 { grid-template-columns: 1fr 1fr; }
+.g-item.video-row.cols-3 { grid-template-columns: repeat(3, 1fr); }
+.g-item.video-row video {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius);
+  background: #0a0a0a;
+  aspect-ratio: 9 / 16;
+  object-fit: cover;
+}
+.g-item.embed-row {
+  grid-column: 1 / -1;
+  aspect-ratio: auto;
+  padding: 0;
+  background: none;
+  display: grid;
+  gap: var(--gap);
+  align-items: stretch;
+  color: transparent;
+}
+.g-item.embed-row.cols-2 { grid-template-columns: 1fr 1fr; }
+.g-item.embed-row .embed-cell {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: #0a0a0a;
+}
+.g-item.embed-row .embed-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  background: #0a0a0a;
+}
+.g-item.embed-row iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+.g-item.embed-row .g-caption { background: var(--glass); }
+@media (max-width: 700px) {
+  .g-item.video-row.cols-2,
+  .g-item.video-row.cols-3,
+  .g-item.embed-row.cols-2 { grid-template-columns: 1fr; }
+}
 .g-item.has-img.square { aspect-ratio: 1; }
 .g-item.has-img .g-label {
   position: absolute;
   bottom: 12px; left: 14px;
   color: rgba(240,238,234,0.72);
   text-shadow: 0 1px 8px rgba(0,0,0,0.55);
+}
+
+/* Compact phone-screen carousel — cycles through screens in one bento */
+.g-item.carousel {
+  padding: 0;
+  aspect-ratio: auto;
+  height: 320px;
+  color: transparent;
+  background: #0a0a0a;
+  align-items: stretch;
+}
+.g-item.carousel .carousel-stage {
+  position: absolute;
+  inset: 0;
+}
+.g-item.carousel .carousel-slide {
+  position: absolute;
+  inset: 20px;
+  width: calc(100% - 40px);
+  height: calc(100% - 40px);
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity 0.55s ease;
+  pointer-events: none;
+}
+.g-item.carousel .carousel-slide.active { opacity: 1; }
+.g-item.carousel .g-label {
+  position: absolute;
+  bottom: 12px;
+  left: 14px;
+  z-index: 2;
+  color: rgba(240,238,234,0.72);
+  text-shadow: 0 1px 8px rgba(0,0,0,0.55);
+}
+@media (max-width: 700px) {
+  .g-item.carousel { height: 280px; }
 }
 /* Image with a caption bar underneath */
 .g-item.has-caption {
@@ -722,7 +862,8 @@ a.nav-link {
   align-items: stretch;
 }
 .g-item.has-caption img,
-.g-item.has-caption video {
+.g-item.has-caption video,
+.g-item.has-caption iframe {
   flex: 1;
   min-height: 0;
 }
@@ -798,6 +939,35 @@ a.nav-link {
 }
 .g-item.bento-row.cols-2 { grid-template-columns: 1fr 1fr; }
 .g-item.bento-row.cols-3 { grid-template-columns: repeat(3, 1fr); }
+.g-item.image-row {
+  grid-column: 1 / -1;
+  aspect-ratio: auto;
+  padding: 0;
+  background: none;
+  display: grid;
+  gap: var(--gap);
+  align-items: start;
+  color: transparent;
+}
+.g-item.image-row.cols-2 { grid-template-columns: 1fr 1fr; align-items: stretch; }
+.g-item.image-row.cols-3 { grid-template-columns: repeat(3, 1fr); }
+.g-item.image-row img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius);
+  background: #0a0a0a;
+}
+.g-item.image-row.cols-2 img {
+  height: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: center;
+}
+@media (max-width: 700px) {
+  .g-item.image-row.cols-2,
+  .g-item.image-row.cols-3 { grid-template-columns: 1fr; }
+}
 .bento-row .col-cell.span-full { grid-column: 1 / -1; padding: 18px 24px; }
 .bento-row .col-cell.span-full .col-label { margin-bottom: 0; }
 /* Feature row — screen recording beside its explanation */
@@ -982,11 +1152,22 @@ a.nav-link {
   background: var(--glass);
 }
 .p-next-thumb.has-img { padding: 0; }
-.p-next-thumb.has-img img {
+.p-next-thumb.has-img img,
+.p-next-thumb.has-img video {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+}
+.p-next-thumb.has-img video {
+  object-position: center 42%;
+  transform: scale(var(--media-zoom, 1));
+}
+.p-next-thumb.has-img.contain img,
+.p-next-thumb.has-img.contain video { object-fit: contain; }
+.p-next-thumb.has-img.contain video {
+  object-position: center;
+  transform: none;
 }
 .p-next-label {
   font-size: 9px;
@@ -1174,7 +1355,8 @@ a.nav-link {
 .ow-item { margin-bottom: 16px; }
 .ow-item:last-child { margin-bottom: 0; }
 .ow-title { font-size: 13px; font-weight: 500; color: var(--white); margin-bottom: 6px; }
-.ow-body { font-size: 13px; line-height: 1.72; color: var(--mid); font-weight: 300; }
+.ow-body { font-size: 13px; line-height: 1.72; color: var(--mid); font-weight: 300; margin-bottom: 10px; }
+.ow-item p.ow-body:last-child { margin-bottom: 0; }
 
 /* Personal values */
 .values-headline {
@@ -1425,10 +1607,21 @@ a.nav-link {
   transition: opacity 0.65s cubic-bezier(0.4,0,0.2,1);
   overflow: hidden;
 }
-.reel-slide.has-img img {
+.reel-slide.has-img img,
+.reel-slide.has-img video {
   width: 100%; height: 100%;
   object-fit: cover;
   display: block;
+}
+.reel-slide.has-img video {
+  object-position: center 42%;
+  transform: scale(var(--media-zoom, 1));
+}
+.reel-slide.has-img.contain img,
+.reel-slide.has-img.contain video { object-fit: contain; }
+.reel-slide.has-img.contain video {
+  object-position: center;
+  transform: none;
 }
 .reel-slide.active { opacity: 1; }
 
@@ -1787,10 +1980,21 @@ a.nav-link {
   -webkit-backdrop-filter: blur(16px) saturate(150%);
   transition: background var(--transition);
 }
-.ao-img.has-cover img {
+.ao-img.has-cover img,
+.ao-img.has-cover video {
   width: 100%; height: 100%;
   object-fit: cover;
   display: block;
+}
+.ao-img.has-cover video {
+  object-position: center 42%;
+  transform: scale(var(--media-zoom, 1));
+}
+.ao-img.has-cover.contain img,
+.ao-img.has-cover.contain video { object-fit: contain; }
+.ao-img.has-cover.contain video {
+  object-position: center;
+  transform: none;
 }
 .ao-img.has-cover span { display: none; }
 
@@ -1902,6 +2106,7 @@ a.nav-link {
           <a class="nav-channel-link" href="mailto:madhavjolly@gmail.com">Email</a>
           <a class="nav-channel-link" href="https://www.instagram.com/madhavjolly.design/" target="_blank" rel="noopener">Instagram</a>
           <a class="nav-channel-link" href="https://www.linkedin.com/in/madhav-jolly-5714b71a4/" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="nav-channel-link" href="https://www.behance.net/madhavjolly" target="_blank" rel="noopener">Behance</a>
           <a class="nav-channel-link" href="assets/Madhav-Jolly-Resume-2026.pdf" target="_blank" rel="noopener">Resume</a>
         </div>
       </div>
@@ -1916,7 +2121,7 @@ a.nav-link {
         <div class="kp-cell wide">
           <div class="kp-cell-label">Status</div>
           <div class="kp-cell-val yellow">● Available</div>
-          <div class="kp-cell-sub">From Aug 2025</div>
+          <div class="kp-cell-sub">Full-time, Melbourne · Contract remote, AU</div>
         </div>
         <div class="kp-cell wide np-cell" id="np-cell">
           <div class="kp-cell-label" id="np-label">Currently playing</div>
@@ -2061,8 +2266,8 @@ a.nav-link {
                 <svg width="10" height="10" viewBox="0 0 11 11" fill="none" aria-hidden="true"><path d="M2 9L9 2M9 2H3.5M9 2V7.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </a>
             </div>
-            <div class="ap-role">Designer — Brand &amp; Digital Product, Melbourne</div>
-            <p class="ap-body">Madhav Jolly is an Indian designer in Melbourne, working across brand and digital product. Identity first, then the system around it — with motion, 3D, and sound when the work needs more than a still. Useful, then a little strange on purpose.</p>
+            <div class="ap-role">Designer, Brand &amp; Digital Product, Melbourne</div>
+            <p class="ap-body">Madhav Jolly is an Indian designer in Melbourne, working across brand and digital product. Identity first, then the system around it, with motion, 3D, and sound when the work needs more than a still. Useful, then a little strange on purpose.</p>
             <p class="ap-body">Outside of design, he produces electronic music, digs for rare records, reads sci-fi, solves cryptic crosswords, and spends time with his dog.</p>
             <div class="ap-tags">
               <div class="tag-chip">Electronic Music Production</div>
@@ -2097,7 +2302,7 @@ a.nav-link {
             </div>
             <div class="ap-contact-row">
               <div class="ap-contact-label">Social</div>
-              <div class="ap-contact-val"><a href="https://www.instagram.com/madhavjolly.design/" target="_blank" rel="noopener">Instagram</a> &nbsp;/&nbsp; <a href="https://www.linkedin.com/in/madhav-jolly-5714b71a4/" target="_blank" rel="noopener">LinkedIn</a></div>
+              <div class="ap-contact-val"><a href="https://www.instagram.com/madhavjolly.design/" target="_blank" rel="noopener">Instagram</a> &nbsp;/&nbsp; <a href="https://www.linkedin.com/in/madhav-jolly-5714b71a4/" target="_blank" rel="noopener">LinkedIn</a> &nbsp;/&nbsp; <a href="https://www.behance.net/madhavjolly" target="_blank" rel="noopener">Behance</a></div>
             </div>
           </div>
 
@@ -2110,9 +2315,9 @@ a.nav-link {
             </div>
             <div class="ap-contact-row">
               <div class="ap-contact-label">Open to</div>
-              <div class="ap-contact-val">Remote &amp; in-person worldwide</div>
+              <div class="ap-contact-val">Full-time roles in Melbourne, AU. Contract remote across Australia.</div>
             </div>
-            <div class="avail-tag"><div class="avail-dot"></div>Available from August 2025</div>
+            <div class="avail-tag"><div class="avail-dot"></div>Available now</div>
           </div>
 
           <!-- Skills card — full width -->
@@ -2134,25 +2339,25 @@ a.nav-link {
             <div class="exp-list">
               <div class="exp-row">
                 <div class="exp-top">
-                  <div class="exp-role">Freelance — Brand Design | During Master's Studies 🇮🇳 🇦🇺</div>
+                  <div class="exp-role">Freelance, Brand Design | During Master's Studies 🇮🇳 🇦🇺</div>
                   <div class="exp-dates">2024 → Present</div>
                 </div>
               </div>
               <div class="exp-row">
                 <div class="exp-top">
-                  <div class="exp-role">The Works — Visual Designer, Brand &amp; Web 🇮🇳</div>
+                  <div class="exp-role">The Works, Visual Designer, Brand &amp; Web 🇮🇳</div>
                   <div class="exp-dates">2022 → 2024</div>
                 </div>
               </div>
               <div class="exp-row">
                 <div class="exp-top">
-                  <div class="exp-role">Please See// — Junior Creative Designer 🇮🇳</div>
+                  <div class="exp-role">Please See//, Junior Creative Designer 🇮🇳</div>
                   <div class="exp-dates">2021 → 2022</div>
                 </div>
               </div>
               <div class="exp-row">
                 <div class="exp-top">
-                  <div class="exp-role">Canvs Club — UI Design Intern 🇮🇳</div>
+                  <div class="exp-role">Canvs Club, UI Design Intern 🇮🇳</div>
                   <div class="exp-dates">2021 → 2021</div>
                 </div>
               </div>
@@ -2165,18 +2370,34 @@ a.nav-link {
             <div class="exp-list">
               <div class="exp-row">
                 <div class="exp-top">
-                  <div class="exp-role">Monash University — M.Des, Interaction Design</div>
+                  <div class="exp-role">Monash University, M.Des, Interaction Design</div>
                   <div class="exp-dates">'24 → '26</div>
                 </div>
                 <p class="edu-body">Built a cross-disciplinary design practice through studies in UX, interface design, research, prototyping, and 3D design, combining systems thinking with user-centred problem solving.</p>
               </div>
               <div class="exp-row">
                 <div class="exp-top">
-                  <div class="exp-role">Srishti Institute of Art, Design — B.Des, Information Design</div>
+                  <div class="exp-role">Srishti Institute of Art, Design, B.Des, Information Design</div>
                   <div class="exp-dates">'18 → '21</div>
                 </div>
                 <p class="edu-body">Completed multiple undergraduate units spanning visual communication, digital media, animation, illustration, print design, and design research.</p>
               </div>
+            </div>
+          </div>
+
+          <!-- Projects -->
+          <div class="ap-card" style="grid-column: 1 / -1;">
+            <div class="ap-card-label">Projects</div>
+            <div class="ow-item">
+              <div class="ow-title">Jam Rooms</div>
+            </div>
+            <div class="ow-item">
+              <div class="ow-title">LOCCAL</div>
+              <p class="ow-body">A Food Waste Maturity Model for LOCCAL, with an interactive dashboard designed to help Australian food organisations measure, understand, and improve their food waste practices.</p>
+              <p class="ow-body">Over two months, we worked with LOCCAL to turn sustainability auditing from a static checklist into something cafés can actually use. A maturity model, a live scoring system, and an interactive dashboard. Immediate feedback on current practices, where to improve, and the environmental and financial case for acting.</p>
+              <p class="ow-body">We built and validated the dashboard as the core of the wider system: a high-fidelity prototype, an 8-week implementation roadmap, and a pilot with real partner cafés. Agile and user-centred, so café feedback could shape the next version of the tool.</p>
+              <p class="ow-body">The proposal gives LOCCAL a path from prototype to a validated Version 1.0, with a launch kit, user guidance, and room to grow.</p>
+              <p class="ow-body">A Monash Innovation Guarantee design sprint at Monash University. I was one of five on the team.</p>
             </div>
           </div>
 
@@ -2238,15 +2459,15 @@ a.nav-link {
 
 const PROJECTS = [
   {
-    id:'class-pulse', name:'ClassPulse', tag:'A student engagement platform helping students stay connected to their learning — giving educators visibility into engagement throughout the semester.',
+    id:'class-pulse', name:'ClassPulse', tag:'A student engagement platform helping students stay connected to their learning, giving educators visibility into engagement throughout the semester.',
     award:'Higher Distinction Award', category:'digital',
     heroColor:'#0a1428', heroAccent:'#c8f060', letter:'C',
     heroImage:'assets/projects/class-pulse/01-hero.png',
     thumbImage:'assets/projects/class-pulse/01-hero.png',
     coverImage:'assets/projects/class-pulse/01-hero.png',
     eyebrow:'UX / Product Design · 2025', title:'ClassPulse',
-    challenge:'Student disengagement in higher education is often silent, gradual, and difficult to detect in real time. Most university systems focus on measurable outputs such as attendance, assignment submissions, and platform activity — these signals only show what students did, not how they are actually engaging with their learning.',
-    solution:'ClassPulse was designed to address this visibility gap by shifting engagement from a passive set of metrics into a continuous, interpretable experience — enabling students to reflect on their own patterns while giving educators higher-level insights into how engagement changes over time.',
+    challenge:'Student disengagement in higher education is often silent, gradual, and difficult to detect in real time. Most university systems focus on measurable outputs such as attendance, assignment submissions, and platform activity. These signals only show what students did, not how they are actually engaging with their learning.',
+    solution:'ClassPulse was designed to address this visibility gap by shifting engagement from a passive set of metrics into a continuous, interpretable experience, enabling students to reflect on their own patterns while giving educators higher-level insights into how engagement changes over time.',
     info:[
       'ClassPulse is a student engagement platform designed to help students stay connected to their learning while giving educators greater visibility into engagement throughout the semester.',
       'Developed in collaboration with stakeholders from Monash University, the project explores how engagement can be better understood, supported, and communicated between students and teaching staff.',
@@ -2260,13 +2481,13 @@ const PROJECTS = [
       { type:'image', src:'assets/projects/class-pulse/00-showcase.png', dark:true, ratio:'16/9' },
       { type:'video', src:'assets/projects/class-pulse/00-reel.mp4', contain:true, ratio:'16/9', bg:'#101828' },
       { type:'text', wide:true, text:'ClassPulse is a student engagement platform designed to help students stay connected to their learning while giving educators greater visibility into engagement throughout the semester. Developed in collaboration with stakeholders from Monash University, the project explores how engagement can be better understood, supported, and communicated between students and teaching staff. Through surveys, interviews, and secondary research, we found that students often disengage silently, lack awareness of their own learning patterns, and receive feedback only after opportunities for intervention have passed.\n\nIn response, we designed ClassPulse, a lightweight engagement layer centred around post-class check-ins, reflective learning journals, and anonymous communication channels. Together, these features create a continuous feedback loop that encourages participation, promotes self-awareness, and provides educators with earlier insight into engagement trends. Rather than measuring attendance alone, ClassPulse focuses on making engagement visible, actionable, and supportive, helping students remain active participants in their learning experience.' },
-      { type:'text', wide:true, label:'01 — Research & Problem', text:'To understand how student engagement breaks down across a semester, we conducted a combination of student interviews, surveys, and a literature review focused on learning behaviour, workload management, and engagement patterns.\n\nThe goal was to identify the gap between what current systems measure and what students actually experience.' },
+      { type:'text', wide:true, label:'01. Research & Problem', text:'To understand how student engagement breaks down across a semester, we conducted a combination of student interviews, surveys, and a literature review focused on learning behaviour, workload management, and engagement patterns.\n\nThe goal was to identify the gap between what current systems measure and what students actually experience.' },
       { type:'bento-row', cols:3, cells:[
         { stat:'10/13', text:'students use external tools to stay organised.' },
         { stat:'80%', text:'of students attend classes but miss at least one class within the first 3 weeks. Engagement drop-off begins early.' },
         { stat:'LMS gap', text:'Current Learning Management Systems are effective at showing students what has happened, but not what to do next.' },
       ]},
-      { type:'bento-row', cols:3, header:'02 — User & Client Needs', cells:[
+      { type:'bento-row', cols:3, header:'02. User & Client Needs', cells:[
         { label:'Fragmented systems', text:'Students frequently switched between multiple systems to stay organised.\n\nNeed: A unified experience that brings coursework, deadlines, feedback, and engagement into one place.' },
         { label:'Transparency', text:'Students were comfortable with engagement tracking when it provided personal value.\n\nNeed: Transparency into how engagement is measured and how it can help them succeed academically.' },
         { label:'Low-friction support', text:'Disengagement was often linked to stress, isolation, and feeling overwhelmed rather than a lack of effort.\n\nNeed: Low-friction ways to reflect on engagement and seek support before academic performance declines.' },
@@ -2274,12 +2495,12 @@ const PROJECTS = [
         { label:'Scale', text:'Educators have limited capacity to manually monitor engagement across large cohorts.\n\nNeed: Automated engagement insights that reduce administrative effort while maintaining meaningful intervention opportunities.' },
         { label:'Outcomes', text:'Universities need confidence that engagement initiatives improve retention, satisfaction, and learning outcomes.\n\nNeed: Measurable evidence linking engagement behaviours to student success.' },
       ]},
-      { type:'text', wide:true, statement:true, label:'03 — Combined User & Client Need', text:"The current LMS shows students their progress, but doesn't actively guide how they engage with their learning. There is an opportunity to introduce a feedback system that fosters engagement through participation, making it meaningful and motivating." },
-      { type:'text', wide:true, label:'04 — Synthesis', text:'Most systems focus on passive progress tracking, which shows status but does not support decision-making in the moment. This results in students feeling overwhelmed, reactive, and disconnected from their learning process.' },
+      { type:'text', wide:true, statement:true, label:'03. Combined User & Client Need', text:"The current LMS shows students their progress, but doesn't actively guide how they engage with their learning. There is an opportunity to introduce a feedback system that fosters engagement through participation, making it meaningful and motivating." },
+      { type:'text', wide:true, label:'04. Synthesis', text:'Most systems focus on passive progress tracking, which shows status but does not support decision-making in the moment. This results in students feeling overwhelmed, reactive, and disconnected from their learning process.' },
       { type:'text', wide:true, statement:true, text:'Students are not lacking information, but they are lacking interpretation and direction.' },
       { type:'image', src:'assets/projects/class-pulse/02-principles.png', wide:true, contain:true, light:true, ratio:'16/9', caption:'Principles our team came up with to follow' },
       { type:'image', src:'assets/projects/class-pulse/03-user-journey.png', wide:true, contain:true, light:true, ratio:'16/9', caption:'Our users journey' },
-      { type:'text', wide:true, label:'05 — The Solution' },
+      { type:'text', wide:true, label:'05. The Solution' },
       { type:'feature', label:'Post Class Check-in', video:'assets/projects/class-pulse/04-checkin.mp4', ratio:'4/5',
         text:'Students often disengage due to workload and overwhelm, yet feedback opportunities typically arrive at the end of a semester when intervention is too late.\n\nTo encourage ongoing reflection, ClassPulse introduces a two-question check-in that takes less than 30 seconds to complete, helping students recognise disengagement before it impacts performance.' },
       { type:'feature', label:'Journal', video:'assets/projects/class-pulse/05-journal.mp4', ratio:'4/5',
@@ -2312,7 +2533,7 @@ const PROJECTS = [
       { type:'text', text:"We evolved the original Pine green to a high contrast 'Pine teal'. This helped them own their heritage, but through a modern lens. Bolder colours and wide contrast allowed them to stand out in a market that uses a lot of gradients, but yet scale for various mediums." },
       { type:'image', src:'assets/projects/pine-labs/04-logo-grid.webp', wide:true },
       { type:'image', src:'assets/projects/pine-labs/05-subbrands.webp', wide:true, contain:true, ratio:'2800/1159' },
-      { type:'text', text:'We created the arrow symbol as a container to hero the entrepreneur and his business, one that is always on the move — shaking things up and breaking new ground.' },
+      { type:'text', text:'We created the arrow symbol as a container to hero the entrepreneur and his business, one that is always on the move, shaking things up and breaking new ground.' },
       { type:'image', src:'assets/projects/pine-labs/06-kiosk.jpg' },
       { type:'image', src:'assets/projects/pine-labs/07-social.gif' },
       { type:'image', src:'assets/projects/pine-labs/08-upi-terminal.jpg' },
@@ -2343,7 +2564,7 @@ const PROJECTS = [
     thumbImage:'assets/projects/falcon/00-preview.gif',
     coverImage:'assets/projects/falcon/00-preview.gif',
     eyebrow:'Brand Identity · 2022', title:'Falcon',
-    challenge:"A payments platform for banks and FinTechs needed a mark as sharp as the product — not another soft gradient in a crowded category.",
+    challenge:"A payments platform for banks and FinTechs needed a mark as sharp as the product, not another soft gradient in a crowded category.",
     solution:"A three-dimensional F, cut like a falcon's bill. Then colour, icons, a card, and packaging that can sit next to the software.",
     info:['Falcon is a platform for launching payment and lending products through open APIs.','I designed the logo, colour, icons, packaging, and credit card, and helped on the pitch deck, working with founders Priyanka Kanwar and Prabhtej Bhatia.','See it live at <a href="https://www.falconfs.com" target="_blank" rel="noopener">falconfs.com</a>'],
     year:'2022', client:'Falcon', agency:'Please See//', scope:'Visual Identity, Illustration, Packaging, Credit Card Design', awards:'—',
@@ -2378,15 +2599,15 @@ const PROJECTS = [
     thumbImage:'assets/projects/1441-pizzeria/01-hero.png',
     coverImage:'assets/projects/1441-pizzeria/01-hero.png',
     eyebrow:'Brand Identity · 2022', title:'1441 Pizzeria',
-    challenge:'1441 wanted to feel like the epicentre of action — Naples energy, not another polite pizza mark. The identity had to work on a box, a sticker, and a crowded counter.',
-    solution:'Two red degree glyphs sit inside the name. Fun, loud, a little chaotic — then a sticker and packaging system that can keep up.',
+    challenge:'1441 wanted to feel like the epicentre of action. Naples energy, not another polite pizza mark. The identity had to work on a box, a sticker, and a crowded counter.',
+    solution:'Two red degree glyphs sit inside the name. Fun, loud, a little chaotic, then a sticker and packaging system that can keep up.',
     info:['A rebrand for 1441 Pizzeria that treats Naples as an attitude, not a texture overlay.','I worked on the mark, colour, stickers, illustrations, packaging, and the system around them.','See it live at <a href="https://www.1441pizzeria.com" target="_blank" rel="noopener">1441pizzeria.com</a>'],
     credits:[{role:'Visual identity, packaging, illustration',name:'Madhav Jolly'},{role:'Agency',name:'Please See//'}],
     year:'2022', client:'1441 Pizzeria', agency:'Please See//', scope:'Visual identity, packaging, illustration', awards:'—',
     colors:['#02954C','#096959','#0a1f14','#0d2419','#081510','#0b1a12'],
     labels:['Hero','Logo evolution','Brand system','Packaging','Illustration','Collateral'],
     gallery:[
-      { type:'text', text:'Two red degree glyphs sit inside the name. Fun, loud, a little chaotic — built for a box, a sticker, and a crowded counter.' },
+      { type:'text', text:'Two red degree glyphs sit inside the name. Fun, loud, a little chaotic, built for a box, a sticker, and a crowded counter.' },
       { type:'image', src:'assets/projects/1441-pizzeria/02-new-old.png', wide:true, contain:true, light:true },
       { type:'text', text:'The identity was designed keeping in mind the brands philosophy of being fun, energetic and exciting. The two red glyphs are used to depict the degree symbols, making it a unique and important asset.' },
       { type:'image', src:'assets/projects/1441-pizzeria/03-stacked-linear.png', wide:true, contain:true, light:true },
@@ -2410,7 +2631,7 @@ const PROJECTS = [
     thumbImage:'assets/projects/rivona-naturals/09-beetroot-scrub.png',
     coverImage:'assets/projects/rivona-naturals/09-beetroot-scrub.png',
     eyebrow:'Brand Identity · 2024', title:'Rivona Naturals',
-    challenge:"Rivona needed to grow past the people who already knew them — without losing the feeling of something made from plants, not a lab.",
+    challenge:"Rivona needed to grow past the people who already knew them, without losing the feeling of something made from plants, not a lab.",
     solution:"A quieter system: mark, type, colour, and a full packaging range that can sit next to bigger organic labels and still read as theirs.",
     info:[
       'Rivona Naturals makes accessible skincare from plants, not a lab.',
@@ -2430,6 +2651,8 @@ const PROJECTS = [
       { type:'text', wide:true, text:'A set of bespoke icons and illustrations was created to visually distinguish and complement each product.' },
       { type:'image', src:'assets/projects/rivona-naturals/05-illustrations.gif', wide:true, contain:true, light:true, ratio:'2/1' },
       { type:'image', src:'assets/projects/rivona-naturals/07-vegan-icon.gif', wide:true, contain:true, dark:true, ratio:'2/1' },
+      { type:'text', wide:true, text:'Before the packs were shot, the range was drawn as flats. One colour per product, ingredient shapes in the back, the name in white.' },
+      { type:'image', src:'assets/projects/rivona-naturals/13-label-flats.png', wide:true, contain:true, light:true, ratio:'16/9' },
       { type:'image', src:'assets/projects/rivona-naturals/09-beetroot-scrub.png', wide:true },
       { type:'image', src:'assets/projects/rivona-naturals/06-aloe-shower-gel.png', dark:true },
       { type:'image', src:'assets/projects/rivona-naturals/11-honey-saffron.png' },
@@ -2483,7 +2706,7 @@ const PROJECTS = [
     thumbImage:'assets/projects/ten-hills-studio/01-preview.jpg',
     coverImage:'assets/projects/ten-hills-studio/01-hero.jpg',
     eyebrow:'Brand Identity · 2025', title:'10 Hills Studio',
-    challenge:'10 Hills was opening a sneaker and streetwear store in the middle of Kolkata. The identity had to hold a shop window, a hang tag, and a website — and still feel like a studio, not a template shop.',
+    challenge:'10 Hills was opening a sneaker and streetwear store in the middle of Kolkata. The identity had to hold a shop window, a hang tag, and a website, and still feel like a studio, not a template shop.',
     solution:'A number and a hill, cut into one mark. Black, white, grey, and a strike of yellow. After the rebrand, sales at the outlet were up 51%.',
     info:[
       '10 Hills Studio is a sneaker and streetwear store in Kolkata.',
@@ -2497,32 +2720,42 @@ const PROJECTS = [
     gallery:[
       { type:'image', src:'assets/projects/ten-hills-studio/20-wordmark.jpg', wide:true, dark:true, ratio:'16/9' },
       { type:'image', src:'assets/projects/ten-hills-studio/21-logo-lockups.jpg', wide:true, contain:true, light:true, ratio:'16/9' },
+      { type:'image', src:'assets/projects/ten-hills-studio/22-symbol-dark.jpg', wide:true, contain:true, light:true, ratio:'16/9' },
       { type:'image', src:'assets/projects/ten-hills-studio/03-logo-bw.jpg', wide:true, ratio:'16/9' },
       { type:'image', src:'assets/projects/ten-hills-studio/23-colour.jpg', wide:true, contain:true, light:true, ratio:'16/9' },
       { type:'text', wide:true, text:'The mark is 10 and a hill in the same stroke. Sharp intervals in the type, a symbol that still reads at the size of a cap badge.' },
-      { type:'image', src:'assets/projects/ten-hills-studio/30-tote-web.jpg', wide:true },
+      { type:'image', src:'assets/projects/ten-hills-studio/05-clear-space.jpg', wide:true, contain:true, light:true, ratio:'16/9' },
+      { type:'text', wide:true, text:'To keep the mark consistent, legible, and prominent, keep the area around it clear. Do not put type or objects in the clear space. Minimum preferred clear space is 1X, measured from the cap height of 10 HILLS.' },
+      { type:'image', src:'assets/projects/ten-hills-studio/07-type.jpg', wide:true, contain:true, light:true, ratio:'16/9' },
+      { type:'text', wide:true, text:'Three core fonts. Bebas Neue Bold for headlines. Baskerville, used sparingly, for subheads and accents. Source Sans for body copy, so longer text stays readable.' },
+      { type:'image', src:'assets/projects/ten-hills-studio/09-social.jpg', wide:true, contain:true, light:true, ratio:'16/9' },
+      { type:'text', wide:true, text:'Primary social icons sit in approved colours. Secondary icons can shift for seasonal campaigns and custom clothing launches.' },
+      { type:'text', wide:true, text:'The hang tag went through a few constructions. A two-sided rectangle. A die-cut triangle layered over the spec. Frosted vellum over a patterned back. A small triangle pinned to the corner. What shipped is the simplest: black wordmark on the front, collection, size, and a yellow QR on the back.' },
+      { type:'image', src:'assets/projects/ten-hills-studio/11-hangtags.jpg', wide:true, contain:true, light:true, ratio:'16/9' },
       { type:'image', src:'assets/projects/ten-hills-studio/25-hangtags.jpg', dark:true, ratio:'4/5' },
       { type:'image', src:'assets/projects/ten-hills-studio/15-cap.jpg', light:true, ratio:'4/5' },
-      { type:'text', wide:true, text:'Then it had to hold at arm’s length: tags, tees, a tote, a window. Same system, different distances.' },
+      { type:'text', wide:true, text:'Then it had to hold at arm’s length: tags, tees, a window. Same system, different distances.' },
       { type:'image', src:'assets/projects/ten-hills-studio/13-tee-chest.jpg', wide:true, dark:true },
       { type:'image', src:'assets/projects/ten-hills-studio/14-tee-back.jpg', wide:true },
-      { type:'image', src:'assets/projects/ten-hills-studio/17-touchpoints.jpg', wide:true },
       { type:'image', src:'assets/projects/ten-hills-studio/19-campaign.jpg', wide:true },
       { type:'image', src:'assets/projects/ten-hills-studio/32-campaign-green.jpg', ratio:'4/5' },
-      { type:'image', src:'assets/projects/ten-hills-studio/28-campaign-pool.jpg', ratio:'4/5' },
-      { type:'image', src:'assets/projects/ten-hills-studio/10-storefront.jpg', wide:true },
+      { type:'text', wide:true, label:'Inside the store' },
+      { type:'image-row', cols:2, images:[
+        'assets/projects/ten-hills-studio/35-store-wall.jpg',
+        'assets/projects/ten-hills-studio/36-store-floor.jpg',
+      ]},
     ],
   },
   {
-    id:'stranger-sons', name:'Stranger & Sons', tag:'Indian craft gin — packaging, print, and a world that stays strange on purpose.',
+    id:'stranger-sons', name:'Stranger & Sons', tag:'Indian craft gin: packaging, print, and a world that stays strange on purpose.',
     category:'brand',
     heroColor:'#0a0a0a', heroAccent:'#e8d6c4', letter:'S',
     heroImage:'assets/projects/stranger-sons/00-cover.jpg',
     thumbImage:'assets/projects/stranger-sons/01-hero.jpg',
     coverImage:'assets/projects/stranger-sons/00-cover.jpg',
     eyebrow:'Brand Identity · 2025', title:'Stranger & Sons',
-    challenge:'An Indian craft gin with a world already in the bottle. The work had to hold that world on a menu, a shipping box, a takeover, and a feed — without flattening it.',
-    solution:'Packaging, print, and campaigns that stay a little strange on purpose. Menus, easels, stories, photography — one world, many distances.',
+    challenge:'An Indian craft gin with a world already in the bottle. The work had to hold that world on a menu, a shipping box, a takeover, and a feed, without flattening it.',
+    solution:'Packaging, print, and campaigns that stay a little strange on purpose. Menus, easels, stories, photography. One world, many distances.',
     info:[
       'Stranger & Sons is an Indian craft gin built on local botanicals.',
       'I worked across packaging, print, menus, easels, social, and photography guidelines.',
@@ -2539,11 +2772,19 @@ const PROJECTS = [
       { type:'image', src:'assets/projects/stranger-sons/05-story-02.jpg', ratio:'9/16' },
       { type:'image', src:'assets/projects/stranger-sons/06-story-03.jpg', ratio:'9/16' },
       { type:'image', src:'assets/projects/stranger-sons/18-story-pour.jpg', ratio:'9/16' },
+      { type:'text', wide:true, label:'The feed' },
+      { type:'image-row', cols:3, images:[
+        'assets/projects/stranger-sons/24-feed-grid-01.jpg',
+        'assets/projects/stranger-sons/25-feed-grid-02.jpg',
+        'assets/projects/stranger-sons/26-feed-grid-03.jpg',
+      ]},
       { type:'text', wide:true, label:'Bar takeovers & campaign stories' },
       { type:'image', src:'assets/projects/stranger-sons/19-story-trade.jpg', ratio:'9/16' },
       { type:'image', src:'assets/projects/stranger-sons/20-story-dates.jpg', ratio:'9/16' },
       { type:'image', src:'assets/projects/stranger-sons/21-story-delhi.jpg', ratio:'9/16' },
       { type:'image', src:'assets/projects/stranger-sons/22-story-elaa.jpg', ratio:'9/16' },
+      { type:'image', src:'assets/projects/stranger-sons/27-story-saimai.png', ratio:'9/16', contain:true, light:true },
+      { type:'image', src:'assets/projects/stranger-sons/28-menu-hyatt.png', contain:true, light:true, ratio:'5/7' },
       { type:'text', wide:true, label:'Menu templates & Shipping box container' },
       { type:'image', src:'assets/projects/stranger-sons/07-menu.jpg', wide:true },
       { type:'image', src:'assets/projects/stranger-sons/08-shipping.jpg', wide:true },
@@ -2566,13 +2807,13 @@ const PROJECTS = [
     heroColor:'#1a120c', heroAccent:'#c4a06a', letter:'I',
     heroImage:'assets/projects/ilaaka/01-hero.jpg',
     thumbImage:'assets/projects/ilaaka/01-hero.jpg',
-    coverImage:'assets/projects/ilaaka/04-guidelines-02.jpg',
+    coverImage:'assets/projects/ilaaka/01-hero.jpg',
     eyebrow:'Brand Identity · 2025', title:'Ilaaka',
-    challenge:'Ilaaka means territory. A Mumbai indie studio needed a mark that could claim one — on a card, a wall, a bag — without looking like a film-festival template.',
+    challenge:'Ilaaka means territory. A Mumbai indie studio needed a mark that could claim one on a card, a wall, or a bag, without looking like a film-festival template.',
     solution:'A red fox. Adaptable, a little sly, able to hold ground. Then a type pairing and a system that can split into sub-brands without losing the studio.',
     info:[
       'Ilaaka Studios is a Mumbai indie film studio named after the Hindi word for territory.',
-      'The fox is the centre of the identity — illustration, lockups, and the applications around it.',
+      'The fox is the centre of the identity: illustration, lockups, and the applications around it.',
       'Follow at <a href="https://www.instagram.com/ilaakastudios/" target="_blank" rel="noopener">@ilaakastudios</a>',
     ],
     credits:[{role:'Brand identity, Illustration, Visual Guidelines',name:'Madhav Jolly'}],
@@ -2599,7 +2840,7 @@ const PROJECTS = [
     thumbImage:'assets/projects/jolies/final-spread.png',
     coverImage:'assets/projects/jolies/final-spread.png',
     eyebrow:'Editorial · 2023', title:'Jolies',
-    challenge:'A members-only club needed something guests would actually hold — a book on the table, a menu in the hand — not a deck that lives in a PDF.',
+    challenge:'A members-only club needed something guests would actually hold: a book on the table, a menu in the hand, not a deck that lives in a PDF.',
     solution:'A coffee-table book and a menu system. Playful type, butter-paper overlays, layers you can feel.',
     info:[
       'Jolies is a members-only club.',
@@ -2625,24 +2866,65 @@ const PROJECTS = [
     ],
   },
   {
-    id:'gameboy-apps', name:'Game Boy Inspired App Bundle', tag:'A timer and a weather app, cut in the purple of a Game Boy Color.',
-    category:'digital', comingSoon:true,
+    id:'gameboy-apps', name:'Game Boy Apps', tag:'A timer and a weather app, cut in the purple of a Game Boy Color.',
+    category:'digital',
     heroColor:'#3d0a61', heroAccent:'#dbb1ff', letter:'G',
-    eyebrow:'Product Design · 2025', title:'Game Boy Inspired App Bundle',
-    challenge:'Most timer and weather apps are flat. No click, no play, no reason to look twice. The brief was to steal the feel of a Game Boy Color without turning a tool into a toy you cannot use.',
-    solution:'Two apps. Same purple DNA — casing, screen, buttons with real shadows. Cities cycle like levels. Time reads like a score.',
+    heroImage:'assets/projects/gameboy-apps/01-cover.png',
+    thumbImage:'assets/projects/gameboy-apps/60-weather-flow.mp4',
+    coverImage:'assets/projects/gameboy-apps/60-weather-flow.mp4',
+    thumbContain:true,
+    eyebrow:'Product Design · 2025', title:'Game Boy Apps',
+    challenge:'Many everyday apps lack engaging interactions and visual feedback, making digital experiences feel flat and uninspiring.',
+    solution:'Two interactive apps, a timer and a weather app, that combine playful Game Boy Color-inspired visuals with clear, modern usability.',
     info:[
-      'A university project: a timer and a weather app, designed as a pair.',
-      'I handled UI, interaction, and the prototypes — from sketches through user tests.',
+      'This project consists of two interactive apps, a timer and a weather app, designed in a visual language inspired by the Game Boy Color. While drawing from its iconic colour palette and playful interface cues, the designs reinterpret the style with a modern approach and my own visual flair.',
+      'The focus was on balancing nostalgic aesthetics with usability, feedback, and engaging interactions through touch and animation.',
+      'I handled UI/UX design, prototyping, and interaction design end to end, from sketches and comparative analysis through user tests and high-fidelity prototypes.',
     ],
     credits:[{role:'UI/UX Design, Prototyping, Interaction Design',name:'Madhav Jolly'}],
-    year:'2025', client:'University project', agency:'—', scope:'UI/UX Design, Prototyping, Interaction Design', awards:'—',
+    year:'2025', client:'University project', agency:'University project', scope:'UI/UX Design, Prototyping, Interaction Design', awards:'—',
     colors:['#3d0a61','#dbb1ff','#c084fc','#94a3b8','#ff6467','#f5f0ff'],
     labels:['Casing','Screen','Buttons','Type','Icons','Grid'],
     gallery:[
-      { type:'text', wide:true, text:'Both apps share the same visual DNA: purple from the casing down to the screen, pixel type, and buttons that still look like they can be pressed.' },
-      { type:'text', wide:true, label:'Weather Boy', text:'Current conditions on a purple-tinted screen. Cities cycle with the D-pad, like levels in a handheld.' },
-      { type:'text', wide:true, label:'Timer Boy', text:'Modes on the D-pad. A big digital readout. Play, pause, reset — time as a score you can actually hit.' },
+      { type:'image', src:'assets/projects/gameboy-apps/01-cover.png', wide:true, dark:true, ratio:'16/9' },
+      { type:'text', wide:true, text:'This project consists of two interactive apps, a timer and a weather app, designed in a visual language inspired by the Game Boy Color. While drawing from its iconic colour palette and playful interface cues, the designs reinterpret the style with a modern approach and my own visual flair. The focus was on balancing nostalgic aesthetics with usability, feedback, and engaging interactions through touch and animation.' },
+      { type:'text', wide:true, label:'Visual Concept', text:'Both applications maintain the same core visual DNA: the distinctive purple colour palette ranging from light casing tones to deep screen backgrounds, authentic button styling with proper shadows and feedback, retro typography, and subtle animated elements that enhance the nostalgic gaming experience.' },
+      { type:'text', wide:true, label:'Weather Boy', text:'Current conditions and forecasts sit on a classic purple-tinted screen. Cities cycle like game levels on the D-pad. Chunky mono type recalls early LCD displays, with animated weather backgrounds and authentic Game Boy controls for navigating cities and switching temperature units.' },
+      { type:'text', wide:true, label:'Timer Boy', text:'Timer modes sit on classic D-pad navigation. The main screen holds large digital-style time readouts with animated progress. Preset timers (Pomodoro, breaks, workouts) read as selectable game cartridges, wrapped in the purple casing, CRT scan lines, and tactile button feedback of a familiar handheld.' },
+      { type:'carousel', label:'Weather Boy', interval:3200, bg:'#3d0a61', images:[
+        'assets/projects/gameboy-apps/10-weather-1.png',
+        'assets/projects/gameboy-apps/11-weather-2.png',
+        'assets/projects/gameboy-apps/12-weather-3.png',
+        'assets/projects/gameboy-apps/13-weather-4.png',
+        'assets/projects/gameboy-apps/14-weather-5.png',
+      ]},
+      { type:'carousel', label:'Timer Boy', interval:3400, bg:'#3d0a61', images:[
+        'assets/projects/gameboy-apps/20-timer-1.png',
+        'assets/projects/gameboy-apps/21-timer-2.png',
+        'assets/projects/gameboy-apps/22-timer-3.png',
+        'assets/projects/gameboy-apps/23-timer-4.png',
+        'assets/projects/gameboy-apps/24-timer-5.png',
+      ]},
+      { type:'image', src:'assets/projects/gameboy-apps/03-visual-research.png', wide:true, dark:true, ratio:'16/9', caption:'Visual research with examples of screens' },
+      { type:'image', src:'assets/projects/gameboy-apps/02-cover-alt.png', wide:true, dark:true, ratio:'16/9', caption:'Preview of the final design' },
+      { type:'video', src:'assets/projects/gameboy-apps/60-weather-flow.mp4', contain:true, ratio:'9/16', bg:'#3d0a61', caption:'Weather App Flow' },
+      { type:'video', src:'assets/projects/gameboy-apps/61-timer-flow.mp4', contain:true, ratio:'9/16', bg:'#3d0a61', caption:'Timer App Flow' },
+      { type:'text', wide:true, label:'Design System' },
+      { type:'image', src:'assets/projects/gameboy-apps/30-colour-system.png', wide:true, contain:true, dark:true, ratio:'16/9', caption:'Colour System' },
+      { type:'image', src:'assets/projects/gameboy-apps/33-icons.png', wide:true, contain:true, dark:true, ratio:'16/9', caption:'Icon System' },
+      { type:'image', src:'assets/projects/gameboy-apps/34-font.png', wide:true, contain:true, dark:true, ratio:'16/9', caption:'Font System' },
+      { type:'image', src:'assets/projects/gameboy-apps/36-grid-space.png', wide:true, contain:true, dark:true, ratio:'16/9', caption:'Spacing & Grid System' },
+      { type:'image', src:'assets/projects/gameboy-apps/37-grid-space-2.png', wide:true, contain:true, dark:true, ratio:'16/9' },
+      { type:'text', wide:true, label:'Design Documentation' },
+      { type:'image', src:'assets/projects/gameboy-apps/40-timer-comp.png', contain:true, dark:true, ratio:'4/5', caption:'Timer App Comp Analysis' },
+      { type:'image', src:'assets/projects/gameboy-apps/41-weather-comp.png', contain:true, dark:true, ratio:'4/5', caption:'Weather App Comp Analysis' },
+      { type:'image', src:'assets/projects/gameboy-apps/44-timer-user-test.png', contain:true, dark:true, ratio:'4/5', caption:'Timer App User Test' },
+      { type:'image', src:'assets/projects/gameboy-apps/45-weather-user-test.png', contain:true, dark:true, ratio:'4/5', caption:'Weather App User Test' },
+      { type:'text', wide:true, text:'I began by exploring ideas through sketches, identifying where interactions could be incorporated. From there, I moved on to designing low-fidelity screens and, after gathering user feedback, refined them into high-fidelity screens.' },
+      { type:'image', src:'assets/projects/gameboy-apps/47-design-iterations.png', wide:true, contain:true, dark:true, ratio:'16/9', caption:'Design iterations on paper' },
+      { type:'text', wide:true, label:'Discarded Designs', text:"These designs were discarded because they were too clunky, didn't mimic the feel of the Game Boy Color, and were tough to navigate through." },
+      { type:'image', src:'assets/projects/gameboy-apps/50-discarded-1.png', ratio:'9/19.5', contain:true, dark:true, bg:'#3d0a61', caption:'V1' },
+      { type:'image', src:'assets/projects/gameboy-apps/51-discarded-2.png', ratio:'9/19.5', contain:true, dark:true, bg:'#3d0a61', caption:'V2' },
       { type:'text', wide:true, label:'Prototypes', text:'Take the prototypes for a spin!',
         ctas:[
           { href:'https://www.figma.com/proto/TVll8JWgO58zkMNLhLgWH8/Untitled?page-id=0%3A1&node-id=0-1405&viewport=333%2C-265%2C0.26&t=gvZs257TP3y2eX3c-1&scaling=min-zoom&content-scaling=fixed', label:'Weather prototype' },
@@ -2651,14 +2933,168 @@ const PROJECTS = [
     ],
   },
   {
-    id:'play-versus', name:'Play Versus', tag:'Branding and UI for a sports matchmaking app in Mumbai — connecting players, venues, and pickup games.',
+    id:'motion-graphics', name:'Motion Graphics', tag:'Title sequences, loops, and motion experiments.',
+    category:'motion',
+    heroColor:'#0c0a08', heroAccent:'#E8D44D', letter:'M',
+    heroImage:'assets/projects/motion-graphics/20-fittr-logo.gif',
+    thumbImage:'assets/projects/motion-graphics/20-fittr-logo.gif',
+    coverImage:'assets/projects/motion-graphics/20-fittr-logo.gif',
+    eyebrow:'Motion · Ongoing', title:'Motion Graphics',
+    challenge:'Some work has to move. Type, product, and identity that only exist in time.',
+    solution:'A set of motion graphic experiments and commissioned pieces: loops, titles, and kinetic type.',
+    info:[
+      'Motion graphic experiments and projects, from short loops to title sequences. Pine Labs, Fittr, B Label, The Bar Collective, and a run of After Effects studies.',
+    ],
+    credits:[{role:'Motion Graphics',name:'Madhav Jolly'}],
+    year:'Ongoing', client:'Selected work', agency:'The Works, Please See//, Freelance', scope:'Motion Graphics, Kinetic Type, Animation', awards:'—',
+    colors:['#0c0a08','#E8D44D','#f0eeea','#1a1612','#12100c','#080706'],
+    labels:['Loop','Title','Type','Product','Experiment','Sequence'],
+    gallery:[
+      { type:'text', wide:true, text:'A collection of motion graphic experiments and commissioned work. Loops, titles, and type that only hold once they move.' },
+      { type:'text', wide:true, label:'Logo animations' },
+      { type:'video', src:'assets/projects/motion-graphics/60-pine-labs-logo-pitch.mp4', wide:true, contain:true, dark:true, ratio:'16/9', caption:'Pitched for Pine Labs. Never used.' },
+      { type:'image', src:'assets/projects/motion-graphics/20-fittr-logo.gif', wide:true, contain:true, dark:true, ratio:'16/9', caption:'Logo animation for Fittr' },
+      { type:'video', src:'assets/projects/motion-graphics/40-blabel-logo.mp4', wide:true, contain:true, dark:true, ratio:'16/9', caption:'Logo animation for B Label' },
+      { type:'embed-row', cols:2, embeds:[
+        { src:'https://player.vimeo.com/video/394131523?autoplay=1&loop=1&muted=1&title=0&byline=0&portrait=0', caption:'Go with the flow' },
+        { src:'https://player.vimeo.com/video/394399503?autoplay=1&loop=1&muted=1&title=0&byline=0&portrait=0', caption:'Way too much coffee' },
+      ]},
+      { type:'embed', src:'https://player.vimeo.com/video/393184043?autoplay=1&loop=1&muted=1&title=0&byline=0&portrait=0', ratio:'16/9', caption:'The rainbow' },
+      { type:'text', wide:true, text:'A series of animations made in After Effects while exploring different styles, kept on a similar theme.' },
+      { type:'embed', src:'https://player.vimeo.com/video/408367414?autoplay=1&loop=1&muted=1&title=0&byline=0&portrait=0', wide:false, ratio:'16/9', caption:'80s retro text' },
+      { type:'embed', src:'https://player.vimeo.com/video/408367550?autoplay=1&loop=1&muted=1&title=0&byline=0&portrait=0', wide:false, ratio:'16/9', caption:'Grid animation, VCR' },
+      { type:'embed', src:'https://player.vimeo.com/video/408367751?autoplay=1&loop=1&muted=1&title=0&byline=0&portrait=0', wide:false, ratio:'16/9', caption:'Save me, VCR' },
+      { type:'embed', src:'https://player.vimeo.com/video/408367920?autoplay=1&loop=1&muted=1&title=0&byline=0&portrait=0', wide:false, ratio:'16/9', caption:'Song promo' },
+      { type:'text', wide:true, label:'The Bar Collective' },
+      { type:'video-row', cols:3, videos:[
+        'assets/projects/social-creatives/tbc-reel-1-oct.mp4',
+        'assets/projects/social-creatives/tbc-reel-8-oct.mp4',
+        'assets/projects/social-creatives/tbc-reel-oct-3.mp4',
+      ]},
+    ],
+  },
+  {
+    id:'moha', name:'MOHA', tag:'A university project. Details coming soon.',
+    category:'digital', comingSoon:true, listed:false,
+    heroColor:'#1a1208', heroAccent:'#e8c07a', letter:'M',
+    eyebrow:'University project · Coming soon', title:'MOHA',
+    challenge:'Project details coming soon.', solution:'Project details coming soon.',
+    info:['Project details coming soon.'],
+    credits:[{role:'Design',name:'Madhav Jolly'}],
+    year:'—', client:'University project', agency:'—', scope:'—', awards:'—',
+    colors:['#1a1208','#2a1c0e','#3a2814','#120c06','#0e0a04','#0a0804'],
+    labels:['Concept','Identity','System','Application','Detail','Outcome'],
+  },
+  {
+    id:'social-creatives', name:'Social Media Creatives', tag:'Posts, stories, and motion made to live in a feed.',
+    category:'motion',
+    heroColor:'#0a0a0a', heroAccent:'#c41e3a', letter:'S',
+    heroImage:'assets/projects/social-creatives/tbc-30-31-july.png',
+    thumbImage:'assets/projects/social-creatives/tbc-30-31-july.png',
+    coverImage:'assets/projects/social-creatives/tbc-30-31-july.png',
+    thumbCarousel:[
+      'assets/projects/social-creatives/tbc-10-dartington.png',
+      'assets/projects/social-creatives/tbc-18-zalto.png',
+      'assets/projects/social-creatives/tbc-30-31-july.png',
+      'assets/projects/social-creatives/tbc-50-gift-1.png',
+      'assets/projects/stranger-sons/24-feed-grid-01.jpg',
+      'assets/projects/stranger-sons/25-feed-grid-02.jpg',
+      'assets/projects/stranger-sons/26-feed-grid-03.jpg',
+      'assets/projects/social-creatives/scentido-10-jovoy.png',
+      'assets/projects/social-creatives/scentido-11-citrus.jpg',
+      'assets/projects/social-creatives/scentido-12-fraternity.jpg',
+      'assets/projects/social-creatives/scentido-13-sound.jpg',
+    ],
+    eyebrow:'Social · 2021 / 2025', title:'Social Media Creatives',
+    challenge:'Different shops, same job: make a feed that sells without looking like a catalogue.',
+    solution:'For The Bar Collective, black, one line, a red shop button. For Stranger & Sons, the bottle, the drink, and the takeover. For Scentido, perfume in a square.',
+    info:[
+      'The Bar Collective is a retailer of glassware, bar tools, and home-bar gifts. Stranger & Sons is an Indian craft gin. Scentido sells niche perfume. A short set from those accounts.',
+    ],
+    credits:[{role:'Social Media Creatives',name:'Madhav Jolly'}],
+    year:'2021 / 2025', client:'The Bar Collective, Stranger & Sons, Scentido', agency:'The Works, Please See//, Freelance', scope:'Social Media Creatives', awards:'—',
+    colors:['#0a0a0a','#1a1a1a','#ffffff','#c41e3a','#8a0f22','#0e0e0e'],
+    labels:['Feed','Product','Editorial','Gifting','Story','Motion'],
+    gallery:[
+      { type:'text', wide:true, text:'The Bar Collective sells the kit for a serious home bar. The feed had to make that kit feel like a pour, then send people to the shop.' },
+      { type:'image', src:'assets/projects/social-creatives/tbc-10-dartington.png', ratio:'1/1' },
+      { type:'image', src:'assets/projects/social-creatives/tbc-18-zalto.png', ratio:'1/1' },
+      { type:'text', wide:true, text:'Not every frame is a product tile. Some weeks it is a Monday joke. Some weeks it is a gift, so a sibling does not have to think.' },
+      { type:'image', src:'assets/projects/social-creatives/tbc-30-31-july.png', ratio:'4/5' },
+      { type:'image', src:'assets/projects/social-creatives/tbc-50-gift-1.png', ratio:'4/5' },
+      { type:'text', wide:true, text:'Some weeks it is a reel: drinks, dates, and a bit of bar history.' },
+      { type:'video-row', cols:3, videos:[
+        'assets/projects/social-creatives/tbc-reel-1-oct.mp4',
+        'assets/projects/social-creatives/tbc-reel-8-oct.mp4',
+        'assets/projects/social-creatives/tbc-reel-oct-3.mp4',
+      ]},
+      { type:'text', wide:true, text:'Stranger & Sons is an Indian craft gin. The feed has to hold a bottle, a bar, and a cocktail without looking like a catalogue.' },
+      { type:'image-row', cols:3, images:[
+        'assets/projects/stranger-sons/24-feed-grid-01.jpg',
+        'assets/projects/stranger-sons/25-feed-grid-02.jpg',
+        'assets/projects/stranger-sons/26-feed-grid-03.jpg',
+      ]},
+      { type:'image', src:'assets/projects/stranger-sons/04-story-01.jpg', ratio:'9/16' },
+      { type:'image', src:'assets/projects/stranger-sons/05-story-02.jpg', ratio:'9/16' },
+      { type:'image', src:'assets/projects/stranger-sons/06-story-03.jpg', ratio:'9/16' },
+      { type:'image', src:'assets/projects/stranger-sons/18-story-pour.jpg', ratio:'9/16' },
+      { type:'image', src:'assets/projects/stranger-sons/19-story-trade.jpg', ratio:'9/16' },
+      { type:'image', src:'assets/projects/stranger-sons/20-story-dates.jpg', ratio:'9/16' },
+      { type:'image', src:'assets/projects/stranger-sons/21-story-delhi.jpg', ratio:'9/16' },
+      { type:'image', src:'assets/projects/stranger-sons/22-story-elaa.jpg', ratio:'9/16' },
+      { type:'image', src:'assets/projects/stranger-sons/27-story-saimai.png', ratio:'9/16', contain:true, light:true },
+      { type:'text', wide:true, text:'Scentido sells niche perfume. The posts had to feel like the bottle: an offer, citrus, a fraternity, scent and sound.' },
+      { type:'image', src:'assets/projects/social-creatives/scentido-10-jovoy.png', ratio:'1/1' },
+      { type:'image', src:'assets/projects/social-creatives/scentido-11-citrus.jpg', ratio:'1/1' },
+      { type:'image', src:'assets/projects/social-creatives/scentido-12-fraternity.jpg', ratio:'1/1' },
+      { type:'image', src:'assets/projects/social-creatives/scentido-13-sound.jpg', ratio:'1/1' },
+    ],
+  },
+  {
+    id:'music-artwork', name:'Music Artwork / Illustrations', tag:'Covers for my own releases, and a few for other artists, plus illustration made for the same world.',
+    category:'editorial', comingSoon:true, listed:false,
+    heroColor:'#12080e', heroAccent:'#f0a060', letter:'A',
+    eyebrow:'Graphic Design · Coming soon', title:'Music Artwork / Illustrations',
+    challenge:'Project details coming soon.', solution:'Project details coming soon.',
+    info:['Project details coming soon.'],
+    credits:[{role:'Music Artwork, Illustration, Graphic Design',name:'Madhav Jolly'}],
+    year:'—', client:'—', agency:'—', scope:'Music Artwork, Illustration, Graphic Design', awards:'—',
+    colors:['#12080e','#1e0e16','#2a1420','#0c060a','#0a0408','#080306'],
+    labels:['Cover','Illustration','Single','EP','Campaign','Spotify'],
+  },
+  {
+    id:'inarco-rollers', name:'Inarco Rollers', tag:'Industrial rollers. Identity and applications coming soon.',
+    category:'brand', comingSoon:true, listed:false,
+    heroColor:'#141414', heroAccent:'#c8c4bc', letter:'R',
+    eyebrow:'Brand Identity · Coming soon', title:'Inarco Rollers',
+    challenge:'Project details coming soon.', solution:'Project details coming soon.',
+    info:['Project details coming soon.'],
+    credits:[{role:'Brand Identity',name:'Madhav Jolly'}],
+    year:'—', client:'Inarco Rollers', agency:'—', scope:'Brand Identity', awards:'—',
+    colors:['#141414','#1c1c1c','#282828','#0e0e0e','#0a0a0a','#080808'],
+    labels:['Mark','System','Type','Colour','Application','Outcome'],
+  },
+  {
+    id:'smitten', name:'Smitten', tag:'A brand project. Details coming soon.',
+    category:'brand', comingSoon:true, listed:false,
+    heroColor:'#2a0812', heroAccent:'#f07090', letter:'S',
+    eyebrow:'Brand Identity · Coming soon', title:'Smitten',
+    challenge:'Project details coming soon.', solution:'Project details coming soon.',
+    info:['Project details coming soon.'],
+    credits:[{role:'Brand Identity',name:'Madhav Jolly'}],
+    year:'—', client:'Smitten', agency:'—', scope:'Brand Identity', awards:'—',
+    colors:['#2a0812','#3a1018','#4a1820','#1a060c','#120408','#0e0406'],
+    labels:['Mark','System','Type','Colour','Application','Outcome'],
+  },
+  {
+    id:'play-versus', name:'Play Versus', tag:'Branding and UI for a sports matchmaking app in Mumbai, connecting players, venues, and pickup games.',
     category:'digital', comingSoon:true,
     heroColor:'#0a1810', heroAccent:'#5ec47a', letter:'P',
     eyebrow:'Brand & Product · Coming soon', title:'Play Versus',
     challenge:'Project details coming soon.', solution:'Project details coming soon.',
     info:['Project details coming soon.','Visit the live site at <a href="https://www.playversus.in" target="_blank" rel="noopener">playversus.in</a>'],
     credits:[{role:'Branding, UI/UX Design',name:'Madhav Jolly'}],
-    year:'—', client:'Play Versus', agency:'—', scope:'Branding, UI/UX Design', awards:'—',
+    year:'—', client:'Play Versus', agency:'The Works', scope:'Branding, UI/UX Design', awards:'—',
     colors:['#0a1810','#0d1e14','#102818','#081208','#06100a','#040c08'],
     labels:['Brand identity','App UI','Matchmaking','Onboarding','Profile','Venues'],
   },
@@ -2764,18 +3200,56 @@ function tick() {
 }
 tick(); setInterval(tick, 1000);
 
+function isVideoSrc(src) {
+  return typeof src === 'string' && /\.mp4($|\?)/i.test(src);
+}
+function listingMedia(src, alt) {
+  if (!src) return '';
+  if (isVideoSrc(src)) {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    return `<video src="${src}" muted loop playsinline preload="metadata"${reduce ? '' : ' autoplay'}></video>`;
+  }
+  return `<img src="${src}" alt="${alt}" loading="lazy">`;
+}
+function listingCarouselSlides(p) {
+  return (p.thumbCarousel || []).filter(Boolean);
+}
+function listingThumbInner(p, alt) {
+  const slides = listingCarouselSlides(p);
+  if (slides.length > 1) {
+    return `<div class="listing-carousel" data-interval="${p.thumbCarouselInterval || 2800}">${slides.map((src, i) =>
+      `<img class="listing-slide${i === 0 ? ' active' : ''}" src="${src}" alt="${alt}" loading="${i === 0 ? 'eager' : 'lazy'}">`
+    ).join('')}</div>`;
+  }
+  return listingMedia(p.thumbImage || p.heroImage || p.coverImage, alt);
+}
+function listingHasMedia(p) {
+  return listingCarouselSlides(p).length > 1 || !!(p.thumbImage || p.heroImage || p.coverImage);
+}
+function listingWrapCss(p) {
+  const parts = [];
+  if (p.heroColor) parts.push(`background:${p.heroColor}`);
+  if (p.heroAccent) parts.push(`color:${p.heroAccent}`);
+  if (p.thumbZoom) parts.push(`--media-zoom:${p.thumbZoom}`);
+  return parts.join(';');
+}
+function listingWrapStyle(p) {
+  const css = listingWrapCss(p);
+  return css ? ` style="${css}"` : '';
+}
+
 /* ─ Build sidebar ─ */
 const listEl = document.getElementById('project-list');
 PROJECTS.forEach((p,i) => {
+  if (p.listed === false) return;
   const el = document.createElement(p.comingSoon ? 'div' : 'a');
   el.className = 'p-item';
   el.id = 'nav-'+p.id;
   el.dataset.projectId = p.id;
   if (!p.comingSoon) el.href = hrefFor(p.id);
   else el.setAttribute('aria-disabled', 'true');
-  const thumbSrc = p.thumbImage || p.heroImage || p.coverImage;
-  const thumbHtml = thumbSrc
-    ? `<div class="p-thumb has-img"><img src="${thumbSrc}" alt="${p.name}" loading="lazy"></div>`
+  const thumbHtml = listingHasMedia(p)
+    ? `<div class="p-thumb has-img${p.thumbContain ? ' contain' : ''}"${listingWrapStyle(p)}>${listingThumbInner(p, p.name)}</div>`
     : `<div class="p-thumb" style="background:${p.heroColor};color:${p.heroAccent}">${p.letter}</div>`;
   el.innerHTML = thumbHtml + `<div class="p-text sidebar-hideable"><div class="p-name">${p.name}</div><div class="p-tag">${p.tag}</div></div>`;
   listEl.appendChild(el);
@@ -2819,6 +3293,50 @@ function buildGalleryTiles(p) {
         }).join('');
         return `<div class="g-item bento-row${cols}">${header}${cells}</div>`;
       }
+      if (item.type === 'image-row') {
+        const imgs = (item.images || []).filter(Boolean);
+        if (!imgs.length) return '';
+        const n = item.cols || imgs.length;
+        const cols = n === 3 ? ' cols-3' : n === 2 ? ' cols-2' : '';
+        const slides = imgs.map(src =>
+          `<img src="${src}" alt="${item.label || p.name}" loading="lazy">`
+        ).join('');
+        return `<div class="g-item image-row${cols}">${slides}</div>`;
+      }
+      if (item.type === 'video-row') {
+        const vids = (item.videos || []).filter(Boolean);
+        if (!vids.length) return '';
+        const n = item.cols || vids.length;
+        const cols = n === 3 ? ' cols-3' : n === 2 ? ' cols-2' : '';
+        const slides = vids.map(src =>
+          `<video src="${src}" autoplay muted loop playsinline preload="metadata"></video>`
+        ).join('');
+        return `<div class="g-item video-row${cols}">${slides}</div>`;
+      }
+      if (item.type === 'embed-row') {
+        const embeds = (item.embeds || []).filter(e => e && e.src);
+        if (!embeds.length) return '';
+        const n = item.cols || embeds.length;
+        const cols = n === 3 ? ' cols-3' : n === 2 ? ' cols-2' : '';
+        const cells = embeds.map(e => {
+          const caption = e.caption ? `<span class="g-caption">${e.caption}</span>` : '';
+          return `<div class="embed-cell"><div class="embed-frame"><iframe src="${e.src}" title="${e.caption || p.name}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>${caption}</div>`;
+        }).join('');
+        return `<div class="g-item embed-row${cols}">${cells}</div>`;
+      }
+      if (item.type === 'embed') {
+        const wide = item.wide != null ? item.wide : true;
+        let cls = 'g-item has-embed';
+        if (wide) cls += ' wide';
+        if (item.compact) cls += ' compact';
+        if (item.caption) cls += ' has-caption';
+        const styles = [];
+        if (item.ratio) styles.push(`aspect-ratio:${item.ratio}`);
+        if (item.bg) styles.push(`background:${item.bg}`);
+        const ratioStyle = styles.length ? ` style="${styles.join(';')}"` : '';
+        const caption = item.caption ? `<span class="g-caption${item.captionSoft ? ' soft' : ''}">${item.caption}</span>` : '';
+        return `<div class="${cls}"${ratioStyle}><iframe src="${item.src}" title="${item.caption || p.name}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe>${caption}</div>`;
+      }
       if (item.type === 'feature') {
         const flip = item.flip ? ' flip' : '';
         const label = item.label ? `<div class="col-label">${item.label}</div>` : '';
@@ -2829,6 +3347,17 @@ function buildGalleryTiles(p) {
           ? `<video src="${item.video}" autoplay muted loop playsinline preload="metadata"></video>`
           : `<img src="${item.src}" alt="${item.label || p.name}" loading="lazy">`;
         return `<div class="g-item feature${flip}"><div class="feature-copy">${label}${paras}</div><div class="feature-media${zoom}"${mediaStyle}>${media}</div></div>`;
+      }
+      if (item.type === 'carousel') {
+        const imgs = (item.images || []).filter(Boolean);
+        if (!imgs.length) return '';
+        const interval = item.interval || 3200;
+        const bg = item.bg || '#0a0a0a';
+        const label = item.label ? `<span class="g-label">${item.label}</span>` : '';
+        const slides = imgs.map((src, i) =>
+          `<img class="carousel-slide${i === 0 ? ' active' : ''}" src="${src}" alt="${item.label || p.name}" loading="${i === 0 ? 'eager' : 'lazy'}">`
+        ).join('');
+        return `<div class="g-item carousel" data-interval="${interval}" style="background:${bg}"><div class="carousel-stage">${slides}</div>${label}</div>`;
       }
       const wide = item.wide != null ? item.wide : false;
       const isVideo = item.type === 'video';
@@ -2876,12 +3405,11 @@ function nextOpenProject(index) {
 
 function buildNextNav(index) {
   const next = nextOpenProject(index);
-  const thumb = next.thumbImage || next.heroImage || next.coverImage;
-  const thumbHtml = thumb
-    ? `<img src="${thumb}" alt="${next.name}" loading="lazy">`
+  const thumbHtml = listingHasMedia(next)
+    ? listingThumbInner(next, next.name)
     : `<span>${next.letter}</span>`;
-  const thumbCls = thumb ? 'p-next-thumb has-img' : 'p-next-thumb';
-  const thumbStyle = thumb ? '' : ` style="background:${next.heroColor};color:${next.heroAccent}"`;
+  const thumbCls = listingHasMedia(next) ? 'p-next-thumb has-img' + (next.thumbContain ? ' contain' : '') : 'p-next-thumb';
+  const thumbStyle = listingWrapStyle(next);
   return `
     <div class="p-project-nav">
       <button class="cta-btn" type="button" onclick="openAll()">View all projects<svg width="10" height="10" viewBox="0 0 11 11" fill="none" aria-hidden="true"><path d="M2 9L9 2M9 2H3.5M9 2V7.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -2900,12 +3428,20 @@ function buildNextNav(index) {
 const mainEl = document.getElementById('main');
 let currentRoute = null;
 let galleryVideoIO = null;
+const galleryCarouselTimers = [];
+
+function stopGalleryCarousels() {
+  while (galleryCarouselTimers.length) {
+    clearInterval(galleryCarouselTimers.pop());
+  }
+}
 
 function unmountProjectPanels() {
   if (galleryVideoIO) {
     galleryVideoIO.disconnect();
     galleryVideoIO = null;
   }
+  stopGalleryCarousels();
   document.querySelectorAll('.panel[data-project-panel]').forEach(el => {
     el.querySelectorAll('video').forEach(v => {
       try { v.pause(); } catch (err) {}
@@ -2985,6 +3521,47 @@ function initGalleryVideoPlayback(root) {
   vids.forEach(v => galleryVideoIO.observe(v));
 }
 
+function initGalleryCarousels(root) {
+  stopGalleryCarousels();
+  if (!root) return;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  root.querySelectorAll('.g-item.carousel').forEach((el, i) => {
+    const slides = [...el.querySelectorAll('.carousel-slide')];
+    if (slides.length < 2 || reduceMotion) return;
+    let idx = 0;
+    const ms = Math.max(1800, parseInt(el.dataset.interval, 10) || 3200);
+    const kick = window.setTimeout(() => {
+      const timer = window.setInterval(() => {
+        slides[idx].classList.remove('active');
+        idx = (idx + 1) % slides.length;
+        slides[idx].classList.add('active');
+      }, ms);
+      galleryCarouselTimers.push(timer);
+    }, i * 900);
+    galleryCarouselTimers.push(kick);
+  });
+}
+
+function initListingCarousels(root) {
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceMotion) return;
+  (root || document).querySelectorAll('.listing-carousel').forEach((el, i) => {
+    if (el.dataset.running) return;
+    const slides = [...el.querySelectorAll('.listing-slide')];
+    if (slides.length < 2) return;
+    el.dataset.running = '1';
+    let idx = 0;
+    const ms = Math.max(1800, parseInt(el.dataset.interval, 10) || 2800);
+    window.setTimeout(() => {
+      window.setInterval(() => {
+        slides[idx].classList.remove('active');
+        idx = (idx + 1) % slides.length;
+        slides[idx].classList.add('active');
+      }, ms);
+    }, i * 400);
+  });
+}
+
 /* ─ Asset paths — drop files in /assets and reference here ─ */
 const ASSETS = {
   about: {
@@ -3036,16 +3613,18 @@ if (apImg) {
   const nameEl = document.getElementById('reel-name');
   const tagEl = document.getElementById('reel-tag');
   const dotsEl = document.getElementById('reel-dots');
-  const reelProjects = PROJECTS.filter(p => !p.id.startsWith('dummy'));
+  const reelProjects = PROJECTS.filter(p => !p.id.startsWith('dummy') && p.listed !== false);
 
   // Build slides
   reelProjects.forEach((p, i) => {
     const slide = document.createElement('div');
     slide.className = 'reel-slide' + (i === 0 ? ' active' : '');
-    const cover = p.coverImage || p.heroImage || p.thumbImage;
-    if (cover) {
+    if (listingHasMedia(p)) {
       slide.classList.add('has-img');
-      slide.innerHTML = `<img src="${cover}" alt="${p.name}" loading="lazy">`;
+      if (p.thumbContain) slide.classList.add('contain');
+      const css = listingWrapCss(p);
+      if (css) slide.style.cssText = css;
+      slide.innerHTML = listingThumbInner(p, p.name);
     } else {
       slide.style.background = p.heroColor;
       slide.style.color = p.heroAccent;
@@ -3063,6 +3642,19 @@ if (apImg) {
   const dots = dotsEl.querySelectorAll('.reel-dot');
   let idx = 0;
 
+  function syncReelVideos() {
+    slides.forEach((s, i) => {
+      s.querySelectorAll('video').forEach(v => {
+        if (i === idx) {
+          const played = v.play();
+          if (played) played.catch(() => {});
+        } else {
+          v.pause();
+        }
+      });
+    });
+  }
+
   function setSlide(n) {
     slides[idx].classList.remove('active');
     dots[idx].classList.remove('active');
@@ -3073,12 +3665,14 @@ if (apImg) {
     nameEl.textContent = reelProjects[idx].name;
     tagEl.textContent = reelProjects[idx].tag;
     card.dataset.projectId = reelProjects[idx].id;
+    syncReelVideos();
   }
 
   // Set first label
   nameEl.textContent = reelProjects[0].name;
   tagEl.textContent = reelProjects[0].tag;
   card.dataset.projectId = reelProjects[0].id;
+  syncReelVideos();
 
   // Zone click — left prev, right next, center opens project
   card.addEventListener('click', e => {
@@ -3439,10 +4033,16 @@ function renderRoute(id) {
   const overlay = document.getElementById('all-overlay');
   if (overlay && overlay.classList.contains('open')) closeAll();
   if (id === 'about') requestAnimationFrame(sizeAboutPhoto);
-  if (isProject) initGalleryVideoPlayback(incoming);
-  else if (galleryVideoIO) {
-    galleryVideoIO.disconnect();
-    galleryVideoIO = null;
+  if (isProject) {
+    initGalleryVideoPlayback(incoming);
+    initGalleryCarousels(incoming);
+    initListingCarousels(incoming);
+  } else {
+    if (galleryVideoIO) {
+      galleryVideoIO.disconnect();
+      galleryVideoIO = null;
+    }
+    stopGalleryCarousels();
   }
 }
 
@@ -3543,34 +4143,31 @@ function setFilter(el) {
 }
 
 /* ─ Show all overlay ─ */
-function aoSizeHash(str) {
-  let h = 0;
-  for (let i = 0; i < str.length; i++) h = ((h << 5) - h) + str.charCodeAt(i) | 0;
-  return Math.abs(h);
-}
-
-function assignAoCardSize(card, projectId) {
-  if (aoSizeHash(projectId) % 3 === 0) card.classList.add('size-tall');
+function assignAoCardSize(card, i) {
+  // Stagger tall covers so the first row always has one, then every fourth card
+  if (i % 4 === 1) card.classList.add('size-tall');
 }
 
 const aoGrid = document.getElementById('ao-grid');
-PROJECTS.forEach((p, i) => {
+let aoI = 0;
+PROJECTS.forEach((p) => {
+  if (p.listed === false) return;
   const card = document.createElement(p.comingSoon ? 'div' : 'a');
   card.className = 'ao-card';
-  assignAoCardSize(card, p.id);
+  assignAoCardSize(card, aoI);
   card.dataset.projectId = p.id;
   card.dataset.name = p.name.toLowerCase()+' '+p.tag.toLowerCase();
   card.dataset.cat = p.category || 'brand';
-  card.style.animationDelay = (i*0.06)+'s';
+  card.style.animationDelay = (aoI*0.06)+'s';
+  aoI++;
   if (!p.comingSoon) card.href = hrefFor(p.id);
   else card.setAttribute('aria-disabled', 'true');
-  const cover = p.coverImage || p.heroImage || p.thumbImage;
-  const imgHtml = cover
-    ? `<img src="${cover}" alt="${p.name}" loading="lazy">`
+  const imgHtml = listingHasMedia(p)
+    ? listingThumbInner(p, p.name)
     : `<span>${p.letter}</span>`;
-  const imgCls = cover ? 'ao-img has-cover' : 'ao-img';
+  const imgCls = listingHasMedia(p) ? 'ao-img has-cover' + (p.thumbContain ? ' contain' : '') : 'ao-img';
   const awardHtml = p.award ? `<div class="ao-award-pill ao-award-overlay">🏆 ${p.award}</div>` : '';
-  card.innerHTML = `<div class="${imgCls}" style="background:${p.heroColor};color:${p.heroAccent};">${imgHtml}${awardHtml}</div>
+  card.innerHTML = `<div class="${imgCls}"${listingWrapStyle(p)}>${imgHtml}${awardHtml}</div>
     <div class="ao-card-body">
       <div class="ao-card-name">${p.name}</div>
       <div class="ao-card-tag">${p.tag}</div>
@@ -3598,6 +4195,7 @@ if (localStorage.getItem('sidebar-collapsed') === '1') {
   if (btn) btn.setAttribute('aria-label', 'Expand sidebar');
 }
 showPanel(parseRoute(), { replace: true });
+initListingCarousels();
 window.addEventListener('resize', sizeAboutPhoto);
 
 /* Theme (dark / light) */
