@@ -1430,7 +1430,6 @@ a.nav-link {
 .kp-bento {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto auto;
   gap: var(--gap);
   margin-bottom: 0;
 }
@@ -1450,8 +1449,6 @@ a.nav-link {
 .kp-cell-val.yellow { color: var(--yellow); }
 .kp-cell-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
 
-.appearance-bento { margin-top: var(--gap); }
-.delight-bento { margin-top: var(--gap); }
 .delight-toggles {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -2154,8 +2151,6 @@ a.nav-link {
             <div class="kpc-dots" id="kpc-dots"></div>
           </div>
         </div>
-      </div>
-      <div class="kp-bento delight-bento">
         <div class="kp-cell wide">
           <div class="kp-cell-label">Sound</div>
           <div class="delight-toggles delight-toggles--single">
@@ -2165,8 +2160,6 @@ a.nav-link {
             </button>
           </div>
         </div>
-      </div>
-      <div class="kp-bento appearance-bento">
         <div class="kp-cell wide">
           <div class="kp-cell-label">Appearance</div>
           <div class="delight-toggles" id="theme-picker" role="group" aria-label="Theme">
@@ -2342,6 +2335,7 @@ a.nav-link {
               <div class="svc"><div class="svc-n">Prototyping</div><div class="svc-s">Code & craft</div></div>
               <div class="svc"><div class="svc-n">Art Direction</div><div class="svc-s">Visual language & systems</div></div>
               <div class="svc"><div class="svc-n">Digital Systems</div><div class="svc-s">Design at scale</div></div>
+              <div class="svc"><div class="svc-n">AI</div><div class="svc-s">Websites and products</div></div>
             </div>
           </div>
 
@@ -2398,18 +2392,25 @@ a.nav-link {
           </div>
 
           <!-- Projects -->
-          <div class="ap-card" style="grid-column: 1 / -1;">
+          <div class="ap-card">
             <div class="ap-card-label">Projects</div>
             <div class="ow-item">
-              <div class="ow-title">Jam Rooms</div>
-            </div>
-            <div class="ow-item">
               <div class="ow-title">LOCCAL</div>
-              <p class="ow-body">A Food Waste Maturity Model for LOCCAL, with an interactive dashboard designed to help Australian food organisations measure, understand, and improve their food waste practices.</p>
-              <p class="ow-body">Over two months, we worked with LOCCAL to turn sustainability auditing from a static checklist into something cafés can actually use. A maturity model, a live scoring system, and an interactive dashboard. Immediate feedback on current practices, where to improve, and the environmental and financial case for acting.</p>
-              <p class="ow-body">We built and validated the dashboard as the core of the wider system: a high-fidelity prototype, an 8-week implementation roadmap, and a pilot with real partner cafés. Agile and user-centred, so café feedback could shape the next version of the tool.</p>
-              <p class="ow-body">The proposal gives LOCCAL a path from prototype to a validated Version 1.0, with a launch kit, user guidance, and room to grow.</p>
-              <p class="ow-body">A Monash Innovation Guarantee design sprint at Monash University. I was one of five on the team.</p>
+              <p class="ow-body">A food waste maturity model and dashboard for Australian cafes, made during a Monash Innovation Guarantee sprint. I was one of five on the team.</p>
+            </div>
+          </div>
+
+          <!-- Volunteering -->
+          <div class="ap-card">
+            <div class="ap-card-label">Volunteering</div>
+            <div class="exp-list">
+              <div class="exp-row">
+                <div class="exp-top">
+                  <div class="exp-role">TEDx Bellandur, Graphic Design Volunteer</div>
+                  <div class="exp-dates">Aug → Sep 2019</div>
+                </div>
+                <p class="edu-body">Arts and Culture.</p>
+              </div>
             </div>
           </div>
 
@@ -2575,6 +2576,7 @@ const PROJECTS = [
     heroImage:'assets/projects/falcon/00-preview.gif',
     thumbImage:'assets/projects/falcon/00-preview.gif',
     coverImage:'assets/projects/falcon/00-preview.gif',
+    reelImage:'assets/projects/falcon/03-guidelines.jpg',
     eyebrow:'Brand Identity · 2022', title:'Falcon',
     challenge:"A payments platform for banks and FinTechs needed a mark as sharp as the product, not another soft gradient in a crowded category.",
     solution:"A three-dimensional F, cut like a falcon's bill. Then colour, icons, a card, and packaging that can sit next to the software.",
@@ -3215,6 +3217,13 @@ tick(); setInterval(tick, 1000);
 function isVideoSrc(src) {
   return typeof src === 'string' && /\.mp4($|\?)/i.test(src);
 }
+function isMotionSrc(src) {
+  return typeof src === 'string' && /\.(gif|mp4|webm)($|\?)/i.test(src);
+}
+function reelStillSrc(p) {
+  const list = [p.reelImage, p.coverImage, p.heroImage, p.thumbImage].concat(p.thumbCarousel || []);
+  return list.find(src => src && !isMotionSrc(src)) || '';
+}
 function listingMedia(src, alt) {
   if (!src) return '';
   if (isVideoSrc(src)) {
@@ -3625,18 +3634,18 @@ if (apImg) {
   const nameEl = document.getElementById('reel-name');
   const tagEl = document.getElementById('reel-tag');
   const dotsEl = document.getElementById('reel-dots');
-  const reelProjects = PROJECTS.filter(p => !p.id.startsWith('dummy') && p.listed !== false);
+  const reelProjects = PROJECTS.filter(p => !p.id.startsWith('dummy') && p.listed !== false && p.id !== 'play-versus' && p.id !== 'social-creatives');
 
   // Build slides
   reelProjects.forEach((p, i) => {
     const slide = document.createElement('div');
     slide.className = 'reel-slide' + (i === 0 ? ' active' : '');
-    if (listingHasMedia(p)) {
+    const still = reelStillSrc(p);
+    if (still) {
       slide.classList.add('has-img');
-      if (p.thumbContain) slide.classList.add('contain');
       const css = listingWrapCss(p);
       if (css) slide.style.cssText = css;
-      slide.innerHTML = listingThumbInner(p, p.name);
+      slide.innerHTML = listingMedia(still, p.name);
     } else {
       slide.style.background = p.heroColor;
       slide.style.color = p.heroAccent;
