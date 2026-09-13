@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-route="home">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Madhav Jolly | Designer, Brand &amp; Digital Product</title>
 <meta name="description" content="Indian designer in Melbourne, working across brand and digital product. Identity first, then the system around it, with motion, 3D, and sound when the work needs more than a still.">
 <link rel="canonical" href="https://madhavswork.vercel.app/">
@@ -2062,6 +2062,192 @@ a.nav-link {
   .hero-bg { transition: none !important; transform: none !important; }
 }
 
+.mobile-bar { display: none; }
+.mobile-home-meta { display: none; }
+.mobile-all-pill { display: none; }
+.mobile-pills { display: contents; }
+
+@media (max-width: 800px) {
+  html, body, * { cursor: auto !important; }
+  #cursor-orb, #cursor-action, #reel-nav-pill { display: none !important; }
+
+  html, body {
+    height: auto;
+    overflow: hidden;
+  }
+  .app {
+    flex-direction: column;
+    height: 100dvh;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .mobile-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    padding: max(10px, env(safe-area-inset-top)) 14px 10px;
+    background: var(--bg);
+    z-index: 60;
+  }
+  .mobile-bar .hamburger-btn { width: 40px; height: 40px; }
+  .mobile-bar-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--white);
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    flex: 1;
+    min-width: 0;
+  }
+  .mobile-bar-all {
+    flex-shrink: 0;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--white);
+    background: var(--glass);
+    border: none;
+    border-radius: var(--radius-pill);
+    padding: 8px 12px;
+    min-height: 36px;
+  }
+
+  html[data-route="home"] .sidebar {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+  }
+  .sidebar-scroll { min-height: 0; }
+  html[data-route="home"] .main { display: none; }
+  html:not([data-route="home"]) .sidebar { display: none; }
+  html:not([data-route="home"]) .main {
+    width: 100%;
+    height: auto;
+    flex: 1;
+    min-height: 0;
+  }
+
+  .sidebar-toggle,
+  .sidebar-resume,
+  .studio-name,
+  .sidebar::after { display: none !important; }
+  .sidebar-toprow { display: none; }
+  .sidebar-head { padding-top: 4px; }
+  .sidebar-scroll { padding-bottom: 28px; }
+  .sidebar .site-footer { padding: 16px 16px max(20px, env(safe-area-inset-bottom)); }
+
+  .mobile-home-meta {
+    display: block;
+    padding: 8px 16px 16px;
+    text-align: center;
+  }
+  .mobile-home-clock-date {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--white);
+    margin-bottom: 2px;
+  }
+  .mobile-home-clock-time {
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .mobile-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 0 16px 14px;
+  }
+  .about-bento {
+    display: inline-flex;
+    width: auto;
+    margin: 0;
+    padding: 10px 14px;
+    min-height: 40px;
+  }
+  .about-bento-label {
+    max-height: none !important;
+    opacity: 1 !important;
+    overflow: visible;
+    pointer-events: auto;
+  }
+  .mobile-all-pill {
+    display: inline-flex;
+    align-items: center;
+    font-family: inherit;
+    font-size: var(--text-body);
+    font-weight: 500;
+    color: var(--white);
+    background: var(--glass);
+    border: none;
+    border-radius: var(--radius);
+    padding: 10px 14px;
+    min-height: 40px;
+  }
+
+  .p-item {
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    margin: 0 12px 8px;
+    padding: 10px 12px;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  .p-thumb {
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+  }
+  .p-text {
+    padding: 0;
+    max-height: none !important;
+    opacity: 1 !important;
+    overflow: visible;
+    pointer-events: auto;
+  }
+  .p-name { margin-bottom: 2px; white-space: normal; }
+  .p-tag { -webkit-line-clamp: 2; line-clamp: 2; }
+
+  .nav-shell {
+    left: 12px;
+    right: 12px;
+    top: max(12px, env(safe-area-inset-top));
+    flex-direction: column;
+    max-height: calc(100dvh - 24px);
+    overflow-y: auto;
+    width: auto;
+    transform-origin: top center;
+  }
+  .nav-panel,
+  .nav-widgets-panel {
+    width: 100%;
+  }
+
+  .gallery { grid-template-columns: 1fr; }
+  .g-item.text { grid-column: 1 / -1; }
+  .two-col { grid-template-columns: 1fr; }
+  .p-hero { height: 42vh; min-height: 220px; }
+  .hero-bg { font-size: 96px; }
+  .p-content { padding-bottom: max(24px, env(safe-area-inset-bottom)); }
+  .ap-bento { grid-template-columns: 1fr; }
+  .svc-grid { grid-template-columns: 1fr 1fr; }
+  .ao-grid {
+    grid-template-columns: 1fr;
+    grid-auto-rows: 280px;
+    padding-bottom: max(24px, env(safe-area-inset-bottom));
+  }
+  .ao-card.size-tall { grid-row: span 1; }
+  .ao-head { padding: 14px 16px; flex-wrap: wrap; }
+  .ao-search-wrap { flex: 1 1 100%; }
+}
+
 </style>
 </head>
 <body>
@@ -2197,6 +2383,14 @@ a.nav-link {
 <!-- App -->
 <div class="app">
 
+  <header class="mobile-bar">
+    <button class="hamburger-btn" type="button" onclick="toggleNav()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <a class="mobile-bar-name" data-route="home" href="#/">Madhav Jolly</a>
+    <button class="mobile-bar-all" type="button" onclick="openAll()">All Work</button>
+  </header>
+
   <!-- SIDEBAR -->
   <aside class="sidebar">
     <div class="sidebar-scroll">
@@ -2222,10 +2416,17 @@ a.nav-link {
 
         <a class="studio-name sidebar-hideable" data-route="home" href="#/">Madhav Jolly</a>
 
-        <a class="about-bento" data-route="about" href="#/about">
-          <div class="about-bento-label sidebar-hideable">About me</div>
-          <span class="about-bento-wave" aria-hidden="true">👋</span>
-        </a>
+        <div class="mobile-home-meta">
+          <div class="mobile-home-clock-date" id="mobile-clock-date">—</div>
+          <div class="mobile-home-clock-time" id="mobile-clock-time">Melbourne</div>
+        </div>
+
+        <div class="mobile-pills">
+          <a class="about-bento" data-route="about" href="#/about">
+            <div class="about-bento-label sidebar-hideable">About me</div>
+            <span class="about-bento-wave" aria-hidden="true">👋</span>
+          </a>
+        </div>
 
       </div><!-- /sidebar-head -->
 
@@ -3209,8 +3410,12 @@ function tick() {
   const d = now.toLocaleDateString('en-AU',{timeZone:tz,weekday:'long',month:'long',day:'numeric'});
   const kpDay = document.getElementById('kp-day');
   const kpTime = document.getElementById('kp-time');
+  const mobileDate = document.getElementById('mobile-clock-date');
+  const mobileTime = document.getElementById('mobile-clock-time');
   if(kpDay) kpDay.textContent = d;
   if(kpTime) kpTime.textContent = t;
+  if(mobileDate) mobileDate.textContent = d;
+  if(mobileTime) mobileTime.textContent = 'Melbourne, ' + t;
 }
 tick(); setInterval(tick, 1000);
 
@@ -3634,7 +3839,7 @@ if (apImg) {
   const nameEl = document.getElementById('reel-name');
   const tagEl = document.getElementById('reel-tag');
   const dotsEl = document.getElementById('reel-dots');
-  const reelProjects = PROJECTS.filter(p => !p.id.startsWith('dummy') && p.listed !== false && p.id !== 'play-versus' && p.id !== 'social-creatives');
+  const reelProjects = PROJECTS.filter(p => !p.id.startsWith('dummy') && p.listed !== false && p.id !== 'play-versus' && p.id !== 'social-creatives' && p.id !== 'motion-graphics');
 
   // Build slides
   reelProjects.forEach((p, i) => {
@@ -4042,6 +4247,7 @@ function renderRoute(id) {
 
   const openedProject = currentRoute !== null && isProject && currentRoute !== id;
   currentRoute = id;
+  document.documentElement.dataset.route = id;
 
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.p-item').forEach(n => n.classList.remove('active'));
@@ -4094,9 +4300,10 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 
 function toggleNav() {
   const menu = document.getElementById('nav-menu');
-  const btn = document.getElementById('hamburger-btn');
+  if (!menu) return;
   menu.classList.toggle('open');
-  btn.classList.toggle('open');
+  const open = menu.classList.contains('open');
+  document.querySelectorAll('.hamburger-btn').forEach(btn => btn.classList.toggle('open', open));
 }
 
 function toggleSidebar() {
@@ -4144,6 +4351,14 @@ function toggleSidebar() {
     }, widthMs * 0.55);
   }
 }
+
+function syncMobileLayout() {
+  if (!window.matchMedia('(max-width: 800px)').matches) return;
+  const sidebar = document.querySelector('.sidebar');
+  if (sidebar) sidebar.classList.remove('collapsed', 'content-faded');
+}
+window.addEventListener('resize', syncMobileLayout);
+syncMobileLayout();
 
 function toggleFilter() {
   document.getElementById('filter-popup').classList.toggle('open');
@@ -4326,6 +4541,7 @@ document.addEventListener('keydown', e => {
   const action = document.getElementById('cursor-action');
   const reelPill = document.getElementById('reel-nav-pill');
   if (!orb || !action) return;
+  if (window.matchMedia('(pointer: coarse)').matches || window.matchMedia('(max-width: 800px)').matches) return;
   const ARROW_LEFT = '<svg width="8" height="8" viewBox="0 0 8 8" fill="none" aria-hidden="true"><path d="M5 1.5L2.5 4 5 6.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   const ARROW_RIGHT = '<svg width="8" height="8" viewBox="0 0 8 8" fill="none" aria-hidden="true"><path d="M3 1.5L5.5 4 3 6.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   const OPEN_ICON = '<svg width="8" height="8" viewBox="0 0 11 11" fill="none" aria-hidden="true"><path d="M2 9L9 2M9 2H3.5M9 2V7.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
