@@ -2144,32 +2144,42 @@ a.nav-link {
 
   .mobile-home-meta {
     display: block;
-    padding: 8px 16px 16px;
+    padding: 20px 20px 18px;
     text-align: center;
   }
-  .mobile-home-clock-date {
-    font-size: 14px;
-    font-weight: 400;
+  .mobile-home-name {
+    font-size: 22px;
+    font-weight: 500;
     color: var(--white);
-    margin-bottom: 2px;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    margin-bottom: 8px;
   }
-  .mobile-home-clock-time {
+  .mobile-home-tag {
+    margin: 0 auto;
+    max-width: 280px;
     font-size: 13px;
+    font-weight: 400;
+    line-height: 1.45;
     color: var(--muted);
+  }
+  html[data-route="home"] .mobile-bar-name {
+    visibility: hidden;
   }
 
   .mobile-pills {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    padding: 0 16px 14px;
+    padding: 0 12px 14px;
   }
   .about-bento {
-    display: inline-flex;
-    width: auto;
+    display: flex;
+    width: 100%;
     margin: 0;
-    padding: 10px 14px;
-    min-height: 40px;
+    padding: 12px 16px;
+    min-height: 44px;
+    justify-content: space-between;
   }
   .about-bento-label {
     max-height: none !important;
@@ -2417,8 +2427,8 @@ a.nav-link {
         <a class="studio-name sidebar-hideable" data-route="home" href="#/">Madhav Jolly</a>
 
         <div class="mobile-home-meta">
-          <div class="mobile-home-clock-date" id="mobile-clock-date">—</div>
-          <div class="mobile-home-clock-time" id="mobile-clock-time">Melbourne</div>
+          <div class="mobile-home-name">Madhav Jolly</div>
+          <p class="mobile-home-tag">Indian designer in Melbourne, working across brand and digital product.</p>
         </div>
 
         <div class="mobile-pills">
@@ -3431,12 +3441,8 @@ function tick() {
   const d = now.toLocaleDateString('en-AU',{timeZone:tz,weekday:'long',month:'long',day:'numeric'});
   const kpDay = document.getElementById('kp-day');
   const kpTime = document.getElementById('kp-time');
-  const mobileDate = document.getElementById('mobile-clock-date');
-  const mobileTime = document.getElementById('mobile-clock-time');
   if(kpDay) kpDay.textContent = d;
   if(kpTime) kpTime.textContent = t;
-  if(mobileDate) mobileDate.textContent = d;
-  if(mobileTime) mobileTime.textContent = 'Melbourne, ' + t;
 }
 tick(); setInterval(tick, 1000);
 
