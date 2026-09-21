@@ -629,7 +629,8 @@ a.nav-link {
   background-position: center;
 }
 .hero-bg.has-img { color: transparent; }
-.hero-bg.has-img img {
+.hero-bg.has-img img,
+.hero-bg.has-img video {
   width: calc(100% + 12px);
   height: calc(100% + 12px);
   margin: -6px;
@@ -2211,8 +2212,8 @@ a.nav-link {
     -webkit-backdrop-filter: none;
   }
   .p-thumb {
-    width: 52px;
-    height: 52px;
+    width: 88px;
+    height: 88px;
     flex-shrink: 0;
   }
   .p-text {
@@ -2687,33 +2688,33 @@ const PROJECTS = [
     category:'brand',
     heroColor:'#0d2419', heroAccent:'#4fd89a', letter:'P',
     heroImage:'assets/projects/pine-labs/02-billboard.webp',
-    thumbImage:'assets/projects/pine-labs/01-building.gif',
+    thumbImage:'assets/projects/pine-labs/01-building.mp4',
     coverImage:'assets/projects/pine-labs/02-billboard.webp',
     eyebrow:'Brand Identity · 2022', title:'Pine Labs',
-    challenge:"Pine Labs had outgrown a look that disappeared among gradients. The job was to keep the heritage, then make it loud enough for entrepreneurs across India to recognise it as theirs.",
-    solution:"We recut the green into a high-contrast teal, built an arrow as a container for the merchant, and rolled the system through logo, icons, packaging, and every surface the brand already owned.",
-    info:["A brand refresh for India's leading digital payments company, made to champion the entrepreneur instead of the product.",'I designed the logo, icon system, colour, illustrations, packaging, and marketing collateral, plus the visual guidelines that hold it together.','See it live at <a href="https://www.pinelabs.com" target="_blank" rel="noopener">pinelabs.com</a>'],
+    challenge:"Pine Labs had outgrown a look that disappeared among gradients. The job was to keep the heritage, then make it loud enough for entrepreneurs across India to recognise it as theirs, including on the POS machines that sit on counters nationwide.",
+    solution:"We recut the green into a high-contrast teal, built an arrow as a container for the merchant, and rolled the system through logo, icons, packaging, and every surface the brand already owned. The identity had to hold at checkout, not only on a billboard.",
+    info:["A brand refresh for India's leading digital payments company, made to champion the entrepreneur instead of the product. Pine Labs terminals are in stores across the country, so the system had to read on a small screen at the counter as clearly as it does on a storefront.",'I designed the logo, icon system, colour, illustrations, packaging, and marketing collateral, plus the visual guidelines that hold it together.','See it live at <a href="https://www.pinelabs.com" target="_blank" rel="noopener">pinelabs.com</a>'],
     credits:[{role:'Visual identity, Illustration, packaging',name:'Madhav Jolly'},{role:'Agency',name:'Please See//'}],
     year:'2022', client:'Pine Labs', agency:'Please See//', scope:'Visual identity, Illustration, packaging', awards:'—',
     gallery:[
-      { type:'image', src:'assets/projects/pine-labs/01-building.gif', wide:true },
+      { type:'image', src:'assets/projects/pine-labs/01-building.mp4', wide:true },
       { type:'image', src:'assets/projects/pine-labs/02-billboard.webp' },
-      { type:'image', src:'assets/projects/pine-labs/03-pine-green.gif' },
+      { type:'image', src:'assets/projects/pine-labs/03-pine-green.mp4' },
       { type:'text', text:"We evolved the original Pine green to a high contrast 'Pine teal'. This helped them own their heritage, but through a modern lens. Bolder colours and wide contrast allowed them to stand out in a market that uses a lot of gradients, but yet scale for various mediums." },
       { type:'image', src:'assets/projects/pine-labs/04-logo-grid.webp', wide:true },
       { type:'image', src:'assets/projects/pine-labs/05-subbrands.webp', wide:true, contain:true, ratio:'2800/1159' },
       { type:'text', text:'We created the arrow symbol as a container to hero the entrepreneur and his business, one that is always on the move, shaking things up and breaking new ground.' },
       { type:'image', src:'assets/projects/pine-labs/06-kiosk.jpg' },
-      { type:'image', src:'assets/projects/pine-labs/07-social.gif' },
+      { type:'image', src:'assets/projects/pine-labs/07-social.mp4' },
       { type:'image', src:'assets/projects/pine-labs/08-upi-terminal.jpg' },
       { type:'image', src:'assets/projects/pine-labs/09-storefront.jpg' },
       { type:'text', text:'In a crowd of hard-sellers and over-explainers, we created design layouts that are bold, clear and confident. Our communication always champions the merchants and their businesses through bold headlines and confident imagery.' },
-      { type:'image', src:'assets/projects/pine-labs/10-frame.gif', contain:true, light:true },
-      { type:'image', src:'assets/projects/pine-labs/11-email.gif', contain:true },
+      { type:'image', src:'assets/projects/pine-labs/10-frame.mp4', contain:true, light:true },
+      { type:'image', src:'assets/projects/pine-labs/11-email.mp4', contain:true },
       { type:'image', src:'assets/projects/pine-labs/12-collateral.webp', wide:true },
       { type:'text', text:'We used the most basic geometric shapes and angles derived from our arrow to make the icons crisp and sharp.' },
       { type:'image', src:'assets/projects/pine-labs/13-icon-diagram.jpg', contain:true, light:true },
-      { type:'image', src:'assets/projects/pine-labs/14-icon-grid.gif', contain:true, light:true },
+      { type:'image', src:'assets/projects/pine-labs/14-icon-grid.mp4', contain:true, light:true },
       { type:'text', text:'Our corporate collaterals follow the bold, clean visual style. However, we were playful at places where we wanted to engage and motivate our merchants and employees to live up to our new vision.' },
       { type:'image', src:'assets/projects/pine-labs/15-stationery.webp', wide:true },
       { type:'image', src:'assets/projects/pine-labs/16-id-card.jpg' },
@@ -2722,7 +2723,7 @@ const PROJECTS = [
       { type:'text', text:"We designed the welcome kit for employees to motivate them about the company's new vision and the rebranding. Hence, we made multiple boxes, each holding a merch talking about the entrepreneurial spirit. We stacked them randomly in a gift box and let the employee's instincts guide him/ her to arrange it in a way and reveal the message 'Make your move'." },
       { type:'image', src:'assets/projects/pine-labs/19-welcome-box.jpg' },
       { type:'image', src:'assets/projects/pine-labs/20-welcome-open.jpg' },
-      { type:'image', src:'assets/projects/pine-labs/21-maker-box.gif', wide:true },
+      { type:'image', src:'assets/projects/pine-labs/21-maker-box.mp4', wide:true },
     ],
   },
   {
@@ -2777,9 +2778,9 @@ const PROJECTS = [
     id:'falcon', name:'Falcon', tag:'A payments platform with a mark as sharp as the bill it was named for.',
     category:'brand',
     heroColor:'#0a1a2e', heroAccent:'#5eb0ff', letter:'F',
-    heroImage:'assets/projects/falcon/00-preview.gif',
-    thumbImage:'assets/projects/falcon/00-preview.gif',
-    coverImage:'assets/projects/falcon/00-preview.gif',
+    heroImage:'assets/projects/falcon/00-preview.mp4',
+    thumbImage:'assets/projects/falcon/00-preview.mp4',
+    coverImage:'assets/projects/falcon/00-preview.mp4',
     reelImage:'assets/projects/falcon/03-guidelines.jpg',
     eyebrow:'Brand Identity · 2022', title:'Falcon',
     challenge:"A payments platform for banks and FinTechs needed a mark as sharp as the product, not another soft gradient in a crowded category.",
@@ -2788,7 +2789,7 @@ const PROJECTS = [
     year:'2022', client:'Falcon', agency:'Please See//', scope:'Visual Identity, Illustration, Packaging, Credit Card Design', awards:'—',
     gallery:[
       { type:'text', text:"Falcon is a powerful platform that enables FinTech's, Banks, NBFCs, and Startups to launch any payment or lending product using open APIs and no code solutions. We worked with the young founders and entrepreneurs Priyanka Kanwar and Prabhtej Bhatia to create a bold, dynamic and edgy visual language that reflects the future of money. The core idea of 'Built to build with' was brought to life through a 3 dimensional 'F' symbol that represents the sharp, curved bill of a Falcon and stands for cutting edge technology. The 'Falcon' wordmark was custom made in uppercase letters to bring out the expertise." },
-      { type:'image', src:'assets/projects/falcon/02-logo-3d.gif' },
+      { type:'image', src:'assets/projects/falcon/02-logo-3d.mp4' },
       { type:'image', src:'assets/projects/falcon/03-guidelines.jpg', wide:true, contain:true, light:true, ratio:'1920/1919' },
       { type:'text', text:'Our color palette was inspired from the colors of the limitless sky and the falcon bill grey. The secondary palette was developed to compliment the main brand colors. The language overall uses lot of gradients to bring more dynamism to the brand.' },
       { type:'image', src:'assets/projects/falcon/04-colors.webp', wide:true, contain:true, light:true, ratio:'2800/2441' },
@@ -2797,16 +2798,15 @@ const PROJECTS = [
       { type:'text', text:'Icons were created by overlapping geometric shapes with sharp corners. Wherever it was possible, we converted our flat 2d icons into 3d product illustrations to make the language more dynamic.' },
       { type:'image', src:'assets/projects/falcon/06-icon-grid-spec.webp', wide:true, contain:true, dark:true, ratio:'2800/986' },
       { type:'image', src:'assets/projects/falcon/07-icon-set.webp', wide:true, contain:true, dark:true, ratio:'2800/1129' },
-      { type:'image', src:'assets/projects/falcon/08-icon-anim-1.gif', square:true, contain:true, dark:true },
-      { type:'image', src:'assets/projects/falcon/09-icon-anim-2.gif', square:true, contain:true, dark:true },
-      { type:'image', src:'assets/projects/falcon/10-icon-anim-3.gif', square:true, contain:true, dark:true },
-      { type:'image', src:'assets/projects/falcon/11-pitch-deck.jpg' },
+      { type:'image', src:'assets/projects/falcon/08-icon-anim-1.mp4', square:true, contain:true, dark:true },
+      { type:'image', src:'assets/projects/falcon/09-icon-anim-2.mp4', square:true, contain:true, dark:true },
+      { type:'image', src:'assets/projects/falcon/11-pitch-deck.jpg', wide:true, ratio:'1/1' },
       { type:'image', src:'assets/projects/falcon/12-stationery.jpg', wide:true },
       { type:'image', src:'assets/projects/falcon/13-merch-shirt.jpg' },
       { type:'image', src:'assets/projects/falcon/14-packaging.jpg' },
       { type:'image', src:'assets/projects/falcon/15-backpack.jpg' },
       { type:'image', src:'assets/projects/falcon/16-cards.jpg' },
-      { type:'image', src:'assets/projects/falcon/17-product.gif', wide:true },
+      { type:'image', src:'assets/projects/falcon/17-product.mp4', wide:true },
     ],
   },
   {
@@ -2851,8 +2851,8 @@ const PROJECTS = [
     award:'Higher Distinction Award', category:'digital',
     heroColor:'#0a1428', heroAccent:'#c8f060', letter:'C',
     heroImage:'assets/projects/class-pulse/01-hero.png',
-    thumbImage:'assets/projects/class-pulse/01-hero.png',
-    coverImage:'assets/projects/class-pulse/01-hero.png',
+    thumbImage:'assets/projects/class-pulse/listing-thumb.jpg',
+    coverImage:'assets/projects/class-pulse/reel-cover.jpg',
     eyebrow:'UX / Product Design · 2025', title:'ClassPulse',
     challenge:'Student disengagement in higher education is often silent, gradual, and difficult to detect in real time. Most university systems focus on measurable outputs such as attendance, assignment submissions, and platform activity. These signals only show what students did, not how they are actually engaging with their learning.',
     solution:'ClassPulse was designed to address this visibility gap by shifting engagement from a passive set of metrics into a continuous, interpretable experience, enabling students to reflect on their own patterns while giving educators higher-level insights into how engagement changes over time.',
@@ -2906,8 +2906,8 @@ const PROJECTS = [
     category:'brand',
     heroColor:'#02954C', heroAccent:'#FABA18', letter:'1',
     heroImage:'assets/projects/1441-pizzeria/01-hero.png',
-    thumbImage:'assets/projects/1441-pizzeria/01-hero.png',
-    coverImage:'assets/projects/1441-pizzeria/01-hero.png',
+    thumbImage:'assets/projects/1441-pizzeria/listing-thumb.jpg',
+    coverImage:'assets/projects/1441-pizzeria/reel-cover.jpg',
     eyebrow:'Brand Identity · 2022', title:'1441 Pizzeria',
     challenge:'1441 wanted to feel like the epicentre of action. Naples energy, not another polite pizza mark. The identity had to work on a box, a sticker, and a crowded counter.',
     solution:'Two red degree glyphs sit inside the name. Fun, loud, a little chaotic, then a sticker and packaging system that can keep up.',
@@ -2938,7 +2938,7 @@ const PROJECTS = [
     category:'brand',
     heroColor:'#9bbf2e', heroAccent:'#ffffff', letter:'R',
     heroImage:'assets/projects/rivona-naturals/01-hero.png',
-    thumbImage:'assets/projects/rivona-naturals/09-beetroot-scrub.png',
+    thumbImage:'assets/projects/rivona-naturals/listing-thumb.jpg',
     coverImage:'assets/projects/rivona-naturals/09-beetroot-scrub.png',
     eyebrow:'Brand Identity · 2024', title:'Rivona Naturals',
     challenge:"Rivona needed to grow past the people who already knew them, without losing the feeling of something made from plants, not a lab.",
@@ -2957,10 +2957,10 @@ const PROJECTS = [
       { type:'image', src:'assets/projects/rivona-naturals/03-logo-detail.png', wide:true, contain:true, light:true, ratio:'2/1' },
       { type:'image', src:'assets/projects/rivona-naturals/02-typography.png', wide:true, contain:true, light:true, ratio:'2/1' },
       { type:'text', wide:true, text:"Our font was chosen for its clean, modern, and versatile character. Its variable weights allow for flexibility across headings, body text, and product packaging, creating a cohesive typographic system that feels approachable yet sophisticated. The typeface complements Rivona's natural, minimal aesthetic while maintaining clarity and readability across digital and print applications." },
-      { type:'image', src:'assets/projects/rivona-naturals/04-color-palette.gif', wide:true, contain:true, light:true, ratio:'2/1' },
+      { type:'image', src:'assets/projects/rivona-naturals/04-color-palette.mp4', wide:true, contain:true, light:true, ratio:'2/1' },
       { type:'text', wide:true, text:'A set of bespoke icons and illustrations was created to visually distinguish and complement each product.' },
-      { type:'image', src:'assets/projects/rivona-naturals/05-illustrations.gif', wide:true, contain:true, light:true, ratio:'2/1' },
-      { type:'image', src:'assets/projects/rivona-naturals/07-vegan-icon.gif', wide:true, contain:true, dark:true, ratio:'2/1' },
+      { type:'image', src:'assets/projects/rivona-naturals/05-illustrations.mp4', wide:true, contain:true, light:true, ratio:'2/1' },
+      { type:'image', src:'assets/projects/rivona-naturals/07-vegan-icon.mp4', wide:true, contain:true, dark:true, ratio:'2/1' },
       { type:'text', wide:true, text:'Before the packs were shot, the range was drawn as flats. One colour per product, ingredient shapes in the back, the name in white.' },
       { type:'image', src:'assets/projects/rivona-naturals/13-label-flats.png', wide:true, contain:true, light:true, ratio:'16/9' },
       { type:'image', src:'assets/projects/rivona-naturals/09-beetroot-scrub.png', wide:true },
@@ -3031,8 +3031,8 @@ const PROJECTS = [
     category:'editorial',
     heroColor:'#1a120c', heroAccent:'#c4a06a', letter:'I',
     heroImage:'assets/projects/ilaaka/01-hero.png',
-    thumbImage:'assets/projects/ilaaka/01-hero.png',
-    coverImage:'assets/projects/ilaaka/01-hero.png',
+    thumbImage:'assets/projects/ilaaka/listing-thumb.jpg',
+    coverImage:'assets/projects/ilaaka/reel-cover.jpg',
     eyebrow:'Brand Identity · 2025', title:'Ilaaka',
     challenge:'Ilaaka means territory. A Mumbai indie studio needed a mark that could claim one on a card, a wall, or a bag, without looking like a film-festival template.',
     solution:'A red fox. Adaptable, a little sly, able to hold ground. Then a type pairing and a system that can split into sub-brands without losing the studio.',
@@ -3061,9 +3061,9 @@ const PROJECTS = [
     id:'jolies', name:'Jolies', tag:'A members-club book and menu, built to be held, not just looked at.',
     category:'editorial',
     heroColor:'#1a0a2e', heroAccent:'#e87830', letter:'J',
-    heroImage:'assets/projects/jolies/final-spread.png',
-    thumbImage:'assets/projects/jolies/final-spread.png',
-    coverImage:'assets/projects/jolies/final-spread.png',
+    heroImage:'assets/projects/jolies/final-spread.jpg',
+    thumbImage:'assets/projects/jolies/listing-thumb.jpg',
+    coverImage:'assets/projects/jolies/listing-thumb.jpg',
     eyebrow:'Editorial · 2023', title:'Jolies',
     challenge:'A members-only club needed something guests would actually hold: a book on the table, a menu in the hand, not a deck that lives in a PDF.',
     solution:'A coffee-table book and a menu system. Playful type, butter-paper overlays, layers you can feel.',
@@ -3075,19 +3075,19 @@ const PROJECTS = [
     credits:[{role:'Design',name:'Madhav Jolly'}],
     year:'2023', client:'Jolies', agency:'Please See//', scope:'Illustration, Print Design', awards:'—',
     gallery:[
-      { type:'image', src:'assets/projects/jolies/spread-01.png', wide:true },
-      { type:'image', src:'assets/projects/jolies/spread-02.png', wide:true },
-      { type:'image', src:'assets/projects/jolies/spread-03.png', wide:true },
-      { type:'image', src:'assets/projects/jolies/spread-04.png', wide:true },
-      { type:'image', src:'assets/projects/jolies/spread-05.png', wide:true },
-      { type:'image', src:'assets/projects/jolies/spread-06.png', wide:true },
-      { type:'image', src:'assets/projects/jolies/spread-07.png', wide:true },
-      { type:'image', src:'assets/projects/jolies/spread-08.png', wide:true },
-      { type:'image', src:'assets/projects/jolies/spread-09.png', wide:true },
-      { type:'image', src:'assets/projects/jolies/spread-10.png', wide:true },
-      { type:'image', src:'assets/projects/jolies/final-spread.png', wide:true },
-      { type:'image', src:'assets/projects/jolies/menu-inside.png', wide:true },
-      { type:'image', src:'assets/projects/jolies/menu-outside.png', wide:true },
+      { type:'image', src:'assets/projects/jolies/spread-01.jpg', wide:true },
+      { type:'image', src:'assets/projects/jolies/spread-02.jpg', wide:true },
+      { type:'image', src:'assets/projects/jolies/spread-03.jpg', wide:true },
+      { type:'image', src:'assets/projects/jolies/spread-04.jpg', wide:true },
+      { type:'image', src:'assets/projects/jolies/spread-05.jpg', wide:true },
+      { type:'image', src:'assets/projects/jolies/spread-06.jpg', wide:true },
+      { type:'image', src:'assets/projects/jolies/spread-07.jpg', wide:true },
+      { type:'image', src:'assets/projects/jolies/spread-08.jpg', wide:true },
+      { type:'image', src:'assets/projects/jolies/spread-09.jpg', wide:true },
+      { type:'image', src:'assets/projects/jolies/spread-10.jpg', wide:true },
+      { type:'image', src:'assets/projects/jolies/final-spread.jpg', wide:true },
+      { type:'image', src:'assets/projects/jolies/menu-inside.jpg', wide:true },
+      { type:'image', src:'assets/projects/jolies/menu-outside.jpg', wide:true },
     ],
   },
   {
@@ -3095,8 +3095,8 @@ const PROJECTS = [
     category:'brand',
     heroColor:'#0a0a0a', heroAccent:'#b6ff3c', letter:'V',
     heroImage:'assets/projects/play-versus/10-bottles.png',
-    thumbImage:'assets/projects/play-versus/10-bottles.png',
-    coverImage:'assets/projects/play-versus/10-bottles.png',
+    thumbImage:'assets/projects/play-versus/listing-thumb.jpg',
+    coverImage:'assets/projects/play-versus/listing-thumb.jpg',
     eyebrow:'Brand Identity · 2025', title:'Play Versus',
     challenge:'Pickup sport in Mumbai needed a mark with match-day energy, not a lifestyle wordmark. The identity had to hold an app, a bottle, and a feed.',
     solution:'VERSUS in all caps, with a lightning cut through the V. Electric green on black. Then colour and merch for the clash the name already holds.',
@@ -3129,7 +3129,7 @@ const PROJECTS = [
     heroColor:'#3d0a61', heroAccent:'#dbb1ff', letter:'G',
     heroImage:'assets/projects/gameboy-apps/01-cover.png',
     thumbImage:'assets/projects/gameboy-apps/60-weather-flow.mp4',
-    coverImage:'assets/projects/gameboy-apps/60-weather-flow.mp4',
+    coverImage:'assets/projects/gameboy-apps/reel-cover.jpg',
     thumbContain:true,
     eyebrow:'Product Design · 2025', title:'Game Boy Apps',
     challenge:'Many everyday apps lack engaging interactions and visual feedback, making digital experiences feel flat and uninspiring.',
@@ -3194,9 +3194,9 @@ const PROJECTS = [
     id:'motion-graphics', name:'Motion Graphics', tag:'Title sequences, loops, and motion experiments.',
     category:'motion',
     heroColor:'#0c0a08', heroAccent:'#E8D44D', letter:'M',
-    heroImage:'assets/projects/motion-graphics/20-fittr-logo.gif',
-    thumbImage:'assets/projects/motion-graphics/20-fittr-logo.gif',
-    coverImage:'assets/projects/motion-graphics/20-fittr-logo.gif',
+    heroImage:'assets/projects/motion-graphics/20-fittr-logo.mp4',
+    thumbImage:'assets/projects/motion-graphics/20-fittr-logo.mp4',
+    coverImage:'assets/projects/motion-graphics/20-fittr-logo.mp4',
     eyebrow:'Motion · Ongoing', title:'Motion Graphics',
     challenge:'Some work has to move. Type, product, and identity that only exist in time.',
     solution:'A set of motion graphic experiments and commissioned pieces: loops, titles, and kinetic type.',
@@ -3211,7 +3211,7 @@ const PROJECTS = [
       { type:'text', wide:true, text:'A collection of motion graphic experiments and commissioned work. Loops, titles, and type that only hold once they move.' },
       { type:'text', wide:true, label:'Logo animations' },
       { type:'video', src:'assets/projects/motion-graphics/60-pine-labs-logo-pitch.mp4', wide:true, contain:true, dark:true, ratio:'16/9', caption:'Pitched for Pine Labs. Never used.' },
-      { type:'image', src:'assets/projects/motion-graphics/20-fittr-logo.gif', wide:true, contain:true, dark:true, ratio:'16/9', caption:'Logo animation for Fittr' },
+      { type:'image', src:'assets/projects/motion-graphics/20-fittr-logo.mp4', wide:true, contain:true, dark:true, ratio:'16/9', caption:'Logo animation for Fittr' },
       { type:'video', src:'assets/projects/motion-graphics/40-blabel-logo.mp4', wide:true, contain:true, dark:true, ratio:'16/9', caption:'Logo animation for B Label' },
       { type:'embed-row', cols:2, embeds:[
         { src:'https://player.vimeo.com/video/394131523?autoplay=1&loop=1&muted=1&title=0&byline=0&portrait=0', caption:'Go with the flow' },
@@ -3236,8 +3236,8 @@ const PROJECTS = [
     category:'motion',
     heroColor:'#0a0a0a', heroAccent:'#c41e3a', letter:'S',
     heroImage:'assets/projects/social-creatives/tbc-30-31-july.png',
-    thumbImage:'assets/projects/social-creatives/tbc-30-31-july.png',
-    coverImage:'assets/projects/social-creatives/tbc-30-31-july.png',
+    thumbImage:'assets/projects/social-creatives/listing-thumb.jpg',
+    coverImage:'assets/projects/social-creatives/listing-thumb.jpg',
     thumbCarousel:[
       'assets/projects/social-creatives/tbc-10-dartington.png',
       'assets/projects/social-creatives/tbc-18-zalto.png',
@@ -3613,7 +3613,7 @@ function buildGalleryTiles(p) {
         return `<div class="g-item carousel" data-interval="${interval}" style="background:${bg}"><div class="carousel-stage">${slides}</div>${label}</div>`;
       }
       const wide = item.wide != null ? item.wide : false;
-      const isVideo = item.type === 'video';
+      const isVideo = item.type === 'video' || isVideoSrc(item.src);
       let cls = 'g-item ' + (isVideo ? 'has-video' : 'has-img');
       if (wide) cls += ' wide';
       if (item.square) cls += ' square';
@@ -3717,7 +3717,7 @@ function mountProjectPanel(p) {
   const infoPara = p.info.map(t=>'<p>'+t+'</p>').join('');
   const agency = p.agency || '—';
   const heroBg = p.heroImage
-    ? `<div class="hero-bg has-img"><img src="${p.heroImage}" alt="${p.title}"></div>`
+    ? `<div class="hero-bg has-img">${listingMedia(p.heroImage, p.title)}</div>`
     : `<div class="hero-bg" style="background:${p.heroColor};color:${p.heroAccent};">${p.letter}</div>`;
 
   el.innerHTML = `
