@@ -524,6 +524,24 @@ a.nav-link {
   color: var(--white);
   margin-bottom: 14px;
 }
+.home-path {
+  font-size: clamp(16px, 1.8vw, 24px);
+  font-weight: 300;
+  line-height: 1.45;
+  letter-spacing: -0.02em;
+  color: var(--mid);
+  margin-bottom: 16px;
+  max-width: 38em;
+}
+.home-strike {
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0;
+  color: var(--muted);
+}
+.home-now {
+  color: var(--white);
+}
 .home-lead {
   font-size: clamp(15px, 1.6vw, 22px);
   font-weight: 300;
@@ -531,6 +549,20 @@ a.nav-link {
   letter-spacing: -0.02em;
   color: var(--mid);
   max-width: 34em;
+}
+.home-punch {
+  margin-top: 16px;
+  font-size: clamp(15px, 1.6vw, 22px);
+  font-weight: 300;
+  line-height: 1.45;
+  letter-spacing: -0.02em;
+  color: var(--mid);
+  max-width: 34em;
+}
+.home-punch em {
+  font-style: normal;
+  color: var(--white);
+  font-weight: 400;
 }
 .home-live {
   display: inline;
@@ -2393,7 +2425,7 @@ a.nav-link {
 
         <div class="mobile-home-meta">
           <div class="mobile-home-name">Hey, I’m Jolly!</div>
-          <p class="mobile-home-tag">Designer based in Melbourne, working with graphics and digital products. My practice focuses on crafting memorable experiences by merging utility with novelty. My work spans graphic design, brand, art direction, UX and prototyping.</p>
+          <p class="mobile-home-tag">Designer from Calcutta → Bangalore → Mumbai, and now Melbourne. I may not have 8 years of experience, but given a weekend and an ominous deadline, I can lowkey learn anything!</p>
         </div>
 
         <div class="mobile-pills">
@@ -2427,7 +2459,9 @@ a.nav-link {
           </div>
           <div class="home-copy">
             <p class="home-hello">Hey, I’m Jolly!</p>
-            <p class="home-lead">Designer based in Melbourne, working with graphics and digital products. My practice focuses on crafting memorable experiences by merging utility with novelty. My work spans <span class="home-live" data-live="graphic" tabindex="0">graphic design</span>, <span class="home-live" data-live="brand" tabindex="0">brand</span>, <span class="home-live" data-live="art" tabindex="0">art direction</span>, <span class="home-live" data-live="ux" tabindex="0">UX</span> and <span class="home-live" data-live="proto" tabindex="0">prototyping</span>.</p>
+            <p class="home-path">Designer from <span class="home-strike">Calcutta</span>, <span class="home-strike">Bangalore</span>, <span class="home-strike">Mumbai</span>, and now <span class="home-now">Melbourne!</span></p>
+            <p class="home-lead">His practice focuses on crafting memorable experiences by merging utility with novelty. His work spans <span class="home-live" data-live="graphic" tabindex="0">graphic design</span>, <span class="home-live" data-live="brand" tabindex="0">brand</span>, <span class="home-live" data-live="art" tabindex="0">art direction</span>, <span class="home-live" data-live="ux" tabindex="0">UX</span> and <span class="home-live" data-live="proto" tabindex="0">prototyping</span>.</p>
+            <p class="home-punch">I may not have 8 years of experience, but given a weekend and an ominous deadline, <em>I can lowkey learn anything!</em></p>
           </div>
         </div>
       </div>
@@ -2580,10 +2614,6 @@ a.nav-link {
             <div class="ow-item">
               <div class="ow-title">Ironwrath</div>
               <p class="ow-body">An idle RPG I’m building for iOS in Swift, with Claude as a coding partner. Currently in beta, heading to the App Store soon.</p>
-            </div>
-            <div class="ow-item">
-              <div class="ow-title">Music</div>
-              <p class="ow-body">I make music as Sentient. <a href="https://open.spotify.com/artist/6v3knTUKqKvYpWjVcThB1N?si=7685jgKCSdOz9_mD7GN-og" target="_blank" rel="noopener">Hear my music here!</a></p>
             </div>
           </div>
 
