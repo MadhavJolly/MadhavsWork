@@ -68,69 +68,11 @@
   font-display: swap;
 }
 
-/* ═══ CUSTOM CURSOR ═══ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-html { cursor: none !important; }
-body { cursor: none !important; }
-* { cursor: none !important; }
-
-#cursor-orb {
-  position: fixed;
-  top: 0; left: 0;
-  width: 18px; height: 18px;
-  border-radius: 50%;
-  background: var(--cursor-orb);
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition:
-    width 0.35s cubic-bezier(0.34,1.4,0.64,1),
-    height 0.35s cubic-bezier(0.34,1.4,0.64,1),
-    border-radius 0.35s cubic-bezier(0.34,1.4,0.64,1),
-    background 0.25s ease,
-    opacity 0.2s ease;
-  will-change: transform;
-}
-
-#cursor-orb.hovering-project { opacity: 0; }
-
-/* Glass pill — ephemeral cursor / reel overlays */
-.glass-pill {
-  position: fixed;
-  top: 0; left: 0;
-  pointer-events: none;
-  z-index: 10000;
-  opacity: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  font-family: inherit;
-  font-size: 9px;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--btn-fg);
-  padding: 4px 7px;
-  border-radius: 3px;
-  border: none;
-  background: rgba(12, 12, 12, 0.55);
-  backdrop-filter: blur(16px) saturate(160%);
-  -webkit-backdrop-filter: blur(16px) saturate(160%);
-  white-space: nowrap;
-  transition: opacity 0.15s ease;
-  will-change: transform;
-}
-.glass-pill svg { flex-shrink: 0; width: 8px; height: 8px; opacity: 0.9; }
-.glass-pill.visible { opacity: 1; }
-
-#cursor-action { padding: 4px 7px; gap: 4px; }
 
 /*
  * Button hierarchy
  * — .cta-btn: solid, committed actions (Resume, View all projects)
- * — #cursor-action: glass, ephemeral cursor overlay
  * — .ao-filter-btn: glass, contextual chrome (filters, search bar)
  * Rule: glass = floating/contextual · solid = committed action
  */
@@ -158,7 +100,6 @@ body { cursor: none !important; }
   --backdrop: rgba(0,0,0,0.65);
   --btn-fg: #f4f2ee;
   --reel-fg: #f0eeea;
-  --cursor-orb: rgba(240,238,234,0.9);
   --text-display: 22px;
   --text-title: 14px;
   --text-body: 12px;
@@ -186,7 +127,6 @@ html.light-mode {
   --glass-hover: rgba(20,17,13,0.09);
   --panel-bg: rgba(250,249,246,0.97);
   --backdrop: rgba(236,233,227,0.55);
-  --cursor-orb: rgba(20,17,13,0.85);
 }
 html.light-mode body { color: var(--white); }
 
@@ -248,7 +188,8 @@ html, body {
 .p-text.sidebar-hideable { max-height: 88px; }
 .news-divider.sidebar-hideable { max-height: 33px; }
 #news-list.sidebar-hideable { max-height: 360px; }
-.site-footer.sidebar-hideable { max-height: 80px; }
+.site-footer.sidebar-hideable { max-height: 110px; }
+.sidebar-section-label.sidebar-hideable { max-height: 36px; }
 .sidebar.content-faded .sidebar-hideable {
   opacity: 0;
   max-height: 0 !important;
@@ -348,7 +289,7 @@ html, body {
   border-radius: var(--radius-btn);
   border: none;
   background: var(--glass-btn-bg);
-  cursor: none;
+  cursor: pointer;
   text-decoration: none;
   white-space: nowrap;
   transition: background var(--transition);
@@ -368,7 +309,7 @@ html, body {
   border: 1px solid var(--border);
   border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  cursor: none;
+  cursor: pointer;
   transition: border-color var(--transition), background var(--transition);
 }
 .sidebar-dot:hover { border-color: var(--border-hover); background: var(--glass); }
@@ -388,7 +329,7 @@ html, body {
   padding: 0 20px;
   background: none;
   border: none;
-  cursor: none;
+  cursor: pointer;
   font-family: inherit;
   text-align: left;
   transition: opacity var(--transition);
@@ -416,7 +357,7 @@ html, body {
   margin: 0 var(--gutter) var(--gap);
   border-radius: var(--radius-sm);
   padding: 14px 16px;
-  cursor: none;
+  cursor: pointer;
   background: var(--glass);
   transition:
     background var(--transition),
@@ -449,6 +390,22 @@ html, body {
 
 /* Project list */
 .project-list { padding: 8px 0 0; }
+.sidebar-more {
+  display: flex;
+  width: calc(100% - var(--gutter) * 2);
+  margin: 4px var(--gutter) 16px;
+  justify-content: center;
+}
+.sidebar.collapsed .sidebar-more { display: none; }
+.sidebar-section-label {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 10px 4px 6px;
+  margin: 8px var(--gutter) 2px;
+}
+.sidebar.collapsed .sidebar-section-label { display: none; }
 
 a.p-item,
 a.about-bento,
@@ -466,7 +423,7 @@ a.nav-link {
   margin: 0 var(--gutter) var(--gap);
   padding: var(--gap);
   border-radius: var(--radius);
-  cursor: none;
+  cursor: pointer;
   background: var(--glass);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
@@ -506,9 +463,83 @@ a.nav-link {
   transition: color var(--transition);
 }
 
+.home-intro {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+  overflow: hidden;
+}
+.home-echo-card {
+  flex: 1;
+  min-height: 180px;
+  padding: var(--gap);
+  border-radius: var(--radius);
+  background: var(--glass);
+  display: flex;
+}
+.home-echo {
+  flex: 1;
+  min-height: 0;
+  position: relative;
+  border-radius: var(--radius-sm);
+  background: var(--echo-color, #141414);
+  overflow: hidden;
+  transition: background-color 0.35s ease;
+}
+.home-echo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+.home-echo img.on { opacity: 1; }
+.home-copy {
+  flex-shrink: 0;
+  padding: clamp(22px, 3.5vw, 40px);
+  border-radius: var(--radius);
+  background: var(--glass);
+}
+.home-hello {
+  font-size: clamp(28px, 4.4vw, 56px);
+  font-weight: 300;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  color: var(--white);
+  margin-bottom: 14px;
+}
+.home-lead {
+  font-size: clamp(15px, 1.6vw, 22px);
+  font-weight: 300;
+  line-height: 1.45;
+  letter-spacing: -0.02em;
+  color: var(--mid);
+  max-width: 34em;
+}
+.home-live {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--white) 35%, transparent);
+  background: none;
+  color: var(--white);
+  font: inherit;
+  letter-spacing: inherit;
+  cursor: pointer;
+  transition: border-color var(--transition), color var(--transition);
+}
+.home-live:hover,
+.home-live.is-on {
+  border-bottom-color: var(--white);
+}
+
 .p-item:hover .p-tag,
 .ao-card:hover .ao-card-tag { color: var(--white); }
-.reel-card:hover .reel-label-tag { color: var(--reel-fg); }
 .p-next-card:hover .p-next-tag { color: var(--white); }
 
 .p-thumb {
@@ -568,7 +599,7 @@ a.nav-link {
   margin: 2px 10px;
   padding: 11px 13px;
   border-radius: var(--radius);
-  cursor: none;
+  cursor: pointer;
   transition: background var(--transition);
 }
 .n-item:hover { background: var(--glass-hover); }
@@ -704,7 +735,7 @@ a.nav-link {
   text-transform: uppercase;
   color: rgba(240,238,234,0.18);
   border-radius: var(--radius);
-  cursor: none;
+  cursor: pointer;
 }
 .g-item.wide { grid-column: 1/-1; aspect-ratio: 16/10; }
 .g-item.has-img { padding: 0; color: transparent; background: #0a0a0a; }
@@ -1100,7 +1131,7 @@ a.nav-link {
 }
 .m-cell {
   padding: 0;
-  cursor: none;
+  cursor: pointer;
 }
 .m-label {
   font-size: var(--text-label);
@@ -1148,7 +1179,7 @@ a.nav-link {
   padding: 8px;
   background: var(--glass);
   border-radius: var(--radius-sm);
-  cursor: none;
+  cursor: pointer;
   transition: background var(--transition);
 }
 .p-next-card:hover { background: var(--glass-hover); }
@@ -1280,7 +1311,7 @@ a.nav-link {
   border-radius: 28px;
   border: none;
   background: transparent;
-  cursor: none;
+  cursor: pointer;
   display: flex; align-items: center; justify-content: center;
   font-size: 16px;
   transition: background var(--transition);
@@ -1371,6 +1402,12 @@ a.nav-link {
 .ow-title { font-size: 13px; font-weight: 500; color: var(--white); margin-bottom: 6px; }
 .ow-body { font-size: 13px; line-height: 1.72; color: var(--mid); font-weight: 300; margin-bottom: 10px; }
 .ow-item p.ow-body:last-child { margin-bottom: 0; }
+.ow-body a {
+  color: var(--white);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(240,238,234,0.25);
+}
 
 /* Personal values */
 .values-headline {
@@ -1441,10 +1478,10 @@ a.nav-link {
   border-radius: var(--radius-sm);
   padding: 12px;
   transition: background var(--transition);
-  cursor: none;
+  cursor: pointer;
 }
 .kp-cell:hover { background: var(--glass-hover); }
-.kp-cell.wide { grid-column: 1/-1; cursor: none; }
+.kp-cell.wide { grid-column: 1/-1; cursor: pointer; }
 
 .kp-cell-label { font-size: 10px; color: var(--muted); margin-bottom: 6px; letter-spacing: 0.04em; }
 .kp-cell-val { font-size: 13px; color: var(--white); font-weight: 500; }
@@ -1467,7 +1504,7 @@ a.nav-link {
   border-radius: var(--radius-sm);
   background: var(--glass);
   border: 1px solid transparent;
-  cursor: none;
+  cursor: pointer;
   font-family: inherit;
   font-size: var(--text-label);
   font-weight: 500;
@@ -1501,7 +1538,7 @@ a.nav-link {
   display: flex;
   align-items: center;
   gap: 10px;
-  cursor: none;
+  cursor: pointer;
   transition: opacity var(--transition);
 }
 .np-row:hover { opacity: 0.82; }
@@ -1573,7 +1610,7 @@ a.nav-link {
   background: var(--yellow-dim);
   border: 1px solid rgba(232,212,77,0.2);
   border-radius: 10px;
-  cursor: none;
+  cursor: pointer;
   transition: background var(--transition), border-color var(--transition);
   text-decoration: none;
 }
@@ -1597,89 +1634,6 @@ a.nav-link {
   height: 100vh;
 }
 
-.reel-card {
-  flex: 1;
-  min-height: 0;
-  border-radius: var(--radius);
-  overflow: hidden;
-  position: relative;
-  background: var(--glass);
-  cursor: none;
-}
-
-/* Slides */
-.reel-slide {
-  position: absolute; inset: 0;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 200px;
-  font-weight: 300;
-  letter-spacing: -0.04em;
-  opacity: 0;
-  transition: opacity 0.65s cubic-bezier(0.4,0,0.2,1);
-  overflow: hidden;
-}
-.reel-slide.has-img img,
-.reel-slide.has-img video {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  display: block;
-}
-.reel-slide.has-img video {
-  object-position: center 42%;
-  transform: scale(var(--media-zoom, 1));
-}
-.reel-slide.has-img.contain img,
-.reel-slide.has-img.contain video { object-fit: contain; }
-.reel-slide.has-img.contain video {
-  object-position: center;
-  transform: none;
-}
-.reel-slide.active { opacity: 1; }
-
-/* Overlaid project label bottom-left */
-.reel-label {
-  position: absolute;
-  bottom: 24px; left: 28px;
-  z-index: 10;
-}
-.reel-label-name {
-  font-size: var(--text-display);
-  font-weight: 300;
-  color: var(--reel-fg);
-  letter-spacing: -0.02em;
-  margin-bottom: 3px;
-}
-.reel-label-tag {
-  font-size: var(--text-body);
-  color: rgba(240,238,234,0.55);
-  transition: color var(--transition);
-}
-
-/* Dot progress indicators bottom-right */
-.reel-dots {
-  position: absolute;
-  bottom: 28px; right: 28px;
-  display: flex; gap: 5px;
-  z-index: 10;
-}
-.reel-dot {
-  width: 5px; height: 5px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.25);
-  cursor: none;
-  transition: background var(--transition), transform var(--transition);
-}
-.reel-dot:hover { background: rgba(255,255,255,0.55); transform: scale(1.15); }
-.reel-dot.active { background: var(--white); }
-
-/* Bottom gradient scrim */
-.reel-scrim {
-  position: absolute; inset: 0;
-  background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.7) 100%);
-  z-index: 5;
-  pointer-events: none;
-}
-
 /* Home button in sidebar */
 .home-btn {
   display: flex; align-items: center; justify-content: center;
@@ -1687,7 +1641,7 @@ a.nav-link {
   border-radius: 50%;
   background: transparent;
   border: none;
-  cursor: none;
+  cursor: pointer;
   opacity: 0.45;
   transition: opacity var(--transition), background var(--transition);
   flex-shrink: 0;
@@ -1717,7 +1671,7 @@ a.nav-link {
   -webkit-backdrop-filter: blur(16px);
   border: none; border-radius: var(--radius-sm);
   padding: 9px 14px;
-  cursor: none; font-family: inherit;
+  cursor: pointer; font-family: inherit;
   transition: background var(--transition);
   flex-shrink: 0;
 }
@@ -1758,7 +1712,7 @@ a.nav-link {
 .filter-item {
   font-size: var(--text-display); font-weight: 300;
   color: var(--muted);
-  padding: 8px 0; cursor: none;
+  padding: 8px 0; cursor: pointer;
   transition: color var(--transition); letter-spacing: -0.01em;
 }
 .filter-item:hover, .filter-item.active { color: var(--white); }
@@ -1767,7 +1721,7 @@ a.nav-link {
 .hamburger-btn {
   width: 32px; height: 32px;
   display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: 5px; background: none; border: none; cursor: none; padding: 0; flex-shrink: 0;
+  gap: 5px; background: none; border: none; cursor: pointer; padding: 0; flex-shrink: 0;
 }
 .hamburger-btn span {
   display: block; width: 18px; height: 1.5px;
@@ -1789,7 +1743,7 @@ a.nav-link {
   justify-content: center;
   background: none;
   border: none;
-  cursor: none;
+  cursor: pointer;
   padding: 0;
   flex-shrink: 0;
   color: var(--mid);
@@ -1863,14 +1817,14 @@ a.nav-link {
   margin-bottom: 8px;
 }
 .nav-panel-title { font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
-.nav-close { background: none; border: none; cursor: none; padding: 0; opacity: 0.4; color: var(--white); transition: opacity var(--transition); }
+.nav-close { background: none; border: none; cursor: pointer; padding: 0; opacity: 0.4; color: var(--white); transition: opacity var(--transition); }
 .nav-close:hover { opacity: 1; }
 .nav-links { padding: 4px 0 12px; }
 .nav-link {
   display: flex; align-items: center;
   padding: 13px 20px;
   font-size: var(--text-display); font-weight: 300;
-  color: var(--mid); cursor: none;
+  color: var(--mid); cursor: pointer;
   transition: color var(--transition);
   letter-spacing: -0.01em;
   background: none; border: none; width: 100%; text-align: left; font-family: inherit;
@@ -1884,7 +1838,7 @@ a.nav-link {
 .nav-channel-link {
   font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
   color: var(--mid); text-decoration: none; background: none; border: none;
-  cursor: none; font-family: inherit; text-align: left; transition: color var(--transition);
+  cursor: pointer; font-family: inherit; text-align: left; transition: color var(--transition);
 }
 .nav-channel-link:hover { color: var(--white); }
 
@@ -1931,7 +1885,7 @@ a.nav-link {
   -webkit-appearance: none;
   appearance: none;
   border-radius: 50%;
-  cursor: none;
+  cursor: pointer;
   color: var(--white);
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
@@ -1962,7 +1916,7 @@ a.nav-link {
 }
 
 .ao-card {
-  cursor: none;
+  cursor: pointer;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -2070,9 +2024,6 @@ a.nav-link {
 .mobile-pills { display: contents; }
 
 @media (max-width: 800px) {
-  html, body, * { cursor: auto !important; }
-  #cursor-orb, #cursor-action, #reel-nav-pill { display: none !important; }
-
   html, body {
     height: auto;
     overflow: hidden;
@@ -2159,7 +2110,7 @@ a.nav-link {
   }
   .mobile-home-tag {
     margin: 0 auto;
-    max-width: 280px;
+    max-width: 340px;
     font-size: 13px;
     font-weight: 400;
     line-height: 1.45;
@@ -2429,8 +2380,8 @@ a.nav-link {
         <a class="studio-name sidebar-hideable" data-route="home" href="#/">Madhav Jolly</a>
 
         <div class="mobile-home-meta">
-          <div class="mobile-home-name">Madhav Jolly</div>
-          <p class="mobile-home-tag">Indian designer in Melbourne, working across brand and digital product.</p>
+          <div class="mobile-home-name">Hey, I’m Jolly!</div>
+          <p class="mobile-home-tag">Designer based in Melbourne, working with graphics and digital products. My practice focuses on crafting memorable experiences by merging utility with novelty. My work spans graphic design, brand, art direction, UX and prototyping.</p>
         </div>
 
         <div class="mobile-pills">
@@ -2446,7 +2397,7 @@ a.nav-link {
       <div class="news-divider sidebar-hideable"></div>
       <div id="news-list" class="sidebar-hideable"></div>
     </div>
-    <footer class="site-footer sidebar-hideable">made by me! © 2026 All rights reserved apart from the rights of having fun ⚽️</footer>
+    <footer class="site-footer sidebar-hideable">Website made by me! AI-assisted website. © 2026 All rights reserved apart from the rights of having fun ⚽️</footer>
   </aside>
 
   <!-- MAIN -->
@@ -2455,14 +2406,17 @@ a.nav-link {
     <!-- HOME -->
     <div class="panel active" id="panel-home">
       <div class="home-panel">
-        <div class="reel-card" id="reel-card">
-          <!-- slides injected by JS -->
-          <div class="reel-scrim"></div>
-          <div class="reel-label">
-            <div class="reel-label-name" id="reel-name">—</div>
-            <div class="reel-label-tag" id="reel-tag">—</div>
+        <div class="home-intro">
+          <div class="home-echo-card">
+            <div class="home-echo" id="home-echo" aria-hidden="true">
+              <img id="home-echo-a" alt="">
+              <img id="home-echo-b" alt="">
+            </div>
           </div>
-          <div class="reel-dots" id="reel-dots"></div>
+          <div class="home-copy">
+            <p class="home-hello">Hey, I’m Jolly!</p>
+            <p class="home-lead">Designer based in Melbourne, working with graphics and digital products. My practice focuses on crafting memorable experiences by merging utility with novelty. My work spans <span class="home-live" data-live="graphic" tabindex="0">graphic design</span>, <span class="home-live" data-live="brand" tabindex="0">brand</span>, <span class="home-live" data-live="art" tabindex="0">art direction</span>, <span class="home-live" data-live="ux" tabindex="0">UX</span> and <span class="home-live" data-live="proto" tabindex="0">prototyping</span>.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -2611,6 +2565,14 @@ a.nav-link {
               <div class="ow-title">LOCCAL</div>
               <p class="ow-body">A food waste maturity model and dashboard for Australian cafes, made during a Monash Innovation Guarantee sprint. I was one of five on the team.</p>
             </div>
+            <div class="ow-item">
+              <div class="ow-title">Ironwrath</div>
+              <p class="ow-body">An idle RPG I’m building for iOS in Swift, with Claude as a coding partner. Currently in beta, heading to the App Store soon.</p>
+            </div>
+            <div class="ow-item">
+              <div class="ow-title">Music</div>
+              <p class="ow-body">I make music as Sentient. <a href="https://open.spotify.com/artist/6v3knTUKqKvYpWjVcThB1N?si=7685jgKCSdOz9_mD7GN-og" target="_blank" rel="noopener">Hear my music here!</a></p>
+            </div>
           </div>
 
           <!-- Volunteering -->
@@ -2632,7 +2594,7 @@ a.nav-link {
             <div class="ap-card-label">Outside of work</div>
             <div class="ow-item">
               <div class="ow-title">Music</div>
-              <p class="ow-body">Outside of design, I produce electronic music and create my own artwork, exploring the relationship between sound, visuals, and atmosphere.</p>
+              <p class="ow-body">I make music as Sentient. <a href="https://open.spotify.com/artist/6v3knTUKqKvYpWjVcThB1N?si=7685jgKCSdOz9_mD7GN-og" target="_blank" rel="noopener">Hear my music here!</a></p>
             </div>
             <div class="ow-item">
               <div class="ow-title">Illustration</div>
@@ -2686,14 +2648,14 @@ a.nav-link {
 const PROJECTS = [
   {
     id:'pine-labs', name:'Pine Labs', tag:"India's payments giant, recut for the merchants who actually run on it.",
-    category:'brand',
+    category:'brand', sidebar:true,
     heroColor:'#0d2419', heroAccent:'#4fd89a', letter:'P',
     heroImage:'assets/projects/pine-labs/02-billboard.webp',
     thumbImage:'assets/projects/pine-labs/01-building.mp4',
     coverImage:'assets/projects/pine-labs/02-billboard.webp',
     eyebrow:'Brand Identity · 2022', title:'Pine Labs',
     challenge:"Pine Labs had outgrown a look that disappeared among gradients. The job was to keep the heritage, then make it loud enough for entrepreneurs across India to recognise it as theirs, including on the POS machines that sit on counters nationwide.",
-    solution:"We recut the green into a high-contrast teal, built an arrow as a container for the merchant, and rolled the system through logo, icons, packaging, and every surface the brand already owned. The identity had to hold at checkout, not only on a billboard.",
+    solution:"I recut the green into a high-contrast teal, built an arrow as a container for the merchant, and rolled the system through logo, icons, packaging, and every surface the brand already owned. The identity had to hold at checkout, not only on a billboard.",
     info:["A brand refresh for India's leading digital payments company, made to champion the entrepreneur instead of the product. Pine Labs terminals are in stores across the country, so the system had to read on a small screen at the counter as clearly as it does on a storefront.",'I designed the logo, icon system, colour, illustrations, packaging, and marketing collateral, plus the visual guidelines that hold it together.','See it live at <a href="https://www.pinelabs.com" target="_blank" rel="noopener">pinelabs.com</a>'],
     credits:[{role:'Visual identity, Illustration, packaging',name:'Madhav Jolly'},{role:'Agency',name:'Please See//'}],
     year:'2022', client:'Pine Labs', agency:'Please See//', scope:'Visual identity, Illustration, packaging', awards:'—',
@@ -2701,27 +2663,27 @@ const PROJECTS = [
       { type:'image', src:'assets/projects/pine-labs/01-building.mp4', wide:true },
       { type:'image', src:'assets/projects/pine-labs/02-billboard.webp' },
       { type:'image', src:'assets/projects/pine-labs/03-pine-green.mp4' },
-      { type:'text', text:"We evolved the original Pine green to a high contrast 'Pine teal'. This helped them own their heritage, but through a modern lens. Bolder colours and wide contrast allowed them to stand out in a market that uses a lot of gradients, but yet scale for various mediums." },
+      { type:'text', text:"I evolved the original Pine green to a high contrast 'Pine teal'. This helped them own their heritage, but through a modern lens. Bolder colours and wide contrast allowed them to stand out in a market that uses a lot of gradients, but yet scale for various mediums." },
       { type:'image', src:'assets/projects/pine-labs/04-logo-grid.webp', wide:true },
       { type:'image', src:'assets/projects/pine-labs/05-subbrands.webp', wide:true, contain:true, ratio:'2800/1159' },
-      { type:'text', text:'We created the arrow symbol as a container to hero the entrepreneur and his business, one that is always on the move, shaking things up and breaking new ground.' },
+      { type:'text', text:'I created the arrow symbol as a container to hero the entrepreneur and his business, one that is always on the move, shaking things up and breaking new ground.' },
       { type:'image', src:'assets/projects/pine-labs/06-kiosk.jpg' },
       { type:'image', src:'assets/projects/pine-labs/07-social.mp4' },
       { type:'image', src:'assets/projects/pine-labs/08-upi-terminal.jpg' },
       { type:'image', src:'assets/projects/pine-labs/09-storefront.jpg' },
-      { type:'text', text:'In a crowd of hard-sellers and over-explainers, we created design layouts that are bold, clear and confident. Our communication always champions the merchants and their businesses through bold headlines and confident imagery.' },
+      { type:'text', text:'In a crowd of hard-sellers and over-explainers, I created design layouts that are bold, clear and confident. The communication always champions the merchants and their businesses through bold headlines and confident imagery.' },
       { type:'image', src:'assets/projects/pine-labs/10-frame.mp4', contain:true, light:true },
       { type:'image', src:'assets/projects/pine-labs/11-email.mp4', contain:true },
       { type:'image', src:'assets/projects/pine-labs/12-collateral.webp', wide:true },
-      { type:'text', text:'We used the most basic geometric shapes and angles derived from our arrow to make the icons crisp and sharp.' },
+      { type:'text', text:'I used the most basic geometric shapes and angles derived from the arrow to make the icons crisp and sharp.' },
       { type:'image', src:'assets/projects/pine-labs/13-icon-diagram.jpg', contain:true, light:true },
       { type:'image', src:'assets/projects/pine-labs/14-icon-grid.mp4', contain:true, light:true },
-      { type:'text', text:'Our corporate collaterals follow the bold, clean visual style. However, we were playful at places where we wanted to engage and motivate our merchants and employees to live up to our new vision.' },
+      { type:'text', text:'The corporate collaterals follow the bold, clean visual style. However, I was playful at places where I wanted to engage and motivate the merchants and employees to live up to the new vision.' },
       { type:'image', src:'assets/projects/pine-labs/15-stationery.webp', wide:true },
       { type:'image', src:'assets/projects/pine-labs/16-id-card.jpg' },
       { type:'image', src:'assets/projects/pine-labs/17-boxes.jpg' },
       { type:'image', src:'assets/projects/pine-labs/18-stickers.webp', wide:true },
-      { type:'text', text:"We designed the welcome kit for employees to motivate them about the company's new vision and the rebranding. Hence, we made multiple boxes, each holding a merch talking about the entrepreneurial spirit. We stacked them randomly in a gift box and let the employee's instincts guide him/ her to arrange it in a way and reveal the message 'Make your move'." },
+      { type:'text', text:"I designed the welcome kit for employees to motivate them about the company's new vision and the rebranding. Hence, I made multiple boxes, each holding a merch talking about the entrepreneurial spirit. I stacked them randomly in a gift box and let the employee's instincts guide him/ her to arrange it in a way and reveal the message 'Make your move'." },
       { type:'image', src:'assets/projects/pine-labs/19-welcome-box.jpg' },
       { type:'image', src:'assets/projects/pine-labs/20-welcome-open.jpg' },
       { type:'image', src:'assets/projects/pine-labs/21-maker-box.mp4', wide:true },
@@ -2729,7 +2691,7 @@ const PROJECTS = [
   },
   {
     id:'ten-hills-studio', name:'10 Hills Studio', tag:'A Kolkata streetwear store, built to live on a cap, a window, and the street.',
-    category:'brand',
+    category:'brand', sidebar:true,
     heroColor:'#0c0c0c', heroAccent:'#f7f126', letter:'1',
     heroImage:'assets/projects/ten-hills-studio/01-hero.jpg',
     thumbImage:'assets/projects/ten-hills-studio/01-preview.jpg',
@@ -2777,7 +2739,7 @@ const PROJECTS = [
   },
   {
     id:'falcon', name:'Falcon', tag:'A payments platform with a mark as sharp as the bill it was named for.',
-    category:'brand',
+    category:'brand', sidebar:true,
     heroColor:'#0a1a2e', heroAccent:'#5eb0ff', letter:'F',
     heroImage:'assets/projects/falcon/00-preview.mp4',
     thumbImage:'assets/projects/falcon/00-preview.mp4',
@@ -2789,14 +2751,14 @@ const PROJECTS = [
     info:['Falcon is a platform for launching payment and lending products through open APIs.','I designed the logo, colour, icons, packaging, and credit card, and helped on the pitch deck, working with founders Priyanka Kanwar and Prabhtej Bhatia.','See it live at <a href="https://www.falconfs.com" target="_blank" rel="noopener">falconfs.com</a>'],
     year:'2022', client:'Falcon', agency:'Please See//', scope:'Visual Identity, Illustration, Packaging, Credit Card Design', awards:'—',
     gallery:[
-      { type:'text', text:"Falcon is a powerful platform that enables FinTech's, Banks, NBFCs, and Startups to launch any payment or lending product using open APIs and no code solutions. We worked with the young founders and entrepreneurs Priyanka Kanwar and Prabhtej Bhatia to create a bold, dynamic and edgy visual language that reflects the future of money. The core idea of 'Built to build with' was brought to life through a 3 dimensional 'F' symbol that represents the sharp, curved bill of a Falcon and stands for cutting edge technology. The 'Falcon' wordmark was custom made in uppercase letters to bring out the expertise." },
+      { type:'text', text:"Falcon is a powerful platform that enables FinTech's, Banks, NBFCs, and Startups to launch any payment or lending product using open APIs and no code solutions. I worked with the young founders and entrepreneurs Priyanka Kanwar and Prabhtej Bhatia to create a bold, dynamic and edgy visual language that reflects the future of money. The core idea of 'Built to build with' was brought to life through a 3 dimensional 'F' symbol that represents the sharp, curved bill of a Falcon and stands for cutting edge technology. The 'Falcon' wordmark was custom made in uppercase letters to bring out the expertise." },
       { type:'image', src:'assets/projects/falcon/02-logo-3d.mp4' },
       { type:'image', src:'assets/projects/falcon/03-guidelines.jpg', wide:true, contain:true, light:true, ratio:'1920/1919' },
-      { type:'text', text:'Our color palette was inspired from the colors of the limitless sky and the falcon bill grey. The secondary palette was developed to compliment the main brand colors. The language overall uses lot of gradients to bring more dynamism to the brand.' },
+      { type:'text', text:'The color palette was inspired from the colors of the limitless sky and the falcon bill grey. The secondary palette was developed to compliment the main brand colors. The language overall uses lot of gradients to bring more dynamism to the brand.' },
       { type:'image', src:'assets/projects/falcon/04-colors.webp', wide:true, contain:true, light:true, ratio:'2800/2441' },
-      { type:'text', text:"Roobert is a mono-linear geometrical sans-serif font family. We picked this type family as it compliments our 'F' symbol by giving that rounded square characteristics like in letters 'g', 'a', 'r', 't'. It is also sharp and clean at the edges like our logo symbol." },
+      { type:'text', text:"Roobert is a mono-linear geometrical sans-serif font family. I picked this type family as it complements the 'F' symbol by giving that rounded square characteristics like in letters 'g', 'a', 'r', 't'. It is also sharp and clean at the edges like the logo symbol." },
       { type:'image', src:'assets/projects/falcon/05-typography.webp', wide:true, contain:true, dark:true, ratio:'2800/1313' },
-      { type:'text', text:'Icons were created by overlapping geometric shapes with sharp corners. Wherever it was possible, we converted our flat 2d icons into 3d product illustrations to make the language more dynamic.' },
+      { type:'text', text:'Icons were created by overlapping geometric shapes with sharp corners. Wherever it was possible, I converted the flat 2d icons into 3d product illustrations to make the language more dynamic.' },
       { type:'image', src:'assets/projects/falcon/06-icon-grid-spec.webp', wide:true, contain:true, dark:true, ratio:'2800/986' },
       { type:'image', src:'assets/projects/falcon/07-icon-set.webp', wide:true, contain:true, dark:true, ratio:'2800/1129' },
       { type:'image', src:'assets/projects/falcon/08-icon-anim-1.mp4', square:true, contain:true, dark:true },
@@ -2849,7 +2811,7 @@ const PROJECTS = [
   },
   {
     id:'class-pulse', name:'ClassPulse', tag:'A student engagement platform helping students stay connected to their learning, giving educators visibility into engagement throughout the semester.',
-    award:'Higher Distinction Award', category:'digital',
+    award:'Higher Distinction Award', category:'digital', sidebar:true,
     heroColor:'#0a1428', heroAccent:'#c8f060', letter:'C',
     heroImage:'assets/projects/class-pulse/01-hero.png',
     thumbImage:'assets/projects/class-pulse/listing-thumb.jpg',
@@ -2860,7 +2822,7 @@ const PROJECTS = [
     info:[
       'ClassPulse is a student engagement platform designed to help students stay connected to their learning while giving educators greater visibility into engagement throughout the semester.',
       'Developed in collaboration with stakeholders from Monash University, the project explores how engagement can be better understood, supported, and communicated between students and teaching staff.',
-      'Through surveys, interviews, and secondary research, we found that students often disengage silently, lack awareness of their own learning patterns, and receive feedback only after opportunities for intervention have passed.',
+      'Through surveys, interviews, and secondary research, I found that students often disengage silently, lack awareness of their own learning patterns, and receive feedback only after opportunities for intervention have passed.',
     ],
     credits:[{role:'UI/UX Design, UX Research, Prototyping, Interaction Design',name:'Madhav Jolly'},{role:'Team',name:'Nidhi Joseph, Zheng Wang'}],
     year:'2025', client:'Monash University', agency:'University project', scope:'UI/UX Design, UX Research, Prototyping, Interaction Design', awards:'Higher Distinction Award',
@@ -2869,8 +2831,8 @@ const PROJECTS = [
     gallery:[
       { type:'image', src:'assets/projects/class-pulse/00-showcase.png', dark:true, ratio:'16/9' },
       { type:'video', src:'assets/projects/class-pulse/00-reel.mp4', contain:true, ratio:'16/9', bg:'#101828' },
-      { type:'text', wide:true, text:'ClassPulse is a student engagement platform designed to help students stay connected to their learning while giving educators greater visibility into engagement throughout the semester. Developed in collaboration with stakeholders from Monash University, the project explores how engagement can be better understood, supported, and communicated between students and teaching staff. Through surveys, interviews, and secondary research, we found that students often disengage silently, lack awareness of their own learning patterns, and receive feedback only after opportunities for intervention have passed.\n\nIn response, we designed ClassPulse, a lightweight engagement layer centred around post-class check-ins, reflective learning journals, and anonymous communication channels. Together, these features create a continuous feedback loop that encourages participation, promotes self-awareness, and provides educators with earlier insight into engagement trends. Rather than measuring attendance alone, ClassPulse focuses on making engagement visible, actionable, and supportive, helping students remain active participants in their learning experience.' },
-      { type:'text', wide:true, label:'01. Research & Problem', text:'To understand how student engagement breaks down across a semester, we conducted a combination of student interviews, surveys, and a literature review focused on learning behaviour, workload management, and engagement patterns.\n\nThe goal was to identify the gap between what current systems measure and what students actually experience.' },
+      { type:'text', wide:true, text:'ClassPulse is a student engagement platform designed to help students stay connected to their learning while giving educators greater visibility into engagement throughout the semester. Developed in collaboration with stakeholders from Monash University, the project explores how engagement can be better understood, supported, and communicated between students and teaching staff. Through surveys, interviews, and secondary research, I found that students often disengage silently, lack awareness of their own learning patterns, and receive feedback only after opportunities for intervention have passed.\n\nIn response, I designed ClassPulse, a lightweight engagement layer centred around post-class check-ins, reflective learning journals, and anonymous communication channels. Together, these features create a continuous feedback loop that encourages participation, promotes self-awareness, and provides educators with earlier insight into engagement trends. Rather than measuring attendance alone, ClassPulse focuses on making engagement visible, actionable, and supportive, helping students remain active participants in their learning experience.' },
+      { type:'text', wide:true, label:'01. Research & Problem', text:'To understand how student engagement breaks down across a semester, I conducted a combination of student interviews, surveys, and a literature review focused on learning behaviour, workload management, and engagement patterns.\n\nThe goal was to identify the gap between what current systems measure and what students actually experience.' },
       { type:'bento-row', cols:3, cells:[
         { stat:'10/13', text:'students use external tools to stay organised.' },
         { stat:'80%', text:'of students attend classes but miss at least one class within the first 3 weeks. Engagement drop-off begins early.' },
@@ -2887,8 +2849,8 @@ const PROJECTS = [
       { type:'text', wide:true, statement:true, label:'03. Combined User & Client Need', text:"The current LMS shows students their progress, but doesn't actively guide how they engage with their learning. There is an opportunity to introduce a feedback system that fosters engagement through participation, making it meaningful and motivating." },
       { type:'text', wide:true, label:'04. Synthesis', text:'Most systems focus on passive progress tracking, which shows status but does not support decision-making in the moment. This results in students feeling overwhelmed, reactive, and disconnected from their learning process.' },
       { type:'text', wide:true, statement:true, text:'Students are not lacking information, but they are lacking interpretation and direction.' },
-      { type:'image', src:'assets/projects/class-pulse/02-principles.png', wide:true, contain:true, light:true, ratio:'16/9', caption:'Principles our team came up with to follow' },
-      { type:'image', src:'assets/projects/class-pulse/03-user-journey.png', wide:true, contain:true, light:true, ratio:'16/9', caption:'Our users journey' },
+      { type:'image', src:'assets/projects/class-pulse/02-principles.png', wide:true, contain:true, light:true, ratio:'16/9', caption:'Principles the team came up with to follow' },
+      { type:'image', src:'assets/projects/class-pulse/03-user-journey.png', wide:true, contain:true, light:true, ratio:'16/9', caption:'The user journey' },
       { type:'text', wide:true, label:'05. The Solution' },
       { type:'feature', label:'Post Class Check-in', video:'assets/projects/class-pulse/04-checkin.mp4', ratio:'4/5',
         text:'Students often disengage due to workload and overwhelm, yet feedback opportunities typically arrive at the end of a semester when intervention is too late.\n\nTo encourage ongoing reflection, ClassPulse introduces a two-question check-in that takes less than 30 seconds to complete, helping students recognise disengagement before it impacts performance.' },
@@ -2899,12 +2861,12 @@ const PROJECTS = [
       { type:'feature', label:'Forum', video:'assets/projects/class-pulse/07-forum.mp4', ratio:'4/5',
         text:'Students can ask questions without social pressure or the need for public identification. This reduces anxiety and creates a safer environment for participation, leading to higher quality and more honest engagement.' },
       { type:'text', wide:true, label:'Prototype', text:'Take the prototype for a spin!', cta:{ href:'https://www.figma.com/proto/xlrjpODNlTM4D9BsTnFuCA/Capstone-Project--Copy-?node-id=1931-3335&p=f&viewport=182%2C136%2C0.05&t=TKV8YmtR9bBPk1XL-0&scaling=scale-down&content-scaling=fixed&starting-point-node-id=1931%3A3335', label:'Open prototype' } },
-      { type:'image', src:'assets/projects/class-pulse/08-design-system.png', wide:true, contain:true, dark:true, ratio:'16/9', captionSoft:true, caption:'Final design system created after a lot of testing and iterating. Happy to walk you through our entire system! :)' },
+      { type:'image', src:'assets/projects/class-pulse/08-design-system.png', wide:true, contain:true, dark:true, ratio:'16/9', captionSoft:true, caption:'Final design system created after a lot of testing and iterating. Happy to walk you through the entire system! :)' },
     ],
   },
   {
     id:'1441-pizzeria', name:'1441 Pizzeria', tag:'Neapolitan energy for a pizzeria that wanted to feel like the centre of the room.',
-    category:'brand',
+    category:'brand', sidebar:true,
     heroColor:'#02954C', heroAccent:'#FABA18', letter:'1',
     heroImage:'assets/projects/1441-pizzeria/01-hero.png',
     thumbImage:'assets/projects/1441-pizzeria/listing-thumb.jpg',
@@ -2928,7 +2890,7 @@ const PROJECTS = [
       { type:'image', src:'assets/projects/1441-pizzeria/07-typography.png', wide:true, contain:true, light:true, ratio:'16/9' },
       { type:'text', text:'Brangus was chosen for its bold, geometric letterforms that convey strength and modernity while remaining approachable. Its clean lines and distinctive character make it ideal for headings, signage, and branding elements, reinforcing 1441 Pizzeria\'s energetic and contemporary identity.' },
       { type:'image', src:'assets/projects/1441-pizzeria/08-stickers.png', wide:true, contain:true, light:true },
-      { type:'text', text:'We developed a distinctive and refreshing illustration system for stickers and all brand collateral.' },
+      { type:'text', text:'I developed a distinctive and refreshing illustration system for stickers and all brand collateral.' },
       { type:'image', src:'assets/projects/1441-pizzeria/09-packaging.png', wide:true },
       { type:'image', src:'assets/projects/1441-pizzeria/10-hand-slice.png', contain:true, ratio:'1200/1696' },
       { type:'video', src:'assets/projects/1441-pizzeria/11-motion.mp4', contain:true, ratio:'1400/784' },
@@ -2957,7 +2919,7 @@ const PROJECTS = [
       { type:'image', src:'assets/projects/rivona-naturals/01-hero.png', wide:true },
       { type:'image', src:'assets/projects/rivona-naturals/03-logo-detail.png', wide:true, contain:true, light:true, ratio:'2/1' },
       { type:'image', src:'assets/projects/rivona-naturals/02-typography.png', wide:true, contain:true, light:true, ratio:'2/1' },
-      { type:'text', wide:true, text:"Our font was chosen for its clean, modern, and versatile character. Its variable weights allow for flexibility across headings, body text, and product packaging, creating a cohesive typographic system that feels approachable yet sophisticated. The typeface complements Rivona's natural, minimal aesthetic while maintaining clarity and readability across digital and print applications." },
+      { type:'text', wide:true, text:"The font was chosen for its clean, modern, and versatile character. Its variable weights allow for flexibility across headings, body text, and product packaging, creating a cohesive typographic system that feels approachable yet sophisticated. The typeface complements Rivona's natural, minimal aesthetic while maintaining clarity and readability across digital and print applications." },
       { type:'image', src:'assets/projects/rivona-naturals/04-color-palette.mp4', wide:true, contain:true, light:true, ratio:'2/1' },
       { type:'text', wide:true, text:'A set of bespoke icons and illustrations was created to visually distinguish and complement each product.' },
       { type:'image', src:'assets/projects/rivona-naturals/05-illustrations.mp4', wide:true, contain:true, light:true, ratio:'2/1' },
@@ -3299,18 +3261,57 @@ const PROJECTS = [
   },
   {
     id:'illustration', name:'Illustration', tag:'Pictures that start as a drawing, then find a job.',
-    category:'editorial',
+    category:'editorial', sidebar:'side',
     heroColor:'#16120e', heroAccent:'#e8c9a0', letter:'I',
-    eyebrow:'Illustration · Ongoing', title:'Illustration',
+    heroImage:'assets/projects/illustration/01.jpg',
+    thumbImage:'assets/projects/illustration/01.jpg',
+    coverImage:'assets/projects/illustration/01.jpg',
+    eyebrow:'Illustration · 2019–2023', title:'Illustration',
     challenge:'Some pictures do not start as a logo. They start as a drawing, then find a job.',
-    solution:'A collection of illustration: personal work, music, and pictures that later moved into brands.',
+    solution:'A set of personal illustrations from 2019, plus the labels I drew for my own records as Sentient.',
     info:[
-      'Selected illustration, from personal work and music to pictures made when a brand needed a drawing, not only a mark.',
+      'Personal illustrations from 2019, drawn by hand and finished in colour, with a process video under the ones I recorded.',
+      'Then the vinyl labels for my own music: Celestial EP on Antariksh Records, Against Reason on Aciddream, and Radiant Energy as Sentient.',
     ],
     credits:[{role:'Illustration',name:'Madhav Jolly'}],
-    year:'Ongoing', client:'Selected work', agency:'Freelance', scope:'Illustration', awards:'—',
+    year:'2019–2023', client:'Personal, Sentient', agency:'Freelance', scope:'Illustration, album artwork', awards:'—',
     gallery:[
-      { type:'text', wide:true, text:'A collection of illustration. Personal work, music, and pictures that later found a brand.' },
+      { type:'text', wide:true, text:'Personal illustrations from 2019. A process video sits under the ones I recorded while drawing them.' },
+      { type:'image', src:'assets/projects/illustration/01.jpg', wide:true, ratio:'3/4' },
+      { type:'embed', src:'https://player.vimeo.com/video/393502579?title=0&byline=0&portrait=0', ratio:'16/9', caption:'Process' },
+      { type:'image', src:'assets/projects/illustration/03.jpg', wide:true, ratio:'3/4' },
+      { type:'embed', src:'https://player.vimeo.com/video/393510520?title=0&byline=0&portrait=0', ratio:'16/9', caption:'Process' },
+      { type:'image', src:'assets/projects/illustration/04.jpg', wide:true, ratio:'4/3' },
+      { type:'embed', src:'https://player.vimeo.com/video/393511942?title=0&byline=0&portrait=0', ratio:'16/9', caption:'Process' },
+      { type:'image', src:'assets/projects/illustration/05.jpg', wide:true, ratio:'3/4' },
+      { type:'image', src:'assets/projects/illustration/06.jpg', wide:true, ratio:'4/3' },
+      { type:'embed', src:'https://player.vimeo.com/video/393740148?title=0&byline=0&portrait=0', ratio:'16/9', caption:'Process' },
+      { type:'image', src:'assets/projects/illustration/07.jpg', wide:true, ratio:'3/4' },
+      { type:'embed', src:'https://player.vimeo.com/video/393740615?title=0&byline=0&portrait=0', ratio:'16/9', caption:'Process' },
+      { type:'image', src:'assets/projects/illustration/08.jpg', wide:true, ratio:'4/3' },
+      { type:'image', src:'assets/projects/illustration/09.jpg', wide:true, ratio:'3/4' },
+      { type:'image', src:'assets/projects/illustration/10.jpg', wide:true, ratio:'3/4' },
+      { type:'text', wide:true, text:'Labels I illustrated for my own records as Sentient: Celestial EP, Against Reason, and Radiant Energy.' },
+      { type:'image', src:'assets/projects/illustration/11-celestial-ep.jpg', wide:true, contain:true, dark:true, ratio:'1/1', caption:'Celestial EP — Antariksh Records, 2023' },
+      { type:'image', src:'assets/projects/illustration/12-against-reason.jpg', wide:true, contain:true, dark:true, ratio:'1/1', caption:'Against Reason — Aciddream, ACD003' },
+      { type:'image', src:'assets/projects/illustration/13-radiant-energy.jpg', wide:true, contain:true, dark:true, ratio:'1/1', caption:'Radiant Energy — Sentient, ANKTS005' },
+    ],
+  },
+  {
+    id:'ironwrath', name:'Ironwrath', tag:'An idle RPG for iOS, in beta now, App Store soon.',
+    category:'digital', sidebar:'side',
+    heroColor:'#140c0a', heroAccent:'#e8b060', letter:'W',
+    eyebrow:'Side project · 2026', title:'Ironwrath',
+    challenge:'I wanted to ship a game, not only design one. Ironwrath is an idle RPG I’m building for iPhone, from systems to Swift.',
+    solution:'Coded in Swift with Claude as a partner. Currently in beta. Releasing on the App Store soon.',
+    info:[
+      'Ironwrath is an idle RPG I’m creating for iOS.',
+      'I’m writing it in Swift, using Claude to help with the code, and testing a beta build now before it goes live on the App Store.',
+    ],
+    credits:[{role:'Game design, iOS engineering',name:'Madhav Jolly'}],
+    year:'2026', client:'Personal', agency:'—', scope:'iOS, Swift, game design', awards:'—',
+    gallery:[
+      { type:'text', wide:true, text:'An idle RPG for iPhone. Built in Swift, with Claude in the loop. In beta now, then the App Store.' },
     ],
   },
   {
@@ -3469,10 +3470,6 @@ function isVideoSrc(src) {
 function isMotionSrc(src) {
   return typeof src === 'string' && /\.(gif|mp4|webm)($|\?)/i.test(src);
 }
-function reelStillSrc(p) {
-  const list = [p.reelImage, p.coverImage, p.heroImage, p.thumbImage].concat(p.thumbCarousel || []);
-  return list.find(src => src && !isMotionSrc(src)) || '';
-}
 function listingMedia(src, alt) {
   if (!src) return '';
   if (isVideoSrc(src)) {
@@ -3510,8 +3507,7 @@ function listingWrapStyle(p) {
 
 /* ─ Build sidebar ─ */
 const listEl = document.getElementById('project-list');
-PROJECTS.forEach((p,i) => {
-  if (p.listed === false) return;
+function appendSidebarItem(p) {
   const el = document.createElement(p.comingSoon ? 'div' : 'a');
   el.className = 'p-item';
   el.id = 'nav-'+p.id;
@@ -3523,7 +3519,108 @@ PROJECTS.forEach((p,i) => {
     : `<div class="p-thumb" style="background:${p.heroColor};color:${p.heroAccent}">${p.letter}</div>`;
   el.innerHTML = thumbHtml + `<div class="p-text sidebar-hideable"><div class="p-name">${p.name}</div><div class="p-tag">${p.tag}</div></div>`;
   listEl.appendChild(el);
-});
+}
+PROJECTS.filter(p => p.listed !== false && p.sidebar === true).forEach(appendSidebarItem);
+const sideProjects = PROJECTS.filter(p => p.listed !== false && p.sidebar === 'side');
+if (sideProjects.length) {
+  const label = document.createElement('div');
+  label.className = 'sidebar-section-label sidebar-hideable';
+  label.textContent = 'Side Projects';
+  listEl.appendChild(label);
+  sideProjects.forEach(appendSidebarItem);
+}
+const moreBtn = document.createElement('button');
+moreBtn.type = 'button';
+moreBtn.className = 'cta-btn sidebar-more sidebar-hideable';
+moreBtn.innerHTML = 'View more projects<svg width="10" height="10" viewBox="0 0 11 11" fill="none" aria-hidden="true"><path d="M2 9L9 2M9 2H3.5M9 2V7.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+moreBtn.setAttribute('onclick', 'openAll()');
+listEl.appendChild(moreBtn);
+
+function echoStillSrc(p) {
+  if (!p) return '';
+  const list = [p.coverImage, p.heroImage, p.reelImage, p.thumbImage];
+  return list.find(src => src && !isMotionSrc(src)) || '';
+}
+
+(function initHomeEcho() {
+  const stage = document.getElementById('home-echo');
+  const imgA = document.getElementById('home-echo-a');
+  const imgB = document.getElementById('home-echo-b');
+  const lead = document.querySelector('.home-lead');
+  if (!stage || !imgA || !imgB) return;
+
+  const LIVE = {
+    graphic: { id: 'ten-hills-studio', src: 'assets/projects/ten-hills-studio/01-hero.jpg' },
+    brand: { id: 'pine-labs', src: 'assets/projects/pine-labs/02-billboard.webp' },
+    art: { id: 'papa-patels', src: 'assets/projects/papa-patels/01-hero.jpg' },
+    ux: { id: 'class-pulse', src: 'assets/projects/class-pulse/01-hero.png' },
+    proto: { id: 'gameboy-apps', src: 'assets/projects/gameboy-apps/01-cover.png' },
+  };
+
+  let front = imgA;
+  let back = imgB;
+  let currentSrc = '';
+  let rest = LIVE.brand;
+
+  function setEcho(src, color, liveKey) {
+    if (color) stage.style.setProperty('--echo-color', color);
+    document.querySelectorAll('.home-live').forEach(el => {
+      el.classList.toggle('is-on', liveKey && el.dataset.live === liveKey);
+    });
+    if (!src || src === currentSrc) return;
+    currentSrc = src;
+    back.onload = null;
+    back.src = src;
+    const show = () => {
+      back.classList.add('on');
+      front.classList.remove('on');
+      const swap = front;
+      front = back;
+      back = swap;
+    };
+    if (back.complete && back.naturalWidth) show();
+    else back.onload = show;
+  }
+
+  function echoFromProject(id, liveKey) {
+    const p = PROJECTS.find(x => x.id === id);
+    if (!p) return;
+    setEcho(echoStillSrc(p) || LIVE[liveKey] && LIVE[liveKey].src, p.heroColor, liveKey || null);
+  }
+
+  function echoLive(key) {
+    const spec = LIVE[key];
+    if (!spec) return;
+    rest = spec;
+    const p = PROJECTS.find(x => x.id === spec.id);
+    setEcho(spec.src, p && p.heroColor, key);
+  }
+
+  echoLive('brand');
+  Object.values(LIVE).forEach(spec => { const img = new Image(); img.src = spec.src; });
+
+  if (lead) {
+    lead.addEventListener('pointerover', e => {
+      const el = e.target.closest('.home-live');
+      if (!el || !lead.contains(el)) return;
+      echoLive(el.dataset.live);
+    });
+    lead.addEventListener('click', e => {
+      const el = e.target.closest('.home-live');
+      if (!el) return;
+      echoLive(el.dataset.live);
+    });
+  }
+
+  listEl.addEventListener('mouseover', e => {
+    const item = e.target.closest('.p-item');
+    if (item) echoFromProject(item.dataset.projectId);
+  });
+  listEl.addEventListener('mouseleave', () => {
+    const key = Object.keys(LIVE).find(k => LIVE[k].id === rest.id);
+    echoLive(key || 'brand');
+  });
+})();
 
 const newsEl = document.getElementById('news-list');
 NEWS.forEach(n => {
@@ -3877,93 +3974,6 @@ if (apImg) {
   apImg.style.objectPosition = PHOTO_VARIANTS.main.pos;
 }
 
-/* ─ Home reel ─ */
-(function initReel() {
-  const card = document.getElementById('reel-card');
-  const nameEl = document.getElementById('reel-name');
-  const tagEl = document.getElementById('reel-tag');
-  const dotsEl = document.getElementById('reel-dots');
-  const reelProjects = PROJECTS.filter(p => !p.id.startsWith('dummy') && p.listed !== false && p.id !== 'social-creatives' && p.id !== 'motion-graphics' && p.id !== 'illustration');
-
-  // Build slides
-  reelProjects.forEach((p, i) => {
-    const slide = document.createElement('div');
-    slide.className = 'reel-slide' + (i === 0 ? ' active' : '');
-    const still = reelStillSrc(p);
-    if (still) {
-      slide.classList.add('has-img');
-      const css = listingWrapCss(p);
-      if (css) slide.style.cssText = css;
-      slide.innerHTML = listingMedia(still, p.name);
-    } else {
-      slide.style.background = p.heroColor;
-      slide.style.color = p.heroAccent;
-      slide.textContent = p.letter;
-    }
-    card.insertBefore(slide, card.querySelector('.reel-scrim'));
-  });
-
-  // Build dots
-  dotsEl.innerHTML = reelProjects.map((_, i) =>
-    `<div class="reel-dot${i === 0 ? ' active' : ''}"></div>`
-  ).join('');
-
-  const slides = card.querySelectorAll('.reel-slide');
-  const dots = dotsEl.querySelectorAll('.reel-dot');
-  let idx = 0;
-
-  function syncReelVideos() {
-    slides.forEach((s, i) => {
-      s.querySelectorAll('video').forEach(v => {
-        if (i === idx) {
-          const played = v.play();
-          if (played) played.catch(() => {});
-        } else {
-          v.pause();
-        }
-      });
-    });
-  }
-
-  function setSlide(n) {
-    slides[idx].classList.remove('active');
-    dots[idx].classList.remove('active');
-    const len = reelProjects.length;
-    idx = ((n % len) + len) % len;
-    slides[idx].classList.add('active');
-    dots[idx].classList.add('active');
-    nameEl.textContent = reelProjects[idx].name;
-    tagEl.textContent = reelProjects[idx].tag;
-    card.dataset.projectId = reelProjects[idx].id;
-    syncReelVideos();
-  }
-
-  // Set first label
-  nameEl.textContent = reelProjects[0].name;
-  tagEl.textContent = reelProjects[0].tag;
-  card.dataset.projectId = reelProjects[0].id;
-  syncReelVideos();
-
-  // Zone click — left prev, right next, center opens project
-  card.addEventListener('click', e => {
-    if (e.target.closest('.reel-dot')) return;
-    const rect = card.getBoundingClientRect();
-    const relX = (e.clientX - rect.left) / rect.width;
-    if (relX < 0.36) setSlide(idx - 1);
-    else if (relX > 0.64) setSlide(idx + 1);
-    else if (!reelProjects[idx].comingSoon) showPanel(reelProjects[idx].id);
-  });
-
-  dots.forEach((dot, i) => {
-    dot.addEventListener('click', e => {
-      e.stopPropagation();
-      setSlide(i);
-    });
-  });
-
-  // Auto-advance every 4s
-  setInterval(() => setSlide(idx + 1), 4000);
-})();
 const MY_TRACKS = [
   {
     title: 'Circles',
@@ -4182,7 +4192,7 @@ const MY_TRACKS = [
     });
   }
 
-  const HOVER_SEL = '.p-item, .ao-card, .reel-card, .p-next-card, .about-bento';
+  const HOVER_SEL = '.p-item, .ao-card, .reel-card, .p-next-card, .about-bento, .home-live';
   const BUTTON_HOVER_SEL = 'button, a.cta-btn, .nav-link, .filter-item, .delight-toggle, .ao-filter-btn, .studio-name';
   document.addEventListener('mouseover', e => {
     if (!soundOn) return;
@@ -4573,125 +4583,6 @@ document.addEventListener('keydown', e => {
   else if (document.getElementById('filter-popup').classList.contains('open')) toggleFilter();
   else if (document.getElementById('nav-menu').classList.contains('open')) toggleNav();
 });
-</script>
-<!-- Custom cursor (blob) -->
-<div id="cursor-orb"></div>
-<div id="cursor-action" class="glass-pill" aria-hidden="true">Open<svg width="8" height="8" viewBox="0 0 11 11" fill="none" aria-hidden="true"><path d="M2 9L9 2M9 2H3.5M9 2V7.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-<div id="reel-nav-pill" class="glass-pill" aria-hidden="true"></div>
-
-<script>
-(function() {
-  const orb = document.getElementById('cursor-orb');
-  const action = document.getElementById('cursor-action');
-  const reelPill = document.getElementById('reel-nav-pill');
-  if (!orb || !action) return;
-  if (window.matchMedia('(pointer: coarse)').matches || window.matchMedia('(max-width: 800px)').matches) return;
-  const ARROW_LEFT = '<svg width="8" height="8" viewBox="0 0 8 8" fill="none" aria-hidden="true"><path d="M5 1.5L2.5 4 5 6.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-  const ARROW_RIGHT = '<svg width="8" height="8" viewBox="0 0 8 8" fill="none" aria-hidden="true"><path d="M3 1.5L5.5 4 3 6.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-  const OPEN_ICON = '<svg width="8" height="8" viewBox="0 0 11 11" fill="none" aria-hidden="true"><path d="M2 9L9 2M9 2H3.5M9 2V7.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-  const OPEN_PILL = 'Open' + OPEN_ICON;
-  let lastPillHtml = OPEN_PILL;
-
-  function pillHtmlFor(projectId) {
-    const p = PROJECTS.find(x => x.id === projectId);
-    return (p && p.comingSoon) ? 'Coming soon' : OPEN_PILL;
-  }
-
-  function setActionPill(html) {
-    if (lastPillHtml === html) return;
-    lastPillHtml = html;
-    action.innerHTML = html;
-  }
-
-  function getReelZone(x, y) {
-    const home = document.getElementById('panel-home');
-    if (!home || !home.classList.contains('active')) return null;
-    const reel = document.getElementById('reel-card');
-    if (!reel) return null;
-    const rect = reel.getBoundingClientRect();
-    if (x < rect.left || x > rect.right || y < rect.top || y > rect.bottom) return null;
-    const relX = (x - rect.left) / rect.width;
-    if (relX < 0.36) return 'left';
-    if (relX > 0.64) return 'right';
-    return 'center';
-  }
-
-  let mx = window.innerWidth / 2;
-  let my = window.innerHeight / 2;
-  let sx = mx, sy = my;
-  let lx = mx, ly = my;
-
-  const ORB_EASE = 0.5;
-  const CHIP_EASE = 0.38;
-
-  function setHidden(el, hidden) {
-    if (!el) return;
-    el.style.opacity = hidden ? '0' : '';
-  }
-
-  document.addEventListener('mousemove', e => {
-    mx = e.clientX;
-    my = e.clientY;
-
-    const reelZone = getReelZone(e.clientX, e.clientY);
-    if (reelZone === 'left' || reelZone === 'right') {
-      orb.classList.add('hovering-project');
-      action.classList.remove('visible');
-      if (reelPill) {
-        reelPill.classList.add('visible');
-        reelPill.innerHTML = reelZone === 'left' ? ARROW_LEFT : ARROW_RIGHT;
-      }
-    } else if (reelZone === 'center') {
-      orb.classList.add('hovering-project');
-      setActionPill(pillHtmlFor(document.getElementById('reel-card')?.dataset.projectId));
-      action.classList.add('visible');
-      reelPill?.classList.remove('visible');
-    } else {
-      reelPill?.classList.remove('visible');
-      const projectTarget = e.target.closest('.p-item, .ao-card, .p-next-card');
-      if (projectTarget) {
-        orb.classList.add('hovering-project');
-        setActionPill(pillHtmlFor(projectTarget.dataset.projectId));
-        action.classList.add('visible');
-      } else {
-        orb.classList.remove('hovering-project');
-        action.classList.remove('visible');
-      }
-    }
-  });
-
-  document.addEventListener('mouseleave', () => {
-    setHidden(orb, true);
-    setHidden(action, true);
-    setHidden(reelPill, true);
-  });
-
-  document.addEventListener('mouseenter', () => {
-    setHidden(orb, false);
-    setHidden(action, false);
-    setHidden(reelPill, false);
-  });
-
-  function loop() {
-    sx += (mx - sx) * ORB_EASE;
-    sy += (my - sy) * ORB_EASE;
-    lx += (mx - lx) * CHIP_EASE;
-    ly += (my - ly) * CHIP_EASE;
-
-    const chipScale = action.classList.contains('visible') ? 1 : 0.9;
-    const reelScale = reelPill && reelPill.classList.contains('visible') ? 1 : 0.9;
-
-    orb.style.transform = `translate(calc(${sx}px - 50%), calc(${sy}px - 50%))`;
-    action.style.transform = `translate(calc(${lx}px - 50%), calc(${ly}px - 50%)) scale(${chipScale})`;
-    if (reelPill) {
-      reelPill.style.transform = `translate(calc(${lx}px - 50%), calc(${ly}px - 50%)) scale(${reelScale})`;
-    }
-
-    requestAnimationFrame(loop);
-  }
-
-  loop();
-})();
 </script>
 </body>
 </html>
