@@ -2425,7 +2425,7 @@ a.nav-link {
 
         <div class="mobile-home-meta">
           <div class="mobile-home-name">Hey, I’m Jolly!</div>
-          <p class="mobile-home-tag">Designer from Calcutta → Bangalore → Mumbai, and now Melbourne. I may not have 8 years of experience, but given a weekend and an ominous deadline, I can lowkey learn anything!</p>
+          <p class="mobile-home-tag">Designer from Mumbai → Melbourne. I may not have 8 years of experience, but given a weekend and an ominous deadline, I can lowkey learn anything!</p>
         </div>
 
         <div class="mobile-pills">
@@ -2459,7 +2459,7 @@ a.nav-link {
           </div>
           <div class="home-copy">
             <p class="home-hello">Hey, I’m Jolly!</p>
-            <p class="home-path">Designer from <span class="home-strike">Calcutta</span>, <span class="home-strike">Bangalore</span>, <span class="home-strike">Mumbai</span>, and now <span class="home-now">Melbourne!</span></p>
+            <p class="home-path">Designer from Mumbai → Melbourne</p>
             <p class="home-lead">His practice focuses on crafting memorable experiences by merging utility with novelty. His work spans <span class="home-live" data-live="graphic" tabindex="0">graphic design</span>, <span class="home-live" data-live="brand" tabindex="0">brand</span>, <span class="home-live" data-live="art" tabindex="0">art direction</span>, <span class="home-live" data-live="ux" tabindex="0">UX</span> and <span class="home-live" data-live="proto" tabindex="0">prototyping</span>.</p>
             <p class="home-punch">I may not have 8 years of experience, but given a weekend and an ominous deadline, <em>I can lowkey learn anything!</em></p>
           </div>
@@ -2697,10 +2697,10 @@ const PROJECTS = [
     coverImage:'assets/projects/pine-labs/02-billboard.webp',
     eyebrow:'Brand Identity · 2022', title:'Pine Labs',
     challenge:"Pine Labs had outgrown a look that disappeared among gradients. The job was to keep the heritage, then make it loud enough for entrepreneurs across India to recognise it as theirs, including on the POS machines that sit on counters nationwide.",
-    solution:"I recut the green into a high-contrast teal, built an arrow as a container for the merchant, and rolled the system through logo, icons, packaging, and every surface the brand already owned. The identity had to hold at checkout, not only on a billboard.",
-    info:["A brand refresh for India's leading digital payments company, made to champion the entrepreneur instead of the product. Pine Labs terminals are in stores across the country, so the system had to read on a small screen at the counter as clearly as it does on a storefront.",'I designed the logo, icon system, colour, illustrations, packaging, and marketing collateral, plus the visual guidelines that hold it together.','See it live at <a href="https://www.pinelabs.com" target="_blank" rel="noopener">pinelabs.com</a>'],
-    credits:[{role:'Visual identity, Illustration, packaging',name:'Madhav Jolly'},{role:'Agency',name:'Please See//'}],
-    year:'2022', client:'Pine Labs', agency:'Please See//', scope:'Visual identity, Illustration, packaging', awards:'—',
+    solution:"I was a junior on the refresh at Please See//. Marketing, motion, emailers, and logo ideation — I did not create the mark. The green became a high-contrast teal, the arrow held the merchant, and the system had to hold at checkout, not only on a billboard.",
+    info:["A brand refresh for India's leading digital payments company, made to champion the entrepreneur instead of the product. Pine Labs terminals are in stores across the country, so the system had to read on a small screen at the counter as clearly as it does on a storefront.",'I was a junior on the team. I worked on the marketing material, motion, and emailers, and ideated on the logo. I did not design the mark.','See it live at <a href="https://www.pinelabs.com" target="_blank" rel="noopener">pinelabs.com</a>'],
+    credits:[{role:'Marketing, motion, emailers, logo ideation',name:'Madhav Jolly'},{role:'Agency',name:'Please See//'}],
+    year:'2022', client:'Pine Labs', agency:'Please See//', scope:'Marketing, motion, emailers, logo ideation', awards:'—',
     gallery:[
       { type:'image', src:'assets/projects/pine-labs/01-building.mp4', wide:true },
       { type:'image', src:'assets/projects/pine-labs/02-billboard.webp' },
@@ -2708,7 +2708,7 @@ const PROJECTS = [
       { type:'text', text:"I evolved the original Pine green to a high contrast 'Pine teal'. This helped them own their heritage, but through a modern lens. Bolder colours and wide contrast allowed them to stand out in a market that uses a lot of gradients, but yet scale for various mediums." },
       { type:'image', src:'assets/projects/pine-labs/04-logo-grid.webp', wide:true },
       { type:'image', src:'assets/projects/pine-labs/05-subbrands.webp', wide:true, contain:true, ratio:'2800/1159' },
-      { type:'text', text:'I created the arrow symbol as a container to hero the entrepreneur and his business, one that is always on the move, shaking things up and breaking new ground.' },
+      { type:'text', text:'The arrow symbol sits as a container to hero the entrepreneur and his business, one that is always on the move, shaking things up and breaking new ground. I sat in on that thinking as a junior. I did not draw the mark.' },
       { type:'image', src:'assets/projects/pine-labs/06-kiosk.jpg' },
       { type:'image', src:'assets/projects/pine-labs/07-social.mp4' },
       { type:'image', src:'assets/projects/pine-labs/08-upi-terminal.jpg' },
@@ -2717,7 +2717,7 @@ const PROJECTS = [
       { type:'image', src:'assets/projects/pine-labs/10-frame.mp4', contain:true, light:true },
       { type:'image', src:'assets/projects/pine-labs/11-email.mp4', contain:true },
       { type:'image', src:'assets/projects/pine-labs/12-collateral.webp', wide:true },
-      { type:'text', text:'I used the most basic geometric shapes and angles derived from the arrow to make the icons crisp and sharp.' },
+      { type:'text', text:'The icons use basic geometric shapes and angles derived from the arrow, so they stay crisp and sharp at the size of a terminal.' },
       { type:'image', src:'assets/projects/pine-labs/13-icon-diagram.jpg', contain:true, light:true },
       { type:'image', src:'assets/projects/pine-labs/14-icon-grid.mp4', contain:true, light:true },
       { type:'text', text:'The corporate collaterals follow the bold, clean visual style. However, I was playful at places where I wanted to engage and motivate the merchants and employees to live up to the new vision.' },
@@ -3562,7 +3562,9 @@ function appendSidebarItem(p) {
   el.innerHTML = thumbHtml + `<div class="p-text sidebar-hideable"><div class="p-name">${p.name}</div><div class="p-tag">${p.tag}</div></div>`;
   listEl.appendChild(el);
 }
-PROJECTS.filter(p => p.listed !== false && p.sidebar === true).forEach(appendSidebarItem);
+PROJECTS.filter(p => p.listed !== false && p.sidebar === true)
+  .sort((a, b) => (a.category === 'brand' ? 0 : 1) - (b.category === 'brand' ? 0 : 1))
+  .forEach(appendSidebarItem);
 const moreBtn = document.createElement('button');
 moreBtn.type = 'button';
 moreBtn.className = 'cta-btn sidebar-more sidebar-hideable';
@@ -3888,6 +3890,10 @@ function mountProjectPanel(p) {
       <div class="two-col">
         <div class="col-cell"><div class="col-label">The Challenge</div><div class="col-body">${p.challenge}</div></div>
         <div class="col-cell"><div class="col-label">The Solution</div><div class="col-body">${p.solution}</div></div>
+      </div>
+      <div class="two-col">
+        <div class="col-cell"><div class="col-label">Role</div><div class="col-body">${p.scope || '—'}</div></div>
+        <div class="col-cell"><div class="col-label">Agency</div><div class="col-body">${agency}</div></div>
       </div>
       <div class="gallery">${tiles}</div>
       <div class="info-creds">
