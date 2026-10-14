@@ -632,6 +632,17 @@ body[data-page="project"] #page-project { display: block; }
   .g-row.cols-2 { grid-template-columns: 1fr; }
   .g-row.is-feed, .g-row.is-phone { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
+
+/* Soft corners on all media, matched to david-sp.com (about 6px on small screens, up to 10px) */
+:root { --radius: clamp(6px, 0.75vw, 10px); }
+.tile-media, .play-media, .g-media, .g-row.is-phone, .g-embed iframe,
+.g-row:not(.is-phone) img, .g-row:not(.is-phone) video,
+.g-feature img, .g-feature video {
+  border-radius: var(--radius);
+}
+.tile-media, .play-media, .g-media { overflow: hidden; }
+.p-nav-thumb { border-radius: 4px; }
+.g-media.contain img, .g-media.contain video { border-radius: var(--radius); }
 </style>
 </head>
 <body data-page="home">
