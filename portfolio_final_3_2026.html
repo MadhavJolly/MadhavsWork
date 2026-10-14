@@ -91,7 +91,9 @@ img, video { display: block; max-width: 100%; }
   position: sticky; top: 0; z-index: 40;
   background: #fff;
 }
-.brand { font-weight: 500; }
+.brand { font-weight: 500; white-space: nowrap; }
+.about-cv { color: #111; }
+.about-cv:hover { opacity: 0.6; }
 .nav { display: flex; gap: 18px; flex-shrink: 0; white-space: nowrap; }
 .nav a { opacity: 0.38; }
 .nav a.on, .nav a:hover { opacity: 1; }
@@ -628,6 +630,8 @@ body[data-page="project"] #page-project { display: block; }
   .p-meta { margin-top: 0; }
 }
 @media (max-width: 520px) {
+  .chrome { gap: 12px; }
+  .nav { gap: 12px; }
   .masonry { grid-template-columns: 1fr; }
   .play-cell { grid-column: 1 / -1 !important; }
   .g-row.cols-2 { grid-template-columns: 1fr; }
@@ -650,10 +654,11 @@ body[data-page="project"] #page-project { display: block; }
 <header class="chrome">
   <a class="brand" href="/">Madhav Jolly</a>
   <nav class="nav">
-    <a href="/all" id="nav-all">All work</a>
+    <a href="/all" id="nav-all">Work</a>
     <a href="/play" id="nav-play">Play</a>
     <a href="/about" id="nav-about">About</a>
     <a href="/contact" id="nav-contact">Contact</a>
+    <a href="/assets/Madhav-Jolly-Resume-2026.pdf" target="_blank" rel="noopener" id="nav-cv">CV ↗</a>
   </nav>
 </header>
 
@@ -696,6 +701,7 @@ body[data-page="project"] #page-project { display: block; }
       <p>I'm <span class="me" id="me">Madhav<span class="me-pop" id="me-pop"><img alt=""></span></span>, a designer in Melbourne working across brand and digital product. Graphic design in India, then an M.Des in Interaction Design at Monash. 3+ years in agencies, plus freelance work alongside my Master's: identities, packaging, motion, and products from a first sketch through to launch.</p>
       <p>I work across creative direction, visual systems, and digital product, with motion, 3D, and sound when a still is not enough.</p>
       <p>Outside of design I produce electronic music as Sentient, dig for rare records, read sci-fi, solve cryptic crosswords, and spend time with my dog.</p>
+      <p><a class="about-cv" href="/assets/Madhav-Jolly-Resume-2026.pdf" target="_blank" rel="noopener">CV ↗</a></p>
     </div>
     <div class="about-k">Experience</div>
     <div class="about-v">
@@ -760,7 +766,7 @@ body[data-page="project"] #page-project { display: block; }
     <a href="https://www.instagram.com/madhavjolly.design/" target="_blank" rel="noopener">Instagram ↗</a>
     <a href="https://www.linkedin.com/in/madhav-jolly-5714b71a4/" target="_blank" rel="noopener">LinkedIn ↗</a>
     <a href="https://www.behance.net/madhavjolly" target="_blank" rel="noopener">Behance ↗</a>
-    <a href="assets/Madhav-Jolly-Resume-2026.pdf" target="_blank" rel="noopener">Resume ↗</a>
+    <a href="assets/Madhav-Jolly-Resume-2026.pdf" target="_blank" rel="noopener">CV ↗</a>
     <p style="margin-top:28px;color:#888;font-weight:400;max-width:22em">Based in Melbourne. Open to full-time here, contract remote globally.</p>
   </div>
 </div>
@@ -780,7 +786,7 @@ body[data-page="project"] #page-project { display: block; }
     <span class="foot-links">
       <a href="https://www.linkedin.com/in/madhav-jolly-5714b71a4/" target="_blank" rel="noopener">LinkedIn ↗</a>
       <a href="https://www.instagram.com/madhavjolly.design/" target="_blank" rel="noopener">Instagram ↗</a>
-      <a href="assets/Madhav-Jolly-Resume-2026.pdf" target="_blank" rel="noopener">Resume ↗</a>
+      <a href="assets/Madhav-Jolly-Resume-2026.pdf" target="_blank" rel="noopener">CV ↗</a>
     </span>
   </div>
 </footer>
