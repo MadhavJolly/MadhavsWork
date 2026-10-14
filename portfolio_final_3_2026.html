@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<base href="/">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Madhav Jolly | Designer, Brand &amp; Digital Product</title>
 <meta name="description" content="Indian designer in Melbourne, working across brand and digital product. Identity first, then the system around it, with motion, 3D, and sound when the work needs more than a still.">
@@ -11,11 +12,14 @@
 <meta property="og:title" content="Madhav Jolly | Designer, Brand &amp; Digital Product">
 <meta property="og:description" content="Indian designer in Melbourne, working across brand and digital product. Identity first, then the system around it, with motion, 3D, and sound when the work needs more than a still.">
 <meta property="og:url" content="https://madhavswork.vercel.app/">
-<meta property="og:image" content="https://madhavswork.vercel.app/assets/icons/favicon-192.png">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://madhavswork.vercel.app/assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Madhav Jolly, Designer, Brand and Digital Product, with selected work">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Madhav Jolly | Designer, Brand &amp; Digital Product">
 <meta name="twitter:description" content="Indian designer in Melbourne, working across brand and digital product. Identity first, then the system around it, with motion, 3D, and sound when the work needs more than a still.">
-<meta name="twitter:image" content="https://madhavswork.vercel.app/assets/icons/favicon-192.png">
+<meta name="twitter:image" content="https://madhavswork.vercel.app/assets/og-image.jpg">
 <link rel="icon" href="/favicon.ico?v=2" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32.png?v=2">
 <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/favicon-192.png?v=2">
@@ -212,13 +216,20 @@ body[data-page="project"] #page-project { display: block; }
   color: var(--muted);
   line-height: 1.3;
 }
-.play-cell img, .play-cell video {
+.play-cell img, .play-cell video, .play-cell iframe {
   width: 100%;
   height: auto;
   display: block;
   pointer-events: none;
   transform: scale(1);
   transition: transform 0.55s ease;
+}
+.play-cell iframe {
+  aspect-ratio: 16 / 9;
+  height: auto;
+  border: 0;
+  background: #111;
+  pointer-events: auto;
 }
 .play-cell:hover img, .play-cell:hover video { transform: scale(1.04); }
 .play-cell:nth-child(8n+1) { grid-column: 1 / span 4; }
@@ -625,22 +636,22 @@ body[data-page="project"] #page-project { display: block; }
 </head>
 <body data-page="home">
 <header class="chrome">
-  <a class="brand" href="#/">Madhav Jolly</a>
+  <a class="brand" href="/">Madhav Jolly</a>
   <nav class="nav">
-    <a href="#/all" id="nav-all">All work</a>
-    <a href="#/play" id="nav-play">Play</a>
-    <a href="#/about" id="nav-about">About</a>
-    <a href="#/contact" id="nav-contact">Contact</a>
+    <a href="/all" id="nav-all">All work</a>
+    <a href="/play" id="nav-play">Play</a>
+    <a href="/about" id="nav-about">About</a>
+    <a href="/contact" id="nav-contact">Contact</a>
   </nav>
 </header>
 
 <div id="page-home" class="page">
   <div class="intro">
     <div class="role">Designer, Brand &amp; Digital Product</div>
-    <p>Designer from Mumbai → Melbourne. My practice focuses on crafting memorable experiences by merging utility with novelty. Brand, digital product, motion, and a little illustration on the side.</p>
+    <p>Designer from Mumbai → Melbourne, working across brand and digital product. Identity first, then the system around it, with motion, 3D and sound when the work needs more than a still.</p>
   </div>
   <div class="masonry" id="home-grid"></div>
-  <a class="more" href="#/all">All work</a>
+  <a class="more" href="/all">All work</a>
 </div>
 
 <div id="page-all" class="page">
@@ -670,7 +681,7 @@ body[data-page="project"] #page-project { display: block; }
   <div class="about-grid">
     <div class="about-k">About</div>
     <div class="about-v about-bio">
-      <p>I'm <span class="me" id="me">Madhav<span class="me-pop" id="me-pop"><img alt=""></span></span>, a designer in Melbourne working across brand and digital product. Graphic design in India, then an M.Des in Interaction Design at Monash. The last five years have been agencies and freelance: identities, packaging, motion, and products from a first sketch through to launch.</p>
+      <p>I'm <span class="me" id="me">Madhav<span class="me-pop" id="me-pop"><img alt=""></span></span>, a designer in Melbourne working across brand and digital product. Graphic design in India, then an M.Des in Interaction Design at Monash. 3+ years in agencies, plus freelance work alongside my Master's: identities, packaging, motion, and products from a first sketch through to launch.</p>
       <p>I work across creative direction, visual systems, and digital product, with motion, 3D, and sound when a still is not enough.</p>
       <p>Outside of design I produce electronic music as Sentient, dig for rare records, read sci-fi, solve cryptic crosswords, and spend time with my dog.</p>
     </div>
@@ -773,18 +784,18 @@ const PROJECTS = [
     coverImage:'assets/projects/pine-labs/02-billboard.webp',
     eyebrow:'Brand Identity', title:'Pine Labs',
     challenge:"Pine Labs had outgrown a look that disappeared among gradients. The job was to keep the heritage, then make it loud enough for entrepreneurs across India to recognise it as theirs, including on the POS machines that sit on counters nationwide.",
-    solution:"I was a junior on the refresh at Please See//. Marketing, motion, emailers, packaging, and logo ideation — I did not create the mark. The green became a high-contrast teal, the arrow held the merchant, and the system had to hold at checkout, not only on a billboard.",
-    info:["A brand refresh for India's leading digital payments company, made to champion the entrepreneur instead of the product. Pine Labs terminals are in stores across the country, so the system had to read on a small screen at the counter as clearly as it does on a storefront.",'I was a junior on the team. I worked on marketing, motion, emailers, and packaging, and ideated on the logo. I did not design the mark.','See it live at <a href="https://www.pinelabs.com" target="_blank" rel="noopener">pinelabs.com</a>'],
+    solution:"I was a junior on the refresh at Please See//, working on marketing, motion, emailers and packaging, and contributing to logo ideation, though the final mark isn't mine. The system had to hold at checkout, not only on a billboard.",
+    info:['See it live at <a href="https://www.pinelabs.com" target="_blank" rel="noopener">pinelabs.com</a>'],
     credits:[{role:'Marketing, motion, emailers, packaging, logo ideation',name:'Madhav Jolly'},{role:'Agency',name:'Please See//'}],
     year:'2022', client:'Pine Labs', agency:'Please See//', scope:'Marketing, motion, emailers, packaging, logo ideation', awards:'—',
     gallery:[
       { type:'image', src:'assets/projects/pine-labs/01-building.mp4', wide:true },
       { type:'image', src:'assets/projects/pine-labs/02-billboard.webp' },
       { type:'image', src:'assets/projects/pine-labs/03-pine-green.mp4' },
-      { type:'text', text:"I evolved the original Pine green to a high contrast 'Pine teal'. This helped them own their heritage, but through a modern lens. Bolder colours and wide contrast allowed them to stand out in a market that uses a lot of gradients, but yet scale for various mediums." },
+      { type:'text', text:"I evolved the original Pine green into a high-contrast 'Pine teal', so the brand could own its heritage through a modern lens. Bolder colours and wide contrast let it stand out in a market full of gradients, while still scaling across every medium." },
       { type:'image', src:'assets/projects/pine-labs/04-logo-grid.webp', wide:true },
       { type:'image', src:'assets/projects/pine-labs/05-subbrands.webp', wide:true, contain:true, ratio:'2800/1159' },
-      { type:'text', text:'The arrow symbol sits as a container to hero the entrepreneur and his business, one that is always on the move, shaking things up and breaking new ground. I sat in on that thinking as a junior. I did not draw the mark.' },
+      { type:'text', text:'The arrow symbol acts as a container that heroes the entrepreneur and their business: always on the move, shaking things up and breaking new ground.' },
       { type:'image', src:'assets/projects/pine-labs/06-kiosk.jpg' },
       { type:'image', src:'assets/projects/pine-labs/07-social.mp4' },
       { type:'image', src:'assets/projects/pine-labs/08-upi-terminal.jpg' },
@@ -796,12 +807,12 @@ const PROJECTS = [
       { type:'text', text:'The icons use basic geometric shapes and angles derived from the arrow, so they stay crisp and sharp at the size of a terminal.' },
       { type:'image', src:'assets/projects/pine-labs/13-icon-diagram.jpg', contain:true, light:true },
       { type:'image', src:'assets/projects/pine-labs/14-icon-grid.mp4', contain:true, light:true },
-      { type:'text', text:'The corporate collaterals follow the bold, clean visual style. However, I was playful at places where I wanted to engage and motivate the merchants and employees to live up to the new vision.' },
+      { type:'text', text:'The corporate collateral follows the same bold, clean style, but gets more playful in places, to engage merchants and employees and get them behind the new vision.' },
       { type:'image', src:'assets/projects/pine-labs/15-stationery.webp', wide:true },
       { type:'image', src:'assets/projects/pine-labs/16-id-card.jpg' },
       { type:'image', src:'assets/projects/pine-labs/17-boxes.jpg' },
       { type:'image', src:'assets/projects/pine-labs/18-stickers.webp', wide:true },
-      { type:'text', text:"I designed the welcome kit for employees to motivate them about the company's new vision and the rebranding. Hence, I made multiple boxes, each holding a merch talking about the entrepreneurial spirit. I stacked them randomly in a gift box and let the employee's instincts guide him/ her to arrange it in a way and reveal the message 'Make your move'." },
+      { type:'text', text:"I designed the employee welcome kit to get the team excited about the new vision and the rebrand. A set of small boxes, each holding a piece of merch about the entrepreneurial spirit, stacked at random inside a gift box. Each person arranges them their own way to reveal the message 'Make your move'." },
       { type:'image', src:'assets/projects/pine-labs/19-welcome-box.jpg' },
       { type:'image', src:'assets/projects/pine-labs/20-welcome-open.jpg' },
       { type:'image', src:'assets/projects/pine-labs/21-maker-box.mp4', wide:true },
@@ -816,14 +827,12 @@ const PROJECTS = [
     coverImage:'assets/projects/ten-hills-studio/01-hero.jpg',
     eyebrow:'Brand Identity', title:'10 Hills Studio',
     challenge:'10 Hills was opening a sneaker and streetwear store in the middle of Kolkata. The identity had to hold a shop window, a hang tag, and a website, and still feel like a studio, not a template shop.',
-    solution:'Freelance, end to end, just me — identity, packaging, merch, store, photography. A number and a hill, cut into one mark. Black, white, grey, and a strike of yellow. After the rebrand, sales at the outlet were up 51%.',
+    solution:'Freelance, end to end, just me: identity, packaging, merch, store and photography. A number and a hill, cut into one mark. Black, white, grey, and a strike of yellow.',
     info:[
-      '10 Hills Studio is a sneaker and streetwear store in Kolkata.',
-      'I did this entirely myself as a freelance project: mark, colour, packaging, merchandise, photography, and the physical store.',
       'See it live at <a href="https://10hillsstudio.com" target="_blank" rel="noopener">10hillsstudio.com</a>',
     ],
-    credits:[{role:'Freelance — identity, packaging, merch, store, photography',name:'Madhav Jolly'}],
-    year:'2025', client:'10 Hills Studio', agency:'Freelance', scope:'Freelance — identity, packaging, merch, store, photography', awards:'—',
+    credits:[{role:'Freelance: identity, packaging, merch, store, photography',name:'Madhav Jolly'}],
+    year:'2025', client:'10 Hills Studio', agency:'Freelance', scope:'Freelance: identity, packaging, merch, store, photography', awards:'—',
     colors:['#0c0c0c','#bec2c6','#ffffff','#f7f126','#1a1a1a','#0a0a0a'],
     labels:['Wordmark','Symbol','Type','Colour','Retail','Merch'],
     gallery:[
@@ -865,19 +874,19 @@ const PROJECTS = [
     reelImage:'assets/projects/falcon/03-guidelines.jpg',
     eyebrow:'Brand Identity', title:'Falcon',
     challenge:"A payments platform for banks and FinTechs needed a mark as sharp as the product, not another soft gradient in a crowded category.",
-    solution:"I was a junior at Please See//. I helped across the system apart from the main logo. The most important piece I owned was the credit card, then colour, icons, packaging, and the pitch deck around a three-dimensional F cut like a falcon's bill.",
-    info:['Falcon is a platform for launching payment and lending products through open APIs.','I was a junior designer on the team. I helped on the material around the brand, not the main logo. Credit card design was my main piece, and I also did packaging.','See it live at <a href="https://www.falconfs.com" target="_blank" rel="noopener">falconfs.com</a>'],
-    credits:[{role:'Junior designer — credit card, packaging, icons, collateral',name:'Madhav Jolly'},{role:'Agency',name:'Please See//'}],
-    year:'2022', client:'Falcon', agency:'Please See//', scope:'Junior designer — credit card, packaging, icons, collateral', awards:'—',
+    solution:"I was a junior at Please See//, working across the system around the main logo. The credit card was the piece I owned, along with colour, icons, packaging and the pitch deck, all built around a three-dimensional F cut like a falcon's bill.",
+    info:['See it live at <a href="https://www.falconfs.com" target="_blank" rel="noopener">falconfs.com</a>'],
+    credits:[{role:'Junior designer: credit card, packaging, icons, collateral',name:'Madhav Jolly'},{role:'Agency',name:'Please See//'}],
+    year:'2022', client:'Falcon', agency:'Please See//', scope:'Junior designer: credit card, packaging, icons, collateral', awards:'—',
     gallery:[
-      { type:'text', text:"Falcon is a platform that lets FinTechs, banks, NBFCs, and startups launch payment and lending products on open APIs. I was a junior at Please See//, working with founders Priyanka Kanwar and Prabhtej Bhatia. I did not create the main logo. I helped on the rest of the system, and the credit card was the piece I owned most." },
+      { type:'text', text:"Falcon is a platform that lets FinTechs, banks, NBFCs and startups launch payment and lending products on open APIs. I worked on it at Please See// with founders Priyanka Kanwar and Prabhtej Bhatia." },
       { type:'image', src:'assets/projects/falcon/02-logo-3d.mp4' },
       { type:'image', src:'assets/projects/falcon/03-guidelines.jpg', wide:true, contain:true, light:true, ratio:'1920/1919' },
-      { type:'text', text:'The color palette was inspired from the colors of the limitless sky and the falcon bill grey. The secondary palette was developed to compliment the main brand colors. The language overall uses lot of gradients to bring more dynamism to the brand.' },
+      { type:'text', text:'The colour palette was inspired by the limitless sky and the grey of a falcon\'s bill. A secondary palette complements the main brand colours, and gradients bring movement to the wider brand language.' },
       { type:'image', src:'assets/projects/falcon/04-colors.webp', wide:true, contain:true, light:true, ratio:'2800/2441' },
-      { type:'text', text:"Roobert is a mono-linear geometrical sans-serif font family. I picked this type family as it complements the 'F' symbol by giving that rounded square characteristics like in letters 'g', 'a', 'r', 't'. It is also sharp and clean at the edges like the logo symbol." },
+      { type:'text', text:"Roobert is a monolinear geometric sans-serif. I picked it because its rounded-square forms in letters like 'g', 'a', 'r' and 't' echo the F symbol, while staying sharp and clean at the edges like the mark." },
       { type:'image', src:'assets/projects/falcon/05-typography.webp', wide:true, contain:true, dark:true, ratio:'2800/1313' },
-      { type:'text', text:'Icons were created by overlapping geometric shapes with sharp corners. Wherever it was possible, I converted the flat 2d icons into 3d product illustrations to make the language more dynamic.' },
+      { type:'text', text:'Icons were created by overlapping geometric shapes with sharp corners. Wherever possible, I turned the flat 2D icons into 3D product illustrations to make the language more dynamic.' },
       { type:'image', src:'assets/projects/falcon/06-icon-grid-spec.webp', wide:true, contain:true, dark:true, ratio:'2800/986' },
       { type:'image', src:'assets/projects/falcon/07-icon-set.webp', wide:true, contain:true, dark:true, ratio:'2800/1129' },
       { type:'image', src:'assets/projects/falcon/08-icon-anim-1.mp4', square:true, contain:true, dark:true },
@@ -917,7 +926,7 @@ const PROJECTS = [
       { type:'image', src:'assets/projects/papa-patels/03-logo-construction.png', wide:true, contain:true, ratio:'16/9', bg:'#ff4a00' },
       { type:'image', src:'assets/projects/papa-patels/04-typography.png', wide:true, contain:true, ratio:'16/9', bg:'#ff4a00' },
       { type:'image', src:'assets/projects/papa-patels/05-logo-icon.png', wide:true, contain:true, ratio:'16/9', bg:'#ff4a00' },
-      { type:'text', wide:true, text:'A compact PP\'s mark for caps, stickers, and small applications. Heat orange leads the palette, with purple, tan, and a tight grayscale for the range.' },
+      { type:'text', wide:true, text:'A compact PP\'s mark for caps, stickers, and small applications. Heat orange leads the palette, with purple, tan, and a tight greyscale for the range.' },
       { type:'image', src:'assets/projects/papa-patels/06-color-palette.png', wide:true, contain:true, dark:true, ratio:'16/9', bg:'#0a0a0a' },
       { type:'image', src:'assets/projects/papa-patels/11-label-peruvian.jpg', wide:true, contain:true, light:true, ratio:'16/9' },
       { type:'image', src:'assets/projects/papa-patels/12-mockup-classic-red.jpg', ratio:'1/1' },
@@ -938,13 +947,9 @@ const PROJECTS = [
     eyebrow:'UX / Product Design', title:'ClassPulse',
     challenge:'Student disengagement in higher education is often silent, gradual, and difficult to detect in real time. Most university systems focus on measurable outputs such as attendance, assignment submissions, and platform activity. These signals only show what students did, not how they are actually engaging with their learning.',
     solution:'ClassPulse was designed to address this visibility gap by shifting engagement from a passive set of metrics into a continuous, interpretable experience, enabling students to reflect on their own patterns while giving educators higher-level insights into how engagement changes over time.',
-    info:[
-      'ClassPulse is a student engagement platform designed to help students stay connected to their learning while giving educators greater visibility into engagement throughout the semester.',
-      'Developed in collaboration with stakeholders from Monash University, the project explores how engagement can be better understood, supported, and communicated between students and teaching staff.',
-      'Through surveys, interviews, and secondary research, I found that students often disengage silently, lack awareness of their own learning patterns, and receive feedback only after opportunities for intervention have passed.',
-    ],
+    info:[],
     credits:[{role:'UI/UX Design, UX Research, Prototyping, Interaction Design',name:'Madhav Jolly'},{role:'Team',name:'Nidhi Joseph, Zheng Wang'}],
-    year:'2025', client:'Monash University', agency:'University project', scope:'UI/UX Design, UX Research, Prototyping, Interaction Design', awards:'Higher Distinction Award',
+    year:'2025', client:'Monash University', agency:'—', context:'Monash M.Des team project, with Nidhi Joseph and Zheng Wang', scope:'UI/UX Design, UX Research, Prototyping, Interaction Design', awards:'Higher Distinction Award',
     colors:['#0a1428','#0d1830','#101c38','#0b1224','#081018','#060c14'],
     labels:['Product overview','Check-in flow','Dashboard','Journal','Analytics','Prototype'],
     gallery:[
@@ -968,7 +973,7 @@ const PROJECTS = [
       { type:'text', wide:true, statement:true, label:'03. Combined User & Client Need', text:"The current LMS shows students their progress, but doesn't actively guide how they engage with their learning. There is an opportunity to introduce a feedback system that fosters engagement through participation, making it meaningful and motivating." },
       { type:'text', wide:true, label:'04. Synthesis', text:'Most systems focus on passive progress tracking, which shows status but does not support decision-making in the moment. This results in students feeling overwhelmed, reactive, and disconnected from their learning process.' },
       { type:'text', wide:true, statement:true, text:'Students are not lacking information, but they are lacking interpretation and direction.' },
-      { type:'image', src:'assets/projects/class-pulse/02-principles.png', wide:true, contain:true, light:true, ratio:'16/9', caption:'Principles the team came up with to follow' },
+      { type:'image', src:'assets/projects/class-pulse/02-principles.png', wide:true, contain:true, light:true, ratio:'16/9', caption:'Design principles we set as a team' },
       { type:'image', src:'assets/projects/class-pulse/03-user-journey.png', wide:true, contain:true, light:true, ratio:'16/9', caption:'The user journey' },
       { type:'text', wide:true, label:'05. The Solution' },
       { type:'feature', label:'Post Class Check-in', video:'assets/projects/class-pulse/04-checkin.mp4', ratio:'4/5',
@@ -1001,7 +1006,7 @@ const PROJECTS = [
     gallery:[
       { type:'text', text:'Two red degree glyphs sit inside the name. Fun, loud, a little chaotic, built for a box, a sticker, and a crowded counter.' },
       { type:'image', src:'assets/projects/1441-pizzeria/02-new-old.png', wide:true, contain:true, light:true },
-      { type:'text', text:'The identity was designed keeping in mind the brands philosophy of being fun, energetic and exciting. The two red glyphs are used to depict the degree symbols, making it a unique and important asset.' },
+      { type:'text', text:'The identity was designed around the brand\'s philosophy of being fun, energetic and exciting. The two red glyphs stand in for degree symbols, making them a unique and important asset.' },
       { type:'image', src:'assets/projects/1441-pizzeria/03-stacked-linear.png', wide:true, contain:true, light:true },
       { type:'image', src:'assets/projects/1441-pizzeria/04-slice-concept.png', wide:true, contain:true, light:true, ratio:'16/9' },
       { type:'image', src:'assets/projects/1441-pizzeria/05-clearspace.png', wide:true, contain:true, light:true, ratio:'16/9' },
@@ -1054,7 +1059,7 @@ const PROJECTS = [
     ],
   },
   {
-    id:'stranger-sons', name:'Stranger & Sons', tag:'Indian craft gin: packaging, print, and a world that stays strange on purpose.',
+    id:'stranger-sons', name:'Stranger & Sons', tag:'Indian craft gin: packaging, print and a world that stays strange on purpose.',
     category:'brand',
     heroColor:'#0a0a0a', heroAccent:'#e8d6c4', letter:'S',
     heroImage:'assets/projects/stranger-sons/00-cover.jpg',
@@ -1062,14 +1067,14 @@ const PROJECTS = [
     coverImage:'assets/projects/stranger-sons/00-cover.jpg',
     eyebrow:'Brand Identity', title:'Stranger & Sons',
     challenge:'An Indian craft gin with a world already in the bottle. The work had to hold that world on a menu, a shipping box, a takeover, and a feed, without flattening it.',
-    solution:'Print, boxes, social, and collaterals that stay a little strange on purpose. Menus, shipping boxes, stories, campaigns. One world, many distances.',
+    solution:'Print, boxes, social and collateral that stay a little strange on purpose. Menus, shipping boxes, stories, campaigns. One world, many distances.',
     info:[
       'Stranger & Sons is an Indian craft gin built on local botanicals.',
-      'I did print material like menus, shipping boxes, a lot of the social creatives, and collaterals around the brand.',
+      'I did print work like menus and shipping boxes, a lot of the social creatives, and collateral around the brand.',
       'See it live at <a href="https://strangerandsons.com" target="_blank" rel="noopener">strangerandsons.com</a>',
     ],
-    credits:[{role:'Print, menus, boxes, social creatives, collaterals',name:'Madhav Jolly'},{role:'Agency',name:'Please See//'}],
-    year:'2025', client:'Stranger & Sons', agency:'Please See//', scope:'Print, menus, boxes, social creatives, collaterals', awards:'—',
+    credits:[{role:'Print, menus, boxes, social creatives, collateral',name:'Madhav Jolly'},{role:'Agency',name:'Please See//'}],
+    year:'2025', client:'Stranger & Sons', agency:'Please See//', scope:'Print, menus, boxes, social creatives, collateral', awards:'—',
     gallery:[
       { type:'text', wide:true, label:'Advertisements designed for various touchpoints' },
       { type:'image', src:'assets/projects/stranger-sons/02-ad-billboard.jpg', wide:true },
@@ -1096,7 +1101,7 @@ const PROJECTS = [
       { type:'image', src:'assets/projects/stranger-sons/07-menu.jpg', wide:true },
       { type:'image', src:'assets/projects/stranger-sons/08-shipping.jpg', wide:true },
       { type:'image', src:'assets/projects/stranger-sons/23-collab-lockup.jpg', wide:true, dark:true },
-      { type:'text', wide:true, label:'Post card designs' },
+      { type:'text', wide:true, label:'Postcard designs' },
       { type:'image', src:'assets/projects/stranger-sons/09-postcard-front.jpg' },
       { type:'image', src:'assets/projects/stranger-sons/10-postcard-back.jpg' },
       { type:'text', wide:true, label:'Packaging & event print' },
@@ -1222,7 +1227,7 @@ const PROJECTS = [
       'I handled UI/UX design, prototyping, and interaction design end to end, from sketches and comparative analysis through user tests and high-fidelity prototypes.',
     ],
     credits:[{role:'UI/UX Design, Prototyping, Interaction Design',name:'Madhav Jolly'}],
-    year:'2025', client:'University project', agency:'University project', scope:'UI/UX Design, Prototyping, Interaction Design', awards:'—',
+    year:'2025', client:'Monash University', agency:'—', context:'Monash M.Des project', scope:'UI/UX Design, Prototyping, Interaction Design', awards:'—',
     colors:['#3d0a61','#dbb1ff','#c084fc','#94a3b8','#ff6467','#f5f0ff'],
     labels:['Casing','Screen','Buttons','Type','Icons','Grid'],
     gallery:[
@@ -1416,9 +1421,9 @@ const PROJECTS = [
       { type:'image', src:'assets/projects/illustration/09.jpg', wide:true, ratio:'3/4' },
       { type:'image', src:'assets/projects/illustration/10.jpg', wide:true, ratio:'3/4' },
       { type:'text', wide:true, text:'Labels I illustrated for my own records as Sentient: Celestial EP, Against Reason, and Radiant Energy.' },
-      { type:'image', src:'assets/projects/illustration/11-celestial-ep.jpg', wide:true, contain:true, dark:true, ratio:'1/1', caption:'Celestial EP — Antariksh Records, 2023' },
-      { type:'image', src:'assets/projects/illustration/12-against-reason.jpg', wide:true, contain:true, dark:true, ratio:'1/1', caption:'Against Reason — Aciddream, ACD003' },
-      { type:'image', src:'assets/projects/illustration/13-radiant-energy.jpg', wide:true, contain:true, dark:true, ratio:'1/1', caption:'Radiant Energy — Sentient, ANKTS005' },
+      { type:'image', src:'assets/projects/illustration/11-celestial-ep.jpg', wide:true, contain:true, dark:true, ratio:'1/1', caption:'Celestial EP, Antariksh Records, 2023' },
+      { type:'image', src:'assets/projects/illustration/12-against-reason.jpg', wide:true, contain:true, dark:true, ratio:'1/1', caption:'Against Reason, Aciddream, ACD003' },
+      { type:'image', src:'assets/projects/illustration/13-radiant-energy.jpg', wide:true, contain:true, dark:true, ratio:'1/1', caption:'Radiant Energy, Sentient, ANKTS005' },
     ],
   },
   {
@@ -1471,6 +1476,29 @@ const PROJECTS = [
   },
 ];
 
+// Videos load only when near the viewport, and pause when off-screen.
+function vid(src) {
+  const poster = src.replace(/\.mp4($|\?)/i, '.poster.jpg');
+  return `<video data-src="${src}" poster="${poster}" muted loop playsinline preload="none"></video>`;
+}
+const vidObserver = 'IntersectionObserver' in window ? new IntersectionObserver((entries) => {
+  entries.forEach(({ target: v, isIntersecting }) => {
+    if (isIntersecting) {
+      if (!v.src && v.dataset.src) v.src = v.dataset.src;
+      const p = v.play(); if (p && p.catch) p.catch(() => {});
+    } else if (!v.paused) v.pause();
+  });
+}, { rootMargin: '400px 0px' }) : null;
+function watchVideos(root) {
+  (root || document).querySelectorAll('video[data-src]').forEach(v => {
+    if (v.dataset.watched) return;
+    v.dataset.watched = '1';
+    if (vidObserver) vidObserver.observe(v);
+    else { v.src = v.dataset.src; v.autoplay = true; }
+  });
+}
+new MutationObserver(() => watchVideos()).observe(document.body, { childList: true, subtree: true });
+
 function isVideoSrc(src) {
   return typeof src === 'string' && /\.mp4($|\?)/i.test(src);
 }
@@ -1488,17 +1516,23 @@ function disc(p) {
 function listed() {
   return PROJECTS.filter(p => p.listed !== false && !p.comingSoon);
 }
-function parseHash() {
-  const raw = (location.hash.replace(/^#\/?/, '') || '').replace(/\/$/, '');
-  const qIdx = raw.indexOf('?');
-  let path = (qIdx === -1 ? raw : raw.slice(0, qIdx)).replace(/\/$/, '');
-  const params = new URLSearchParams(qIdx === -1 ? '' : raw.slice(qIdx + 1));
-  if (!path) {
-    const parts = location.pathname.replace(/\/+$/, '').split('/').filter(Boolean);
-    const last = parts[parts.length - 1] || '';
-    if (last && !last.endsWith('.html')) path = last;
+// Clean URLs (/pine-labs). Old #/ links are upgraded in place so shared links keep working.
+function upgradeHashUrl() {
+  if (location.hash.startsWith('#/')) {
+    const clean = '/' + location.hash.slice(2).replace(/^\/+/, '');
+    history.replaceState(null, '', clean);
   }
-  return { path, filter: params.get('filter') || new URLSearchParams(location.search).get('filter') || '' };
+}
+upgradeHashUrl();
+function parseHash() {
+  const parts = location.pathname.replace(/\/+$/, '').split('/').filter(Boolean);
+  let path = parts[parts.length - 1] || '';
+  if (path.endsWith('.html')) path = '';
+  return { path, filter: new URLSearchParams(location.search).get('filter') || '' };
+}
+function go(url) {
+  history.pushState(null, '', url);
+  route();
 }
 function renderAllGrid(filter) {
   const cat = filter || '';
@@ -1510,18 +1544,18 @@ function renderAllGrid(filter) {
   const sel = document.getElementById('all-filter');
   if (sel && sel.value !== cat) sel.value = cat;
 }
+// Home order: work I owned end to end first, agency refreshes after.
+const HOME_ORDER = ['ten-hills-studio', 'class-pulse', '1441-pizzeria', 'pine-labs', 'falcon'];
 function selected() {
-  const side = listed().filter(p => p.sidebar === true);
-  const brand = side.filter(p => p.category === 'brand');
-  const rest = side.filter(p => p.category !== 'brand');
-  return brand.concat(rest);
+  const open = listed();
+  return HOME_ORDER.map(id => open.find(p => p.id === id)).filter(Boolean);
 }
 function thumbSrc(p) {
   return p.coverImage || p.heroImage || p.thumbImage || '';
 }
 function mediaTag(src, alt) {
   if (!src) return '';
-  if (isVideoSrc(src)) return `<video src="${src}" muted loop playsinline autoplay></video>`;
+  if (isVideoSrc(src)) return `${vid(src)}`;
   return `<img src="${src}" alt="${alt}" loading="lazy">`;
 }
 function tileHTML(p) {
@@ -1533,7 +1567,7 @@ function tileHTML(p) {
     ? 'A student engagement platform with a live view of how people are actually learning.'
     : (p.tag || '');
   const tag = tagText ? `<div class="tile-tag">${tagText}</div>` : '';
-  return `<a class="tile" href="#/${p.id}"><div class="tile-media">${media}</div><div class="tile-name">${p.name}</div>${tag}<div class="tile-disc">${disc(p)}</div></a>`;
+  return `<a class="tile" href="/${p.id}"><div class="tile-media">${media}</div><div class="tile-name">${p.name}</div>${tag}<div class="tile-disc">${disc(p)}</div></a>`;
 }
 function renderGrids() {
   document.getElementById('home-grid').innerHTML = selected().map(tileHTML).join('');
@@ -1552,9 +1586,17 @@ function renderGrids() {
     { src:'assets/projects/illustration/12-against-reason.jpg', title:'Against Reason' },
     { src:'assets/projects/illustration/13-radiant-energy.jpg', title:'Radiant Energy' },
     { src:'assets/projects/motion-graphics/20-fittr-logo.mp4', title:'Fittr logo' },
+    { embed:'https://player.vimeo.com/video/394399503?autoplay=1&loop=1&muted=1&background=1&autopause=0&title=0&byline=0&portrait=0', title:'Way Too Much Coffee' },
+    { embed:'https://player.vimeo.com/video/408367414?autoplay=1&loop=1&muted=1&background=1&autopause=0&title=0&byline=0&portrait=0', title:'VCR, 80s retro' },
+    { embed:'https://player.vimeo.com/video/408367550?autoplay=1&loop=1&muted=1&background=1&autopause=0&title=0&byline=0&portrait=0', title:'VCR, Grid' },
+    { embed:'https://player.vimeo.com/video/408367751?autoplay=1&loop=1&muted=1&background=1&autopause=0&title=0&byline=0&portrait=0', title:'VCR, Save me' },
+    { embed:'https://player.vimeo.com/video/408367920?autoplay=1&loop=1&muted=1&background=1&autopause=0&title=0&byline=0&portrait=0', title:'VCR, Song promo' },
   ];
   document.getElementById('play-grid').innerHTML = playBits.map(bit => {
-    const inner = isVideoSrc(bit.src) ? `<video src="${bit.src}" muted loop playsinline autoplay></video>` : `<img src="${bit.src}" alt="${bit.title}" loading="lazy">`;
+    let inner;
+    if (bit.embed) inner = `<iframe src="${bit.embed}" title="${bit.title}" allow="autoplay; fullscreen" loading="lazy"></iframe>`;
+    else if (isVideoSrc(bit.src)) inner = `${vid(bit.src)}`;
+    else inner = `<img src="${bit.src}" alt="${bit.title}" loading="lazy">`;
     return `<div class="play-cell"><div class="play-media">${inner}</div><span class="play-cap">${bit.title}</span></div>`;
   }).join('');
 }
@@ -1591,7 +1633,7 @@ function galleryHTML(p) {
       const cols = n >= 4 ? 'cols-4' : n === 3 ? 'cols-3' : 'cols-2';
       const kind = item.phone ? ' is-phone' : item.feed ? ' is-feed' : '';
       const cells = list.map(s => item.type === 'video-row'
-        ? `<video src="${s}" muted loop playsinline autoplay></video>`
+        ? `${vid(s)}`
         : `<img src="${s}" alt="${p.name}" loading="lazy">`).join('');
       const cap = item.label ? `<span class="g-caption">${item.label}</span>` : '';
       return `<div class="g-row ${cols}${kind}">${cells}</div>${cap}`;
@@ -1599,7 +1641,7 @@ function galleryHTML(p) {
     if (item.type === 'feature') {
       const lab = item.label ? `<div class="g-kicker">${item.label}</div>` : '';
       const paras = item.text ? item.text.split('\n\n').map(t => `<p>${t}</p>`).join('') : '';
-      const media = item.video ? `<video src="${item.video}" muted loop playsinline autoplay></video>` : `<img src="${item.src}" alt="${item.label||p.name}" loading="lazy">`;
+      const media = item.video ? `${vid(item.video)}` : `<img src="${item.src}" alt="${item.label||p.name}" loading="lazy">`;
       return `<div class="g-feature${item.flip?' flip':''}"><div class="g-feature-copy">${lab}${paras}</div><div>${media}</div></div>`;
     }
     if (item.type === 'carousel') {
@@ -1622,7 +1664,7 @@ function galleryHTML(p) {
     if (item.contain) cls.push('contain');
     if (item.light) cls.push('light');
     const cap = item.caption ? `<span class="g-caption">${item.caption}</span>` : '';
-    const el = isV ? `<video src="${src}" muted loop playsinline autoplay></video>` : `<img src="${src}" alt="${item.caption||p.name}" loading="lazy">`;
+    const el = isV ? `${vid(src)}` : `<img src="${src}" alt="${item.caption||p.name}" loading="lazy">`;
     return `<div class="${cls.join(' ')}">${el}</div>${cap}`;
   }).join('');
 }
@@ -1633,7 +1675,7 @@ function navCard(p, label, side) {
   const media = src
     ? mediaTag(src, p.name)
     : `<div class="letter" style="background:${p.heroColor||'#111'};color:${p.heroAccent||'#fff'}">${p.letter||''}</div>`;
-  return `<a class="p-nav-card ${side}" href="#/${p.id}"><div class="p-nav-thumb">${media}</div><div><div class="p-nav-k">${label}</div><div class="p-nav-n">${p.name}</div></div></a>`;
+  return `<a class="p-nav-card ${side}" href="/${p.id}"><div class="p-nav-thumb">${media}</div><div><div class="p-nav-k">${label}</div><div class="p-nav-n">${p.name}</div></div></a>`;
 }
 function renderProject(id) {
   const open = listed();
@@ -1651,6 +1693,7 @@ function renderProject(id) {
   const meta = [
     p.scope && ['Role', p.scope],
     p.agency && p.agency !== '—' && ['Agency', p.agency],
+    p.context && ['Context', p.context],
     p.client && ['Client', p.client],
     p.awards && p.awards !== '—' && ['Awards', p.awards],
   ].filter(Boolean).map(([k,v]) => `<div><span>${k}</span>${v}</div>`).join('');
@@ -1672,6 +1715,19 @@ function renderProject(id) {
   `;
 }
 
+const SITE_TITLE = 'Madhav Jolly | Designer, Brand & Digital Product';
+const PAGE_TITLES = { all:'All work', play:'Play', about:'About', contact:'Contact' };
+const DEFAULT_DESC = (document.querySelector('meta[name="description"]') || {}).content || '';
+function setMeta(page, s) {
+  const p = page === 'project' ? PROJECTS.find(x => x.id === s) : null;
+  const name = p ? (p.title || p.name) : PAGE_TITLES[page];
+  document.title = name ? `${name} | Madhav Jolly` : SITE_TITLE;
+  const url = 'https://madhavswork.vercel.app' + (page === 'home' ? '/' : '/' + (page === 'project' ? s : page));
+  const canon = document.querySelector('link[rel="canonical"]');
+  if (canon) canon.href = url;
+  const desc = document.querySelector('meta[name="description"]');
+  if (desc) desc.content = (p && p.tag) ? p.tag : DEFAULT_DESC;
+}
 function slug() {
   return parseHash().path;
 }
@@ -1694,15 +1750,27 @@ function route() {
   document.getElementById('nav-contact').classList.toggle('on', page === 'contact');
   if (page === 'project') renderProject(s);
   else document.getElementById('project-root').innerHTML = '';
+  setMeta(page, s);
   if (page === 'all') renderAllGrid(parseHash().filter);
   window.scrollTo(0, 0);
 }
 renderGrids();
 document.getElementById('all-filter').addEventListener('change', (e) => {
   const val = e.target.value;
-  location.hash = val ? `#/all?filter=${val}` : '#/all';
+  history.replaceState(null, '', val ? `/all?filter=${val}` : '/all');
+  renderAllGrid(val);
 });
-window.addEventListener('hashchange', route);
+document.addEventListener('click', (e) => {
+  if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+  const a = e.target.closest('a');
+  if (!a || a.target || a.hasAttribute('download')) return;
+  const href = a.getAttribute('href') || '';
+  if (!href.startsWith('/') || href.startsWith('//') || href.startsWith('/assets/')) return;
+  e.preventDefault();
+  if (href !== location.pathname + location.search) go(href);
+});
+window.addEventListener('popstate', route);
+window.addEventListener('hashchange', () => { if (location.hash.startsWith('#/')) { upgradeHashUrl(); route(); } });
 route();
 
 (function initMePop() {
