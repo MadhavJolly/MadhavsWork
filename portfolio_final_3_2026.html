@@ -647,6 +647,8 @@ body[data-page="project"] #page-project { display: block; }
 }
 .tile-media, .play-media, .g-media { overflow: hidden; }
 .p-nav-thumb { border-radius: 4px; }
+.g-row.is-pages { row-gap: var(--gap); }
+.g-row.is-pages img { box-shadow: 0 0 0 1px #e4e4e4; }
 .g-media.contain img, .g-media.contain video { border-radius: var(--radius); }
 </style>
 </head>
@@ -845,14 +847,14 @@ const PROJECTS = [
     thumbImage:'assets/projects/ten-hills-studio/01-preview.jpg',
     coverImage:'assets/projects/ten-hills-studio/01-hero.jpg',
     eyebrow:'Brand Identity', title:'10 Hills Studio',
-    scopeLine:'Identity, packaging, merch, store and photography for a Kolkata streetwear shop. Freelance, solo.',
+    scopeLine:'Identity, brand guidelines, packaging, merch, store and photography for a Kolkata streetwear shop. Freelance, solo.',
     challenge:'10 Hills was opening a sneaker and streetwear store in the middle of Kolkata. The identity had to hold a shop window, a hang tag, and a website, and still feel like a studio, not a template shop.',
     solution:'A number and a hill, cut into one mark. Black, white, grey, and a strike of yellow.',
     info:[
       'See it live at <a href="https://10hillsstudio.com" target="_blank" rel="noopener">10hillsstudio.com</a>',
     ],
-    credits:[{role:'Freelance: identity, packaging, merch, store, photography',name:'Madhav Jolly'}],
-    year:'2025', client:'10 Hills Studio', agency:'Freelance', scope:'Freelance: identity, packaging, merch, store, photography', awards:'—',
+    credits:[{role:'Freelance: identity, guidelines, packaging, merch, store, photography',name:'Madhav Jolly'}],
+    year:'2025', client:'10 Hills Studio', agency:'Freelance', scope:'Freelance: identity, guidelines, packaging, merch, store, photography', awards:'—',
     colors:['#0c0c0c','#bec2c6','#ffffff','#f7f126','#1a1a1a','#0a0a0a'],
     labels:['Wordmark','Symbol','Type','Colour','Retail','Merch'],
     gallery:[
@@ -870,6 +872,13 @@ const PROJECTS = [
       { type:'image', src:'assets/projects/ten-hills-studio/23-colour.jpg', wide:true, contain:true, light:true, ratio:'16/9' },
       { type:'image', src:'assets/projects/ten-hills-studio/07-type.jpg', wide:true, contain:true, light:true, ratio:'16/9' },
       { type:'text', wide:true, text:'Three core fonts. Bebas Neue Bold for headlines. Baskerville, used sparingly, for subheads and accents. Source Sans for body copy, so longer text stays readable.' },
+      { type:'text', wide:true, label:'Visual identity guidelines', text:'I also designed the brand guidelines: a 28-page document covering the logo, clear space, type, colour, brand assets, grid and photography, so the brand holds together across the store, online and merch.' },
+      { type:'image-row', cols:2, pages:true, images:[
+        'assets/projects/ten-hills-studio/50-guidelines-1.jpg',
+        'assets/projects/ten-hills-studio/50-guidelines-2.jpg',
+        'assets/projects/ten-hills-studio/50-guidelines-3.jpg',
+        'assets/projects/ten-hills-studio/50-guidelines-4.jpg',
+      ]},
       { type:'text', wide:true, text:'The hang tag went through a few constructions. A two-sided rectangle. A die-cut triangle layered over the spec. Frosted vellum over a patterned back. A small triangle pinned to the corner. What shipped is the simplest: black wordmark on the front, collection, size, and a yellow QR on the back.' },
       { type:'image', src:'assets/projects/ten-hills-studio/11-hangtags.jpg', wide:true, contain:true, light:true, ratio:'16/9' },
       { type:'image', src:'assets/projects/ten-hills-studio/25-hangtags.jpg', dark:true, ratio:'4/5' },
@@ -1654,7 +1663,7 @@ function galleryHTML(p) {
       const list = item.type === 'video-row' ? (item.videos||[]) : (item.images||[]);
       const n = item.cols || list.length;
       const cols = n >= 4 ? 'cols-4' : n === 3 ? 'cols-3' : 'cols-2';
-      const kind = item.phone ? ' is-phone' : item.feed ? ' is-feed' : '';
+      const kind = item.phone ? ' is-phone' : item.feed ? ' is-feed' : item.pages ? ' is-pages' : '';
       const cells = list.map(s => item.type === 'video-row'
         ? `${vid(s)}`
         : `<img src="${s}" alt="${p.name}" loading="lazy">`).join('');
