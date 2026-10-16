@@ -904,8 +904,10 @@ const PROJECTS = [
     year:'2022', client:'Falcon', agency:'Please See//', scope:'Junior designer: credit card, print, packaging, collateral', awards:'—',
     gallery:[
       { type:'text', text:"Falcon is a platform that lets FinTechs, banks, NBFCs and startups launch payment and lending products on open APIs. I worked on it at Please See// with founders Priyanka Kanwar and Prabhtej Bhatia." },
-      { type:'image', src:'assets/projects/falcon/02-logo-3d.mp4' },
-      { type:'image', src:'assets/projects/falcon/03-guidelines.jpg', wide:true, contain:true, light:true, ratio:'1920/1919' },
+      { type:'image-row', cols:2, images:[
+        'assets/projects/falcon/02-logo-3d.mp4',
+        'assets/projects/falcon/03-guidelines.jpg',
+      ]},
       { type:'text', text:'The colour palette was inspired by the limitless sky and the grey of a falcon\'s bill. A secondary palette complements the main brand colours, and gradients bring movement to the wider brand language.' },
       { type:'image', src:'assets/projects/falcon/04-colors.webp', wide:true, contain:true, light:true, ratio:'2800/2441' },
       { type:'text', text:"Roobert is a monolinear geometric sans-serif, chosen because its rounded-square forms in letters like 'g', 'a', 'r' and 't' echo the F symbol, while staying sharp and clean at the edges like the mark." },
@@ -913,8 +915,10 @@ const PROJECTS = [
       { type:'text', text:'Icons are built from overlapping geometric shapes with sharp corners, and where possible turned into 3D product illustrations to make the language more dynamic.' },
       { type:'image', src:'assets/projects/falcon/06-icon-grid-spec.webp', wide:true, contain:true, dark:true, ratio:'2800/986' },
       { type:'image', src:'assets/projects/falcon/07-icon-set.webp', wide:true, contain:true, dark:true, ratio:'2800/1129' },
-      { type:'image', src:'assets/projects/falcon/08-icon-anim-1.mp4', square:true, contain:true, dark:true },
-      { type:'image', src:'assets/projects/falcon/09-icon-anim-2.mp4', square:true, contain:true, dark:true },
+      { type:'image-row', cols:2, images:[
+        'assets/projects/falcon/08-icon-anim-1.mp4',
+        'assets/projects/falcon/09-icon-anim-2.mp4',
+      ]},
       { type:'image', src:'assets/projects/falcon/11-pitch-deck.jpg', wide:true, ratio:'1/1' },
       { type:'image', src:'assets/projects/falcon/12-stationery.jpg', wide:true },
       { type:'image', src:'assets/projects/falcon/13-merch-shirt.jpg' },
@@ -1666,7 +1670,7 @@ function galleryHTML(p) {
       const kind = item.phone ? ' is-phone' : item.feed ? ' is-feed' : item.pages ? ' is-pages' : '';
       const cells = list.map(s => item.type === 'video-row'
         ? `${vid(s)}`
-        : `<img src="${s}" alt="${p.name}" loading="lazy">`).join('');
+        : (isVideoSrc(s) ? vid(s) : `<img src="${s}" alt="${p.name}" loading="lazy">`)).join('');
       const cap = item.label ? `<span class="g-caption">${item.label}</span>` : '';
       return `<div class="g-row ${cols}${kind}">${cells}</div>${cap}`;
     }
