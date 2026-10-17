@@ -458,6 +458,8 @@ body[data-page="project"] #page-project { display: block; }
 .g-row.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .g-row.cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .g-row.cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.g-media.fit { background: transparent; border-radius: 0; }
+.g-media.fit img { width: auto; max-width: 100%; max-height: 86vh; margin: 0 auto; border-radius: var(--radius); }
 .g-row.is-phone[style] img, .g-row.is-phone[style] video { background: transparent; }
 .g-row img, .g-row video { width: 100%; min-width: 0; display: block; }
 .g-row.is-feed img, .g-row.is-feed video {
@@ -1165,7 +1167,7 @@ const PROJECTS = [
     credits:[{role:'Brand identity, Illustration, Visual Guidelines',name:'Madhav Jolly'}],
     year:'2025', client:'Ilaaka Studios', agency:'Freelance', scope:'Brand identity, Illustration, Visual Guidelines', awards:'—',
     gallery:[
-      { type:'image', src:'assets/projects/ilaaka/01-hero.png', ratio:'1870/2805' },
+      { type:'image', src:'assets/projects/ilaaka/01-hero.png', ratio:'1870/2805', fit:true },
       { type:'image', src:'assets/projects/ilaaka/10-fox.jpg', dark:true, ratio:'4/5' },
       { type:'image', src:'assets/projects/ilaaka/13-logo-colourways.jpg', wide:true },
       { type:'image', src:'assets/projects/ilaaka/12-colour.jpg', wide:true, contain:true, light:true, ratio:'16/9' },
@@ -1706,6 +1708,7 @@ function galleryHTML(p) {
     const isV = item.type === 'video' || isVideoSrc(src);
     const cls = ['g-media'];
     if (item.contain) cls.push('contain');
+    if (item.fit) cls.push('fit');
     if (item.light) cls.push('light');
     const cap = item.caption ? `<span class="g-caption">${item.caption}</span>` : '';
     const el = isV ? `${vid(src)}` : `<img src="${src}" alt="${item.caption||p.name}" loading="lazy">`;
