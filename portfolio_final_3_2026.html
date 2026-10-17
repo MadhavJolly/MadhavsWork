@@ -457,6 +457,8 @@ body[data-page="project"] #page-project { display: block; }
 .g-row.cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .g-row.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .g-row.cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.g-row.cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.g-row.is-phone[style] img, .g-row.is-phone[style] video { background: transparent; }
 .g-row img, .g-row video { width: 100%; min-width: 0; display: block; }
 .g-row.is-feed img, .g-row.is-feed video {
   aspect-ratio: 1;
@@ -494,7 +496,11 @@ body[data-page="project"] #page-project { display: block; }
 }
 .g-feature-copy p { margin-bottom: 12px; }
 .g-feature-copy p:last-child { margin-bottom: 0; }
-.g-feature video, .g-feature img { width: 100%; display: block; }
+.g-feature img { display: block; width: auto; max-width: 100%; max-height: 72vh; margin: 0 auto; }
+.g-feature video { display: block; width: min(100%, calc(72vh * 720 / 1566)); aspect-ratio: 720 / 1566; height: auto; margin: 0 auto; }
+.tile.is-locked { cursor: default; }
+.tile.is-locked .tile-media { opacity: 0.55; }
+.tile.is-locked .tile-tag { color: var(--muted); }
 .g-caption {
   display: block;
   padding: 8px 0 4px;
@@ -625,7 +631,7 @@ body[data-page="project"] #page-project { display: block; }
   .masonry { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .play-cell { grid-column: span 6 !important; margin-top: 0 !important; }
   .about-grid, .g-feature, .g-bento.cols-2, .g-bento.cols-3, .p-head, .p-nav { grid-template-columns: 1fr; }
-  .g-row.cols-3, .g-row.cols-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .g-row.cols-3, .g-row.cols-4, .g-row.cols-5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .p-nav-card.next { flex-direction: row; text-align: left; }
   .p-meta { margin-top: 0; }
 }
@@ -1110,10 +1116,9 @@ const PROJECTS = [
       { type:'image', src:'assets/projects/stranger-sons/02-ad-billboard.jpg', wide:true },
       { type:'image', src:'assets/projects/stranger-sons/03-ad-poster.jpg', wide:true },
       { type:'text', wide:true, label:'Social post template' },
-      { type:'image', src:'assets/projects/stranger-sons/04-story-01.jpg', ratio:'9/16' },
-      { type:'image', src:'assets/projects/stranger-sons/05-story-02.jpg', ratio:'9/16' },
-      { type:'image', src:'assets/projects/stranger-sons/06-story-03.jpg', ratio:'9/16' },
-      { type:'image', src:'assets/projects/stranger-sons/18-story-pour.jpg', ratio:'9/16' },
+      { type:'image-row', cols:4, images:[
+        'assets/projects/stranger-sons/04-story-01.jpg', 'assets/projects/stranger-sons/05-story-02.jpg', 'assets/projects/stranger-sons/06-story-03.jpg', 'assets/projects/stranger-sons/18-story-pour.jpg',
+      ]},
       { type:'text', wide:true, label:'The feed' },
       { type:'image-row', cols:3, images:[
         'assets/projects/stranger-sons/24-feed-grid-01.jpg',
@@ -1121,10 +1126,9 @@ const PROJECTS = [
         'assets/projects/stranger-sons/26-feed-grid-03.jpg',
       ]},
       { type:'text', wide:true, label:'Bar takeovers & campaign stories' },
-      { type:'image', src:'assets/projects/stranger-sons/19-story-trade.jpg', ratio:'9/16' },
-      { type:'image', src:'assets/projects/stranger-sons/20-story-dates.jpg', ratio:'9/16' },
-      { type:'image', src:'assets/projects/stranger-sons/21-story-delhi.jpg', ratio:'9/16' },
-      { type:'image', src:'assets/projects/stranger-sons/22-story-elaa.jpg', ratio:'9/16' },
+      { type:'image-row', cols:4, images:[
+        'assets/projects/stranger-sons/19-story-trade.jpg', 'assets/projects/stranger-sons/20-story-dates.jpg', 'assets/projects/stranger-sons/21-story-delhi.jpg', 'assets/projects/stranger-sons/22-story-elaa.jpg',
+      ]},
       { type:'image', src:'assets/projects/stranger-sons/27-story-saimai.png', ratio:'9/16', contain:true, light:true },
       { type:'image', src:'assets/projects/stranger-sons/28-menu-hyatt.png', contain:true, light:true, ratio:'5/7' },
       { type:'text', wide:true, label:'Menu templates & Shipping box container' },
@@ -1211,7 +1215,7 @@ const PROJECTS = [
   },
   {
     id:'play-versus', name:'Play Versus', tag:'A Mumbai sports matchmaking app, with a mark that plays like a fixture.',
-    category:'brand',
+    category:'brand', locked:true,
     heroColor:'#0a0a0a', heroAccent:'#b6ff3c', letter:'V',
     heroImage:'assets/projects/play-versus/10-bottles.png',
     thumbImage:'assets/projects/play-versus/listing-thumb.jpg',
@@ -1284,8 +1288,10 @@ const PROJECTS = [
       ]},
       { type:'image', src:'assets/projects/gameboy-apps/03-visual-research.png', wide:true, dark:true, ratio:'16/9', caption:'Visual research with examples of screens' },
       { type:'image', src:'assets/projects/gameboy-apps/02-cover-alt.png', wide:true, dark:true, ratio:'16/9', caption:'Preview of the final design' },
-      { type:'video', src:'assets/projects/gameboy-apps/60-weather-flow.mp4', contain:true, ratio:'9/16', bg:'#3d0a61', caption:'Weather App Flow' },
-      { type:'video', src:'assets/projects/gameboy-apps/61-timer-flow.mp4', contain:true, ratio:'9/16', bg:'#3d0a61', caption:'Timer App Flow' },
+      { type:'video-row', cols:2, phone:true, bg:'#3d0a61', label:'Weather and Timer app flows', videos:[
+        'assets/projects/gameboy-apps/60-weather-flow.mp4',
+        'assets/projects/gameboy-apps/61-timer-flow.mp4',
+      ]},
       { type:'text', wide:true, label:'Design System' },
       { type:'image', src:'assets/projects/gameboy-apps/30-colour-system.png', wide:true, contain:true, dark:true, ratio:'16/9', caption:'Colour System' },
       { type:'image', src:'assets/projects/gameboy-apps/33-icons.png', wide:true, contain:true, dark:true, ratio:'16/9', caption:'Icon System' },
@@ -1599,6 +1605,7 @@ function tileHTML(p) {
     ? 'Making silent disengagement visible.'
     : (p.tag || '');
   const tag = tagText ? `<div class="tile-tag">${tagText}</div>` : '';
+  if (p.locked) return `<div class="tile is-locked" aria-disabled="true"><div class="tile-media">${media}</div><div class="tile-name">${p.name}</div><div class="tile-tag">Coming soon</div><div class="tile-disc">${disc(p)}</div></div>`;
   return `<a class="tile" href="/${p.id}"><div class="tile-media">${media}</div><div class="tile-name">${p.name}</div>${tag}<div class="tile-disc">${disc(p)}</div></a>`;
 }
 function renderGrids() {
@@ -1672,7 +1679,8 @@ function galleryHTML(p) {
         ? `${vid(s)}`
         : (isVideoSrc(s) ? vid(s) : `<img src="${s}" alt="${p.name}" loading="lazy">`)).join('');
       const cap = item.label ? `<span class="g-caption">${item.label}</span>` : '';
-      return `<div class="g-row ${cols}${kind}">${cells}</div>${cap}`;
+      const rowStyle = item.bg ? ` style="background:${item.bg}"` : '';
+      return `<div class="g-row ${cols}${kind}"${rowStyle}>${cells}</div>${cap}`;
     }
     if (item.type === 'feature') {
       const lab = item.label ? `<div class="g-kicker">${item.label}</div>` : '';
@@ -1684,7 +1692,7 @@ function galleryHTML(p) {
       const imgs = item.images || [];
       if (!imgs.length) return '';
       const cap = item.label ? `<span class="g-caption">${item.label}</span>` : '';
-      return `<div class="g-row cols-2">${imgs.map(s => `<img src="${s}" alt="${item.label||p.name}" loading="lazy">`).join('')}</div>${cap}`;
+      return `<div class="g-row cols-${Math.min(imgs.length,5)} is-screens">${imgs.map(s => `<img src="${s}" alt="${item.label||p.name}" loading="lazy">`).join('')}</div>${cap}`;
     }
     if (item.type === 'embed' || item.type === 'embed-row') {
       if (item.type === 'embed') {
@@ -1714,10 +1722,10 @@ function navCard(p, label, side) {
   return `<a class="p-nav-card ${side}" href="/${p.id}"><div class="p-nav-thumb">${media}</div><div><div class="p-nav-k">${label}</div><div class="p-nav-n">${p.name}</div></div></a>`;
 }
 function renderProject(id) {
-  const open = listed();
+  const open = listed().filter(x => !x.locked);
   const p = PROJECTS.find(x => x.id === id);
   const root = document.getElementById('project-root');
-  if (!p || p.comingSoon) {
+  if (!p || p.comingSoon || p.locked) {
     root.innerHTML = '<div class="p-head"><div class="p-copy"><p>Coming soon.</p></div></div>';
     return;
   }
