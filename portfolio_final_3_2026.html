@@ -1577,7 +1577,7 @@ function renderAllGrid(filter) {
   if (sel && sel.value !== cat) sel.value = cat;
 }
 // Home order: work I owned end to end first, agency refreshes after.
-const HOME_ORDER = ['pine-labs', 'falcon', 'class-pulse', 'ten-hills-studio', '1441-pizzeria'];
+const HOME_ORDER = ['pine-labs', 'falcon', 'class-pulse', 'ten-hills-studio', '1441-pizzeria', 'stranger-sons'];
 function selected() {
   const open = listed();
   return HOME_ORDER.map(id => open.find(p => p.id === id)).filter(Boolean);
