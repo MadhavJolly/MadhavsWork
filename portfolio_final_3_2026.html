@@ -1145,10 +1145,14 @@ const PROJECTS = [
       { type:'image', src:'assets/projects/stranger-sons/09-postcard-front.jpg' },
       { type:'image', src:'assets/projects/stranger-sons/10-postcard-back.jpg' },
       { type:'text', wide:true, label:'Packaging & event print' },
-      { type:'image', src:'assets/projects/stranger-sons/15-label.jpg', contain:true, light:true, ratio:'9/16' },
-      { type:'image', src:'assets/projects/stranger-sons/13-print-easel.jpg', ratio:'9/16' },
-      { type:'image', src:'assets/projects/stranger-sons/16-imbibe-product.jpg', ratio:'1/1' },
-      { type:'image', src:'assets/projects/stranger-sons/17-imbibe-invite.jpg', ratio:'1/1', light:true },
+      { type:'image-row', cols:2, phone:true, bg:'#f3f1ec', images:[
+        'assets/projects/stranger-sons/15-label.jpg',
+        'assets/projects/stranger-sons/13-print-easel.jpg',
+      ]},
+      { type:'image-row', cols:2, images:[
+        'assets/projects/stranger-sons/16-imbibe-product.jpg',
+        'assets/projects/stranger-sons/17-imbibe-invite.jpg',
+      ]},
       { type:'image', src:'assets/projects/stranger-sons/01-hero.jpg', wide:true, dark:true },
       { type:'image', src:'assets/projects/stranger-sons/14-thank-you.jpg', wide:true, dark:true, contain:true, ratio:'16/4.3', bg:'#000000' },
     ],
