@@ -8,7 +8,7 @@
           "value": "madhavswork.vercel.app"
         }
       ],
-      "destination": "https://www.madhavjolly.site/",
+      "destination": "https://www.madhavjolly.com/",
       "permanent": true
     },
     {
@@ -19,7 +19,51 @@
           "value": "madhavswork.vercel.app"
         }
       ],
-      "destination": "https://www.madhavjolly.site/:path*",
+      "destination": "https://www.madhavjolly.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "madhavjolly.site"
+        }
+      ],
+      "destination": "https://www.madhavjolly.com/",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "madhavjolly.site"
+        }
+      ],
+      "destination": "https://www.madhavjolly.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.madhavjolly.site"
+        }
+      ],
+      "destination": "https://www.madhavjolly.com/",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.madhavjolly.site"
+        }
+      ],
+      "destination": "https://www.madhavjolly.com/:path*",
       "permanent": true
     },
     {

@@ -6,20 +6,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Madhav Jolly | Graphic, Brand &amp; Interaction Designer</title>
 <meta name="description" content="Graphic, brand and interaction designer in Melbourne. Identity first, then the system around it, with motion, 3D and sound when the work needs more than a still.">
-<link rel="canonical" href="https://www.madhavjolly.site/">
+<link rel="canonical" href="https://www.madhavjolly.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Madhav Jolly">
 <meta property="og:title" content="Madhav Jolly | Graphic, Brand &amp; Interaction Designer">
 <meta property="og:description" content="Graphic, brand and interaction designer in Melbourne. Identity first, then the system around it, with motion, 3D and sound when the work needs more than a still.">
-<meta property="og:url" content="https://www.madhavjolly.site/">
-<meta property="og:image" content="https://www.madhavjolly.site/assets/og-image.jpg">
+<meta property="og:url" content="https://www.madhavjolly.com/">
+<meta property="og:image" content="https://www.madhavjolly.com/assets/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Madhav Jolly, Graphic, Brand and Interaction Designer, with selected work">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Madhav Jolly | Graphic, Brand &amp; Interaction Designer">
 <meta name="twitter:description" content="Graphic, brand and interaction designer in Melbourne. Identity first, then the system around it, with motion, 3D and sound when the work needs more than a still.">
-<meta name="twitter:image" content="https://www.madhavjolly.site/assets/og-image.jpg">
+<meta name="twitter:image" content="https://www.madhavjolly.com/assets/og-image.jpg">
 <link rel="icon" href="/favicon.ico?v=2" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32.png?v=2">
 <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/favicon-192.png?v=2">
@@ -1812,7 +1812,7 @@ function setMeta(page, s) {
   const p = page === 'project' ? PROJECTS.find(x => x.id === s) : null;
   const name = p ? (p.title || p.name) : PAGE_TITLES[page];
   document.title = name ? `${name} | Madhav Jolly` : SITE_TITLE;
-  const url = 'https://www.madhavjolly.site' + (page === 'home' ? '/' : '/' + (page === 'project' ? s : page));
+  const url = 'https://www.madhavjolly.com' + (page === 'home' ? '/' : '/' + (page === 'project' ? s : page));
   const canon = document.querySelector('link[rel="canonical"]');
   if (canon) canon.href = url;
   const desc = document.querySelector('meta[name="description"]');

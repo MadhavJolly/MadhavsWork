@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.madhavjolly.site/sitemap.xml
+Sitemap: https://www.madhavjolly.com/sitemap.xml
