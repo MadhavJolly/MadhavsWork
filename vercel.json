@@ -21,6 +21,11 @@
       ],
       "destination": "https://www.madhavjolly.site/:path*",
       "permanent": true
+    },
+    {
+      "source": "/assets/Madhav-Jolly-Resume-2026.pdf",
+      "destination": "/assets/Madhav-Jolly-Resume-2027.pdf",
+      "permanent": true
     }
   ],
   "rewrites": [
