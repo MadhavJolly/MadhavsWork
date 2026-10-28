@@ -1,13 +1,32 @@
 {
   "redirects": [
     {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "madhavswork.vercel.app"
+        }
+      ],
+      "destination": "https://www.madhavjolly.site/",
+      "permanent": true
+    },
+    {
       "source": "/:path*",
-      "has": [{ "type": "host", "value": "madhavswork.vercel.app" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "madhavswork.vercel.app"
+        }
+      ],
       "destination": "https://www.madhavjolly.site/:path*",
       "permanent": true
     }
   ],
   "rewrites": [
-    { "source": "/(.*)", "destination": "/portfolio_final_3_2026.html" }
+    {
+      "source": "/(.*)",
+      "destination": "/portfolio_final_3_2026.html"
+    }
   ]
 }
