@@ -503,6 +503,15 @@ body[data-page="project"] #page-project { display: block; }
 .tile.is-locked { cursor: default; }
 .tile.is-locked .tile-media { opacity: 0.55; }
 .tile.is-locked .tile-tag { color: var(--muted); }
+.g-stat { margin: 0; min-width: 0; }
+.g-stat img, .g-stat video { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; border-radius: var(--radius); background: #111; }
+.g-stat.is-reel img, .g-stat.is-reel video { aspect-ratio: 9 / 16; }
+.g-stat figcaption { display: flex; flex-direction: column; gap: 2px; padding-top: 10px; font-size: var(--fs-ui); line-height: var(--lh-copy); }
+.g-stat-n { color: var(--ink, #111); font-weight: 500; }
+.g-stat-m { color: var(--muted); }
+.g-stat-m a { color: var(--muted); }
+.g-stat-m a:hover { color: #111; }
+.g-stat-kicker { margin: 16px 0 -8px; }
 .g-caption {
   display: block;
   padding: 8px 0 4px;
@@ -1414,6 +1423,18 @@ const PROJECTS = [
     labels:['Feed','Product','Editorial','Gifting','Story','Motion'],
     gallery:[
       { type:'text', wide:true, label:'The Bar Collective', text:'The Bar Collective sells the kit for a serious home bar. The feed had to make that kit feel like a pour, then send people to the shop. Not every frame is a product tile. Some weeks it is a Monday joke. Some weeks it is a gift, so a sibling does not have to think.' },
+      { type:'stat-row', reels:true, label:'Top performing reels · at The Works, 2022–24', items:[
+        { src:'assets/projects/social-creatives/top/CxMdsPby34_.mp4', stats:'256K plays · 5.8K likes', date:'Sep 2023, collab with @ridhi.khosla.jalan', url:'https://www.instagram.com/p/CxMdsPby34_/', alt:'Coravin wine reel' },
+        { src:'assets/projects/social-creatives/top/Cow3NYAJfs7.mp4', stats:'218K plays · 441 likes', date:'Feb 2023', url:'https://www.instagram.com/p/Cow3NYAJfs7/', alt:'Ginato tonic reel' },
+        { src:'assets/projects/social-creatives/top/C0xpNxlobeO.mp4', stats:'143K plays · 262 likes', date:'Dec 2023', url:'https://www.instagram.com/p/C0xpNxlobeO/', alt:'Holiday table reel' },
+        { src:'assets/projects/social-creatives/top/CucBhlYOXWD.mp4', stats:'85K plays · 1.4K likes', date:'Jul 2023', url:'https://www.instagram.com/p/CucBhlYOXWD/', alt:'Home bar gifts reel' },
+      ]},
+      { type:'stat-row', label:'Top performing posts · at The Works, 2022–24', items:[
+        { src:'assets/projects/social-creatives/top/Cpm7vRwJ0Ca.jpg', stats:'399 likes', date:'Mar 2023', url:'https://www.instagram.com/p/Cpm7vRwJ0Ca/', alt:'Unbreakable glasses post' },
+        { src:'assets/projects/social-creatives/top/CmbkcPzyBHK.jpg', stats:'352 likes · 107 comments', date:'Dec 2022, Christmas giveaway', url:'https://www.instagram.com/p/CmbkcPzyBHK/', alt:'Christmas giveaway post' },
+        { src:'assets/projects/social-creatives/top/CmJpIFNItHJ.jpg', stats:'286 likes · 227 comments', date:'Dec 2022, Christmas giveaway', url:'https://www.instagram.com/p/CmJpIFNItHJ/', alt:'Christmas giveaway post' },
+        { src:'assets/projects/social-creatives/top/Cmq-4cCSHUW.jpg', stats:'282 likes', date:'Dec 2022', url:'https://www.instagram.com/p/Cmq-4cCSHUW/', alt:'Decanter carousel' },
+      ]},
       { type:'image-row', cols:4, feed:true, images:[
         'assets/projects/social-creatives/tbc-10-dartington.png',
         'assets/projects/social-creatives/tbc-18-zalto.png',
@@ -1427,6 +1448,18 @@ const PROJECTS = [
         'assets/projects/social-creatives/tbc-reel-oct-3.mp4',
       ]},
       { type:'text', wide:true, label:'Stranger & Sons', text:'Stranger & Sons is an Indian craft gin. The feed has to hold a bottle, a bar, and a cocktail without looking like a catalogue.' },
+      { type:'stat-row', reels:true, label:'Top performing reels · at Please See//, 2022', items:[
+        { src:'assets/projects/social-creatives/top/CeVO3erIL5W.mp4', stats:'491K plays · 1.4K likes', date:'Jun 2022', url:'https://www.instagram.com/p/CeVO3erIL5W/', alt:'Gin of Summer reel' },
+        { src:'assets/projects/social-creatives/top/CdifEH-oZv-.mp4', stats:'27K plays · 1.3K likes', date:'May 2022', url:'https://www.instagram.com/p/CdifEH-oZv-/', alt:'Collaboration reel' },
+        { src:'assets/projects/social-creatives/top/CaZVT7ApPEZ.mp4', stats:'24K plays · 948 likes', date:'Feb 2022', url:'https://www.instagram.com/p/CaZVT7ApPEZ/', alt:'Delhi peru cart reel' },
+        { src:'assets/projects/social-creatives/top/CdckuXcOdWF.mp4', stats:'24K plays · 1.3K likes', date:'May 2022', url:'https://www.instagram.com/p/CdckuXcOdWF/', alt:'Trading Tides reel' },
+      ]},
+      { type:'stat-row', label:'Top performing posts · at Please See//, 2022', items:[
+        { src:'assets/projects/social-creatives/top/CfBvK6Go2h6.jpg', stats:'7K likes', date:'Jun 2022', url:'https://www.instagram.com/p/CfBvK6Go2h6/', alt:'Third Eye post' },
+        { src:'assets/projects/social-creatives/top/CYl0Beuvt-m.jpg', stats:'2K likes', date:'Jan 2022', url:'https://www.instagram.com/p/CYl0Beuvt-m/', alt:'Gimlet post' },
+        { src:'assets/projects/social-creatives/top/CYteZ9PPSuX.jpg', stats:'1.5K likes', date:'Jan 2022', url:'https://www.instagram.com/p/CYteZ9PPSuX/', alt:'Gin on your feed post' },
+        { src:'assets/projects/social-creatives/top/CcR8dIEvdaQ.jpg', stats:'1.3K likes', date:'Apr 2022', url:'https://www.instagram.com/p/CcR8dIEvdaQ/', alt:'Weekend post' },
+      ]},
       { type:'image-row', cols:3, feed:true, images:[
         'assets/projects/stranger-sons/24-feed-grid-01.jpg',
         'assets/projects/stranger-sons/25-feed-grid-02.jpg',
@@ -1729,6 +1762,16 @@ function galleryHTML(p) {
       const cap = item.label ? `<span class="g-caption">${item.label}</span>` : '';
       const rowStyle = item.bg ? ` style="background:${item.bg}"` : '';
       return `<div class="g-row ${cols}${kind}"${rowStyle}>${cells}</div>${cap}`;
+    }
+    if (item.type === 'stat-row') {
+      const cells = (item.items||[]).map(it => {
+        const media = isVideoSrc(it.src) ? vid(it.src) : `<img src="${it.src}" alt="${it.alt||p.name}" loading="lazy">`;
+        const link = it.url ? ` · <a href="${it.url}" target="_blank" rel="noopener">View ↗</a>` : '';
+        return `<figure class="g-stat${item.reels?' is-reel':''}">${media}<figcaption><span class="g-stat-n">${it.stats}</span><span class="g-stat-m">${it.date}${link}</span></figcaption></figure>`;
+      }).join('');
+      const n = (item.items||[]).length;
+      const cap = item.label ? `<div class="g-kicker g-stat-kicker">${item.label}</div>` : '';
+      return `${cap}<div class="g-row cols-${n>=4?4:n} g-stats">${cells}</div>`;
     }
     if (item.type === 'feature') {
       const lab = item.label ? `<div class="g-kicker">${item.label}</div>` : '';
